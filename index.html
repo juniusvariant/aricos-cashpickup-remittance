@@ -314,6 +314,28 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#bank-account-remittance-overview" class="toc-h2 toc-link" data-title="Bank Account Remittance Overview">Bank Account Remittance Overview</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting Started">Getting Started</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#set-up-your-account" class="toc-h2 toc-link" data-title="Set Up Your Account">Set Up Your Account</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-your-api-account" class="toc-h2 toc-link" data-title="Retrieve Your API Account">Retrieve Your API Account</a>
+                  </li>
+                  <li>
+                    <a href="#start-testing" class="toc-h2 toc-link" data-title="Start Testing!">Start Testing!</a>
+                  </li>
+                  <li>
+                    <a href="#postman-collection" class="toc-h2 toc-link" data-title="Postman Collection">Postman Collection</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
@@ -348,6 +370,60 @@
 <p>Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all banks in Indonesia quickly and securely.</p>
 
 <p>Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.</p>
+<h2 id='bank-account-remittance-overview'>Bank Account Remittance Overview</h2>
+<p>Use the Remittance API to transfer funds instantly to any bank in Indonesia at any time, including holidays and weekends. Due to restrictions from the banks, we’re unable to disburse when the bank channel are offline or when they fail.</p>
+
+<p>The remittance flow is as follows:</p>
+
+<ol>
+<li><p><a href="#prefund">Prefund</a> your Instamoney account balance</p></li>
+<li><p><a href="#create-customer">Create a customer</a> which represents the sender, and a customer which represents the recipient of the remittance. You’ll get an id for each</p></li>
+<li><p><a href="#create-remittance">Create a remittance</a>, attaching ids of the sender and recipient</p></li>
+<li><p>We run this remittance through our risk-scoring system. If necessary, our compliance team will contact you for additional verification of information</p></li>
+<li><p>We process the remittance and return a callback with the status of the remittance. You may also query the status of a remittance anytime via the <a href="get-remittance">Get Remittance</a> API</p></li>
+</ol>
+<h1 id='getting-started'>Getting Started</h1><h2 id='set-up-your-account'>Set Up Your Account</h2>
+<p>To use our Bank Account Remittance APIs, register for an Aricos account by contacting your account manager or our support team.</p>
+
+<p>You can start testing our APIs immediately in development environment. When you are ready to process live transactions, contact your account manager to go live.</p>
+<h2 id='retrieve-your-api-account'>Retrieve Your API Account</h2>
+<p>We provide account user and password for development and production environments. You can retrieve these from your Dashboard. Your API keys should be kept private, so do not share your secret API keys.</p>
+
+<p>To successfully authenticate with Aricos&#39;s API, you must append a colon and Base 64 encode the API key. All API requests should be made over HTTPS instead of HTTP (all calls made over plain HTTP will fail).</p>
+
+<p>You can access our development end-point url to https://dev.aricos.co.id and production end-point url to https://aricos.co.id.</p>
+<h2 id='start-testing'>Start Testing!</h2>
+<p>You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the banking networks and will not cost you anything.</p>
+<h2 id='postman-collection'>Postman Collection</h2>
+<p>The easiest way to get started using our API is to use our Postman Collection. Postman is a free client application that enables you to make calls to APIs easily. To make integrating with our APIs easier, we&#39;ve created a Postman Collection of our endpoints so that you can test our APIs more easily.</p>
+
+<p>The following is an outline of actions to get started with Postman.</p>
+
+<ol>
+<li><p>Install <a href="https://www.getpostman.com/">Postman</a>.</p></li>
+<li><p>Download our <a href="https://github.com/juniusvariant/aricos-bankaccount-remittance/raw/main/source/images/logo.png" download> Postman collection</a>.</p></li>
+<li><p>Open Postman and Import the Aricos API Postman Collection.</p></li>
+<li><p>Set up the collection’s Authorization header.</p>
+
+<p>a. Under the Authorization tab of each folder, the default authorization type is set to “Inherit auth from parent”. The “Inherit auth from parent” setting indicates that every request in the folder by default uses the authorization type from the parent.</p>
+
+<p>b. Edit the Instamoney API collection.</p>
+
+<p>c. Under “Authorization”, paste your secret API key into the Username. Use your Development Key to test in the development environment, and your Live Key to send live transactions.</p>
+
+<p>d. Click Update.</p>
+
+<p>e. This authorization key will be automatically used for each request in the collection.</p></li>
+<li><p>Try getting <a href="#balance">your balance</a>.</p>
+
+<p>a. Click on the Balances folder and click Get Balances.</p>
+
+<p>b. Hit the blue Send button.</p>
+
+<p>c. In the response area, you should get your latest cash balance.</p></li>
+</ol>
+
+<p>If you can query your balance successfully, you’re all set up! Feel free to explore our other APIs by selecting it in the collection and launching it.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
