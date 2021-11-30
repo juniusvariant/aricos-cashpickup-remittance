@@ -26,6 +26,70 @@ Aricos is middleware that is make transfer transaction easy, fast, secure, relia
 
 Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.
 
+## Bank Account Remittance Overview
+Use the Remittance API to transfer funds instantly to any bank in Indonesia at any time, including holidays and weekends. Due to restrictions from the banks, we’re unable to disburse when the bank channel are offline or when they fail.
+
+The remittance flow is as follows:
+
+1. [Prefund](#prefund) your Instamoney account balance
+
+2. [Create a customer](#create-customer) which represents the sender, and a customer which represents the recipient of the remittance. You’ll get an id for each
+
+3. [Create a remittance](#create-remittance), attaching ids of the sender and recipient
+
+4. We run this remittance through our risk-scoring system. If necessary, our compliance team will contact you for additional verification of information
+
+5. We process the remittance and return a callback with the status of the remittance. You may also query the status of a remittance anytime via the [Get Remittance](get-remittance) API
+
+# Getting Started
+## Set Up Your Account
+To use our Bank Account Remittance APIs, register for an Aricos account by contacting your account manager or our support team.
+
+You can start testing our APIs immediately in development environment. When you are ready to process live transactions, contact your account manager to go live.
+
+## Retrieve Your API Account
+We provide account user and password for development and production environments. You can retrieve these from your Dashboard. Your API keys should be kept private, so do not share your secret API keys.
+
+To successfully authenticate with Aricos's API, you must append a colon and Base 64 encode the API key. All API requests should be made over HTTPS instead of HTTP (all calls made over plain HTTP will fail).
+
+You can access our development end-point url to https://dev.aricos.co.id and production end-point url to https://aricos.co.id.
+
+## Start Testing!
+You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the banking networks and will not cost you anything.
+
+## Postman Collection
+The easiest way to get started using our API is to use our Postman Collection. Postman is a free client application that enables you to make calls to APIs easily. To make integrating with our APIs easier, we've created a Postman Collection of our endpoints so that you can test our APIs more easily.
+
+The following is an outline of actions to get started with Postman.
+
+1. Install [Postman](https://www.getpostman.com/).
+
+2. Download our <a href="https://github.com/juniusvariant/aricos-bankaccount-remittance/raw/main/source/images/logo.png" download> Postman collection</a>.
+
+3. Open Postman and Import the Aricos API Postman Collection.
+
+4. Set up the collection’s Authorization header.
+
+	a. Under the Authorization tab of each folder, the default authorization type is set to “Inherit auth from parent”. The “Inherit auth from parent” setting indicates that every request in the folder by default uses the authorization type from the parent.
+
+	b. Edit the Instamoney API collection.
+
+	c. Under “Authorization”, paste your secret API key into the Username. Use your Development Key to test in the development environment, and your Live Key to send live transactions.
+
+	d. Click Update.
+
+	e. This authorization key will be automatically used for each request in the collection.
+
+5. Try getting [your balance](#balance).
+
+	a. Click on the Balances folder and click Get Balances.
+
+	b. Hit the blue Send button.
+
+	c. In the response area, you should get your latest cash balance.
+
+If you can query your balance successfully, you’re all set up! Feel free to explore our other APIs by selecting it in the collection and launching it.
+
 # Authentication
 
 > To authorize, use this code:
