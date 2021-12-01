@@ -438,6 +438,8 @@
 <p>All information about your account and password will be provide by our support team by email. So if you&#39;re not getting any information about your account for development testing or for go live, please let us know.</p>
 <h2 id='account-login'>Account Login</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
 </code></pre></div>
+<p>You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.</p>
+<h3 id='login-request'>Login Request</h3>
 <blockquote>
 <p>Login Example Request:</p>
 </blockquote>
@@ -450,8 +452,6 @@ curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span
 "username": "Junius",
 "password": "123456"}'</span>
 </code></pre></div>
-<p>You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.</p>
-<h3 id='login-request'>Login Request</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -477,6 +477,10 @@ curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
 </code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>username</code> and <code>password</code> with your account credential.</p>
+</blockquote>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -496,10 +500,6 @@ curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span
 <td>Bearer Token That You Have To Use Everytime When You Want To Access Our APIs</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>Make sure to replace <code>username</code> and <code>password</code> with your account credential.</p>
-</blockquote>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
