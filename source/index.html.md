@@ -119,7 +119,6 @@ data | Bearer Token That You Have To Use Everytime When You Want To Access Our A
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
-</br>
 
 > Login Example Request:
 
@@ -133,14 +132,12 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
-</br>
 
 > Login Example Response:
 
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
-</br>
 
 > Make sure to replace `username` and `password` with your account credential.
 
