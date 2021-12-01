@@ -108,6 +108,10 @@ All information about your account and password will be provide by our support t
 POST https://dev.aricos.co.id/api/v1/login
 ```
 
+You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
+
+### Login Request
+
 > Login Example Request:
 
 ```shell
@@ -120,10 +124,6 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
-
-You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
-
-### Login Request
 
 Parameter | Description
 --------- | -----------
@@ -142,13 +142,13 @@ password | The User Password That Provided By Our Team
 POST https://dev.aricos.co.id/api/v1/login
 ```
 
+> Make sure to replace `username` and `password` with your account credential.
+
 Parameter | Description
 --------- | -----------
 success | Response That Given When You're Success To Access Our API
 failed | Response That Given When You're Failed To Access Our API
 data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
-
-> Make sure to replace `username` and `password` with your account credential.
 
 # Authentication
 
