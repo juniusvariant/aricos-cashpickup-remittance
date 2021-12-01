@@ -109,12 +109,9 @@ password | The User Password That Provided By Our Team
    Make sure to replace <code>username</code> and <code>password</code> with your account credential.
 </aside>
 
-</br>
-
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
-</br>
 
 > Login Example Request:
 
