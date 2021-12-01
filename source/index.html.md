@@ -105,10 +105,6 @@ Parameter | Description
 username | The User Account That Provided By Our Team
 password | The User Password That Provided By Our Team
 
-<aside class="notice">
-   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
-</aside>
-
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
@@ -125,6 +121,10 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
+
+<aside class="notice">
+   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
+</aside>
 
 ### Login Response
 Parameter | Description
