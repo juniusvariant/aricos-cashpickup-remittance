@@ -454,20 +454,7 @@
 <td>The User Password That Provided By Our Team</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
-</code></pre></div>
-<blockquote>
-<p>Login Example Request:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 
-curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--data</span> <span class="s1">'
-{
-"username": "Junius",
-"password": "123456"}'</span>
-</code></pre></div>
 <aside class="notice">
    Make sure to replace <code>username</code> and <code>password</code> with your account credential.
 </aside>
@@ -491,12 +478,31 @@ curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span
 <td>Bearer Token That You Have To Use Everytime When You Want To Access Our APIs</td>
 </tr>
 </tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
+</code></pre></div>
+<p></br></p>
+
+<blockquote>
+<p>Login Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+
+curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'
+{
+"username": "Junius",
+"password": "123456"}'</span>
+</code></pre></div>
+<p></br></p>
 
 <blockquote>
 <p>Login Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
 </code></pre></div>
+<p></br></p>
+
 <blockquote>
 <p>Make sure to replace <code>username</code> and <code>password</code> with your account credential.</p>
 </blockquote>
