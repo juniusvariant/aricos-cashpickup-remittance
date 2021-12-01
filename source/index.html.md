@@ -124,7 +124,7 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
-> Make sure to replace `username` and `password` with your account credential.
+> Make sure to replace `username` and `password` with your account credential. </br>
 
 Parameter | Description
 --------- | -----------
