@@ -42,13 +42,14 @@ The remittance flow is as follows:
 5. We process the remittance and return a callback with the status of the remittance. You may also query the status of a remittance anytime via the [Get Remittance](get-remittance) API
 
 # Getting Started
+
 ## Set Up Your Account
 To use our Bank Account Remittance APIs, register for an Aricos account by contacting your account manager or our support team.
 
 You can start testing our APIs immediately in development environment. When you are ready to process live transactions, contact your account manager to go live.
 
 ## Retrieve Your API Account
-We provide account user and password for development and production environments. You can retrieve these from your Dashboard. Your API keys should be kept private, so do not share your secret API keys.
+Before you access all our features, you have to register your account to access all our API Feature. Our support team will give you the information of your account to login into our API.
 
 To successfully authenticate with Aricos's API, you must append a colon and Base 64 encode the API key. All API requests should be made over HTTPS instead of HTTP (all calls made over plain HTTP will fail).
 
@@ -88,7 +89,60 @@ The following is an outline of actions to get started with Postman.
 
 	c. In the response area, you should get your latest cash balance.
 
-If you can query your balance successfully, you’re all set up! Feel free to explore our other APIs by selecting it in the collection and launching it.
+6. If you can query your balance successfully, you’re all set up! Feel free to explore our other APIs by selecting it in the collection and launching it.
+
+# Account
+
+## Account Register
+All information about your account and password will be provide by our support team by email. So if you're not getting any information about your account for development testing or for go live, please let us know.
+
+## Account Login
+You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
+
+### Login Request
+Parameter | Description
+--------- | -----------
+username | The User Account That Provided By Our Team
+password | The User Password That Provided By Our Team
+
+<aside class="notice">
+   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
+</aside>
+
+</br>
+
+```shell
+POST https://dev.aricos.co.id/api/v1/login
+```
+</br>
+
+> Login Example Request:
+
+```shell
+# With shell, you can just pass the correct header with each request
+
+curl https://dev.aricos.co.id/api/v1/login -X POST \
+-H 'Content-Type: application/json' \
+--data '
+{
+"username": "Junius",
+"password": "123456"}'
+```
+
+### Login Response
+Parameter | Description
+--------- | -----------
+success | Response That Given When You're Success To Access Our API
+failed | Response That Given When You're Failed To Access Our API
+data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
+
+> Login Example Response:
+
+```shell
+POST https://dev.aricos.co.id/api/v1/login
+```
+
+> Make sure to replace `username` and `password` with your account credential.
 
 # Authentication
 
