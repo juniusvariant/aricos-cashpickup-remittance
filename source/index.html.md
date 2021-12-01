@@ -27,6 +27,7 @@ Aricos is middleware that is make transfer transaction easy, fast, secure, relia
 Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.
 
 ## Bank Account Remittance Overview
+
 Use the Remittance API to transfer funds instantly to any bank in Indonesia at any time, including holidays and weekends. Due to restrictions from the banks, we’re unable to disburse when the bank channel are offline or when they fail.
 
 The remittance flow is as follows:
@@ -44,11 +45,13 @@ The remittance flow is as follows:
 # Getting Started
 
 ## Set Up Your Account
+
 To use our Bank Account Remittance APIs, register for an Aricos account by contacting your account manager or our support team.
 
 You can start testing our APIs immediately in development environment. When you are ready to process live transactions, contact your account manager to go live.
 
 ## Retrieve Your API Account
+
 Before you access all our features, you have to register your account to access all our API Feature. Our support team will give you the information of your account to login into our API.
 
 To successfully authenticate with Aricos's API, you must append a colon and Base 64 encode the API key. All API requests should be made over HTTPS instead of HTTP (all calls made over plain HTTP will fail).
@@ -56,9 +59,11 @@ To successfully authenticate with Aricos's API, you must append a colon and Base
 You can access our development end-point url to https://dev.aricos.co.id and production end-point url to https://aricos.co.id.
 
 ## Start Testing!
+
 You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the banking networks and will not cost you anything.
 
 ## Postman Collection
+
 The easiest way to get started using our API is to use our Postman Collection. Postman is a free client application that enables you to make calls to APIs easily. To make integrating with our APIs easier, we've created a Postman Collection of our endpoints so that you can test our APIs more easily.
 
 The following is an outline of actions to get started with Postman.
@@ -94,27 +99,10 @@ The following is an outline of actions to get started with Postman.
 # Account
 
 ## Account Register
+
 All information about your account and password will be provide by our support team by email. So if you're not getting any information about your account for development testing or for go live, please let us know.
 
 ## Account Login
-You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
-
-### Login Request
-Parameter | Description
---------- | -----------
-username | The User Account That Provided By Our Team
-password | The User Password That Provided By Our Team
-
-<aside class="notice">
-   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
-</aside>
-
-### Login Response
-Parameter | Description
---------- | -----------
-success | Response That Given When You're Success To Access Our API
-failed | Response That Given When You're Failed To Access Our API
-data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
 
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
@@ -133,11 +121,32 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "password": "123456"}'
 ```
 
+You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
+
+### Login Request
+
+Parameter | Description
+--------- | -----------
+username | The User Account That Provided By Our Team
+password | The User Password That Provided By Our Team
+
+<aside class="notice">
+   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
+</aside>
+
+### Login Response
+
 > Login Example Response:
 
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
+
+Parameter | Description
+--------- | -----------
+success | Response That Given When You're Success To Access Our API
+failed | Response That Given When You're Failed To Access Our API
+data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
 
 > Make sure to replace `username` and `password` with your account credential.
 
