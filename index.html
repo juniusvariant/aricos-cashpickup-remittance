@@ -338,6 +338,17 @@
               </ul>
           </li>
           <li>
+            <a href="#account" class="toc-h1 toc-link" data-title="Account">Account</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#account-register" class="toc-h2 toc-link" data-title="Account Register">Account Register</a>
+                  </li>
+                  <li>
+                    <a href="#account-login" class="toc-h2 toc-link" data-title="Account Login">Account Login</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -387,7 +398,7 @@
 
 <p>You can start testing our APIs immediately in development environment. When you are ready to process live transactions, contact your account manager to go live.</p>
 <h2 id='retrieve-your-api-account'>Retrieve Your API Account</h2>
-<p>We provide account user and password for development and production environments. You can retrieve these from your Dashboard. Your API keys should be kept private, so do not share your secret API keys.</p>
+<p>Before you access all our features, you have to register your account to access all our API Feature. Our support team will give you the information of your account to login into our API.</p>
 
 <p>To successfully authenticate with Aricos&#39;s API, you must append a colon and Base 64 encode the API key. All API requests should be made over HTTPS instead of HTTP (all calls made over plain HTTP will fail).</p>
 
@@ -421,9 +432,78 @@
 <p>b. Hit the blue Send button.</p>
 
 <p>c. In the response area, you should get your latest cash balance.</p></li>
+<li><p>If you can query your balance successfully, you’re all set up! Feel free to explore our other APIs by selecting it in the collection and launching it.</p></li>
 </ol>
+<h1 id='account'>Account</h1><h2 id='account-register'>Account Register</h2>
+<p>All information about your account and password will be provide by our support team by email. So if you&#39;re not getting any information about your account for development testing or for go live, please let us know.</p>
+<h2 id='account-login'>Account Login</h2>
+<p>You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.</p>
+<h3 id='login-request'>Login Request</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>The User Account That Provided By Our Team</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The User Password That Provided By Our Team</td>
+</tr>
+</tbody></table>
 
-<p>If you can query your balance successfully, you’re all set up! Feel free to explore our other APIs by selecting it in the collection and launching it.</p>
+<aside class="notice">
+   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
+</aside>
+
+<p></br></p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
+</code></pre></div>
+<p></br></p>
+
+<blockquote>
+<p>Login Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+
+curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'
+{
+"username": "Junius",
+"password": "123456"}'</span>
+</code></pre></div><h3 id='login-response'>Login Response</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>success</td>
+<td>Response That Given When You&#39;re Success To Access Our API</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>Response That Given When You&#39;re Failed To Access Our API</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Bearer Token That You Have To Use Everytime When You Want To Access Our APIs</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Login Example Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>username</code> and <code>password</code> with your account credential.</p>
+</blockquote>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
