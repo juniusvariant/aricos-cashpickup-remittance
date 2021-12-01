@@ -114,15 +114,9 @@ You have to login to get token access before you do a request to our APIs. You h
 
 ### Login Request
 
-Parameter | Description
---------- | -----------
-username | The User Account That Provided By Our Team
-password | The User Password That Provided By Our Team
-
 > Login Example Request:
 
 ```shell
-
 curl https://dev.aricos.co.id/api/v1/login -X POST \
 -H 'Content-Type: application/json' \
 --data '
@@ -130,6 +124,11 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
+
+Parameter | Description
+--------- | -----------
+username | The User Account That Provided By Our Team
+password | The User Password That Provided By Our Team
 
 <aside class="notice">
    Make sure to replace <code>username</code> and <code>password</code> with your account credential.
