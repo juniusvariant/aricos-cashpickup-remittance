@@ -136,7 +136,6 @@ password | The User Password That Provided By Our Team
 <aside class="notice">
    Make sure to replace <code>username</code> and <code>password</code> with your account credential.
 </aside>
-</br>
 
 ### Login Response
 
