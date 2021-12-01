@@ -124,6 +124,7 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
+> Make sure to replace `username` and `password` with your account credential.
 
 Parameter | Description
 --------- | -----------
@@ -139,10 +140,14 @@ password | The User Password That Provided By Our Team
 > Login Example Response:
 
 ```shell
-POST https://dev.aricos.co.id/api/v1/login
+{
+    "success": {
+        "code": 200,
+        "message": "Login Success"
+    },
+    "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcmljb3NhcmcuY28uaWRcL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNTczNzQzNTA3LCJleHAiOjE1NzM3NDcxMDcsIm5iZiI6MTU3Mzc0MzUwNywianRpIjoiVjBGS2JmSnlLOXBYUU00RyIsInN1YiI6IjVkYzRkYjZiYWVlNjEzNjllOSIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.fei1OIN0nDU9-hzT_yAMp_cqs53YmBPIOvjf2sUtf0E"
+}
 ```
-
-> Make sure to replace `username` and `password` with your account credential.
 
 Parameter | Description
 --------- | -----------
