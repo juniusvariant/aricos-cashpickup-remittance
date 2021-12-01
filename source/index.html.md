@@ -105,9 +105,21 @@ Parameter | Description
 username | The User Account That Provided By Our Team
 password | The User Password That Provided By Our Team
 
+<aside class="notice">
+   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
+</aside>
+
+### Login Response
+Parameter | Description
+--------- | -----------
+success | Response That Given When You're Success To Access Our API
+failed | Response That Given When You're Failed To Access Our API
+data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
+
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
+</br>
 
 > Login Example Request:
 
@@ -121,23 +133,14 @@ curl https://dev.aricos.co.id/api/v1/login -X POST \
 "username": "Junius",
 "password": "123456"}'
 ```
-
-<aside class="notice">
-   Make sure to replace <code>username</code> and <code>password</code> with your account credential.
-</aside>
-
-### Login Response
-Parameter | Description
---------- | -----------
-success | Response That Given When You're Success To Access Our API
-failed | Response That Given When You're Failed To Access Our API
-data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
+</br>
 
 > Login Example Response:
 
 ```shell
 POST https://dev.aricos.co.id/api/v1/login
 ```
+</br>
 
 > Make sure to replace `username` and `password` with your account credential.
 
