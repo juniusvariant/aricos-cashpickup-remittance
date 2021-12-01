@@ -452,6 +452,10 @@ POST https://dev.aricos.co.id/api/v1/login
 "username": "Junius",
 "password": "123456"}'</span>
 </code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>username</code> and <code>password</code> with your account credential.</p>
+</blockquote>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -475,12 +479,14 @@ POST https://dev.aricos.co.id/api/v1/login
 <blockquote>
 <p>Login Example Response:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/login
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"success"</span>: <span class="o">{</span>
+        <span class="s2">"code"</span>: 200,
+        <span class="s2">"message"</span>: <span class="s2">"Login Success"</span>
+    <span class="o">}</span>,
+    <span class="s2">"data"</span>: <span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcmljb3NhcmcuY28uaWRcL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNTczNzQzNTA3LCJleHAiOjE1NzM3NDcxMDcsIm5iZiI6MTU3Mzc0MzUwNywianRpIjoiVjBGS2JmSnlLOXBYUU00RyIsInN1YiI6IjVkYzRkYjZiYWVlNjEzNjllOSIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.fei1OIN0nDU9-hzT_yAMp_cqs53YmBPIOvjf2sUtf0E"</span>
+<span class="o">}</span>
 </code></pre></div>
-<blockquote>
-<p>Make sure to replace <code>username</code> and <code>password</code> with your account credential.</p>
-</blockquote>
-
 <table><thead>
 <tr>
 <th>Parameter</th>
