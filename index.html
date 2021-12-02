@@ -738,7 +738,55 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
 </tr>
 </tbody></table>
-<h2 id='create-customer-response'>Create Customer Response</h2><h1 id='errors'>Errors</h1>
+<h2 id='create-customer-response'>Create Customer Response</h2>
+<p>We return a customer object if the call succeeded.</p>
+<h3 id='create-customer-errors'>Create Customer Errors</h3>
+<blockquote>
+<p>Example Create Customer Response
+<code>shell
+{
+  &quot;id&quot;: &quot;5c1774e76966b43a5b8198fb&quot;,
+  &quot;external_id&quot;: &quot;r-1234&quot;,
+  &quot;customer_type&quot;: &quot;INDIVIDUAL&quot;,
+  &quot;given_name&quot;: &quot;Ichwano&quot;,
+  &quot;surname&quot;: &quot;Sembo&quot;,
+  &quot;address&quot;: {
+      &quot;country_code&quot;: &quot;ID&quot;,
+      &quot;province&quot;: &quot;DKI Jakarta&quot;,
+      &quot;city&quot;: &quot;Jakarta Selatan&quot;,
+      &quot;line_1&quot;: &quot;Jl. Senayan 1 No.15&quot;
+  },
+  &quot;date_of_birth&quot;: &quot;11-01-1990&quot;,
+  &quot;identification&quot;: {
+      &quot;ktp_number&quot;: &quot;0987654321320987&quot;,
+      &quot;npwp_number&quot;: &quot;098765432132098&quot;
+  },
+  &quot;account_details&quot;: {
+      &quot;account_code&quot;: &quot;BNI&quot;,
+      &quot;account_number&quot;: &quot;123456780&quot;,
+      &quot;account_holder_name&quot;: &quot;Ichwano&quot;
+  },
+  &quot;email&quot;: &quot;ichwano@email.com&quot;,
+  &quot;mobile_number&quot;: &quot;+628111555777&quot;,
+  &quot;phone_number&quot;: &quot;+622199990000&quot;,
+  &quot;created&quot;: &quot;2018-12-12T13:50:12.000Z&quot;,
+  &quot;updated&quot;: &quot;2018-12-12T13:50:12.000Z&quot;
+}
+</code></p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR</br> <code>400</code></td>
+<td>Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge">No retry</span></td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
