@@ -500,21 +500,17 @@ Our Bank Account Remittance APIs allow you to send remittances from your Aricos 
 
 ## Create Remittance
 
+```shell
+POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+```
+
 Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.
 
 Your Aricos account balance must be able to cover the payout amount and the transaction fees, or you’ll receive an “Insufficient Balance” error.
 
 ## Create Remittance Request
 
-```shell
-POST https://dev.aricos.co.id/api/v1/remittance/create-v2
-```
-
 > Create Remittance Example Request:
-
-```shell
-POST https://dev.aricos.co.id/api/v1/remittance/create-v2
-```
 
 ```shell
 curl https://dev.aricos.co.id/api/v1/remittance/create-v2 -X POST \
@@ -538,3 +534,46 @@ recipient_customer_id </br><small><span style="color:grey">*required* </span></s
 source_of_funds </br><small><span style="color:grey">*optional* </span></small>| `string` Source of funds. Refer to our list of [Source of Funds Codes](#source-of-funds)
 purpose_code </br><small><span style="color:grey">*optional* </span></small>| `string` Purpose of the remittance. Refer to our list of [Purpose Codes](#purpose-codes)
 
+## Create Remittance Response
+
+> Create Remittance Example Response:
+
+```shell
+{
+  "external_id": "72655",
+  "amount": 11000,
+  "purpose_code": "FAMILY",
+  "source_of_funds": "PERSONAL_SAVINGS",
+  "description": "uang jajan",
+  "sender_customer_id" : "5c1774e76966b43a5b8198fb",
+  "recipient_customer_id": "5b51e6ba0071ec521008e21d",
+  "status": "PENDING_RISK_ASSESSMENT",
+  "created": "2018-12-20T17:00:00.000Z",
+  "updated": "2018-12-20T17:00:00.000Z",
+  "id": "5afbf743e28bc2055b3c06ed"
+}
+```
+
+We return a response with additional fields described below if there were no initial errors with the remittance creation (request formatted incorrectly, invalid purpose code, insufficient funds, etc). The status of the remittance will be initially marked as `PENDING_RISK_ASSESSMENT`.
+
+Parameter | Description
+--------- | -----------
+status | `string` Status of the remittance. Default is `PENDING_RISK_ASSESSMENT`: Request is being processed and assessed in the risk scoring system. See [Remittance Statuses](#remittance-statuses)
+created | `string` An ISO timestamp that tracks when the remittance was created
+updated | `string` An ISO timestamp that tracks when the remittance was updated
+id | `string` Unique remittance ID
+
+### Create Remittance Errors
+
+Error Code | Description
+--------- | -----------
+API_VALIDATION_ERROR</br> <span class="badge">400</span>| Inputs are failing validation. The errors field contains details about which fields are violating validation.</br> <span class="badge error">No retry</span>
+INVALID_JSON_FORMAT</br> <span class="badge">400</span>| The request body is not a valid JSON format.</br> <span class="badge error">No retry</span>
+DUPLICATE_REMITTANCE_ERROR</br> <span class="badge">400</span>| External ID has been used before. Use a unique External ID and try again.</br> <span class="badge error">No retry</span>
+RECIPIENT_AMOUNT_ERROR</br> <span class="badge">400</span>| The transfer amount requested is lower than the prescribed minimum for the recipient bank. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span>
+MAXIMUM_TRANSFER_LIMIT_ERROR</br> <span class="badge">400</span>| The transfer amount requested is higher than the prescribed maximum for the recipient bank. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span>
+SENDER_CUSTOMER_VALIDATION_ERROR</br> <span class="badge">400</span>| There are missing inputs for this customer which are required for the remittance. The errors field contains details about which fields are violating validation.</br> <span class="badge error">No retry</span>
+RECIPIENT_CUSTOMER_VALIDATION_ERROR</br> <span class="badge">400</span>| There are missing inputs for this customer which are required for the remittance. The errors field contains details about which fields are violating validation.</br> <span class="badge error">No retry</span>
+SENDER_CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find customer.</br> <span class="badge error">No retry</span>
+RECIPIENT_CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find customer.</br> <span class="badge error">No retry</span>
+SERVER_ERROR</br> <span class="badge">500</span>| Error connecting to our server. Please use Get remittance by external_id API to check whether the remittance has already been created. If you receive an empty array, the remittance has not been created; please retry the remittance request in 1-2 hours.</br> <span class="badge error">No retry</span>
