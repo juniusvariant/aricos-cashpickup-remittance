@@ -187,7 +187,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 
 ## Get Balance Response
 
-> Get Balance Example Request:
+> Get Balance Example Response:
 
 ```shell
 {
@@ -218,7 +218,7 @@ Create customer for your end-customers for the sender and recipient.
 > Create Customer Example Request:
 
 ```shell
-curl https://api.instamoney.co/customers -X POST \
+curl https://dev.aricos.co.id/api/v1/customer/register \
    -H 'Content-Type: application/json' \
    -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
    --data '
@@ -290,7 +290,7 @@ We return a customer object if the call succeeded.
 
 ### Create Customer Errors
 
-> Example Create Customer Response
+> Create Customer Example Response:
 
 ```shell
 {
@@ -330,3 +330,161 @@ INVALID_JSON_FORMAT</br> <span class="badge">400</span>| The request body is not
 ACCOUNT_CODE_NOT_SUPPORTED_ERROR</br> <span class="badge">400</span>| The code of the account is currently not supported</br> <span class="badge error">No retry</span>
 ACCOUNT_NUMBER_ERROR</br> <span class="badge">400</span>| Where account_code is “BCA”, account_number input needs to be 10 digits. Please check the account number length before retrying.</br> <span class="badge error">No retry</span>
 DUPLICATE_CUSTOMER_ERROR</br> <span class="badge">400</span>| The external_id entered has been used before. Please enter a unique external_id and try again.</br> <span class="badge error">No retry</span>
+
+## Update Customer Request
+
+Updates an existing customer
+
+```shell
+PUT https://dev.aricos.co.id/api/v1/customer/update/{reference_id}
+```
+
+> Update Customer Example Request:
+
+```shell
+curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 -X PUT \
+   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
+   -H 'Content-Type: application/json' \
+   -H 'cache-control: no-cache' \
+   --data '{
+     {
+      "given_name": "Ahmad",
+      "surname": "Shahab",
+      "phone_number": "+622199990000"
+    }
+   }'
+```
+
+Parameter | Description
+--------- | -----------
+reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
+customer_type </br><small><span style="color:grey">*required* </span></small>| `string` Legal entity. Valid values: `INDIVIDUAL` or `BUSINESS`
+given_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Given name(s). Required if `customer_type` is `INDIVIDUAL`. Only allowed if `customer_type` is `INDIVIDUAL`
+surname </br><small><span style="color:grey">*optional* </span></small>| `string` Surname or family name, if applicable. Only allowed if `customer_type` is `INDIVIDUAL`
+business_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Required if `customer_type` is `BUSINESS`. Only allowed if `customer_type` is `BUSINESS`
+address </br><small><span style="color:grey">*optional* </span></small>| `object` Customer's address
+address.country_code </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). If `customer_type` is `BUSINESS`, the country in which the corporate entity is registered. If `customer_type` is `INDIVIDUAL`, a country in which the customer holds nationality
+address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state
+address.province </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s province
+address.city </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s city
+address.suburb </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s suburb
+address.post_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s postal code
+address.line_1 </br><small><span style="color:grey">*optional* </span></small>| `string` First line of customer’s address. Typically used for building name and / or apartment number
+address.line_2 </br><small><span style="color:grey">*optional* </span></small>| `string` Second line of customer’s address. Typically used for building name and / or apartment number
+date_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Birth. Only allowed if `customer_type` is `INDIVIDUAL`. ISO 8601 format YYYY-MM-DD
+date_of_registration </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Registration. Only allowed if `customer_type` is `BUSINESS`. ISO 8601 format YYYY-MM-DD
+identification </br><small><span style="color:grey">*optional* </span></small>| `object` A legal document that verifies the identity of the customer
+identification.ktp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>16 characters</small></span>
+identification.npwp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>15 characters</small></span>
+identification.drivers_license </br><small><span style="color:grey">*optional* </span></small>| `string` Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>14 characters</small></span>
+identification.passport_number </br><small><span style="color:grey">*optional* </span></small>| `string` Passport number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br></br> If provided, should provide `passport_country`. In the case of multiple passports, please choose the passport of the country closest to Indonesia
+identification.passport_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Passport country of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br></br> Required if `passport_numberis` provided.
+identification.business_tax_id </br><small><span style="color:grey">*optional* </span></small>| `string` Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if `customer_type` is `BUSINESS`. If provided, should provide `business_tax_id_country`.
+identification.business_tax_id_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Country for tax identification number of the business.</br></br> Only allowed if `customer_type` is `BUSINESS`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). </br></br> Required if `business_tax_id` is provided.
+account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
+account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes]()
+account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
+account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
+email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
+mobile_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX
+phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
+
+## Update Customer Response
+
+We return the updated customer object if the call succeeded.
+
+### Update Customer Errors
+
+> Update Customer Example Response:
+
+```shell
+{
+  "id": "5c1774e76966b43a5b8198fb",
+  "external_id": "r-1234",
+  "customer_type": "INDIVIDUAL",
+  "given_name": "Ichwano",
+  "surname": "Sembo",
+  "address": {
+      "country_code": "ID",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Selatan",
+      "line_1": "Jl. Senayan 1 No.15"
+  },
+  "date_of_birth": "11-01-1990",
+  "identification": {
+      "ktp_number": "0987654321320987",
+      "npwp_number": "098765432132098"
+  },
+  "account_details": {
+      "account_code": "BNI",
+      "account_number": "123456780",
+      "account_holder_name": "Ichwano"
+  },
+  "email": "ichwano@email.com",
+  "mobile_number": "+628111555777",
+  "phone_number": "+622199990000",
+  "created": "2018-12-12T13:50:12.000Z",
+  "updated": "2018-12-12T13:50:12.000Z"
+}
+```
+
+Error Code | Description
+--------- | -----------
+API_VALIDATION_ERROR</br> <span class="badge">400</span>| Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge error">No retry</span>
+INVALID_JSON_FORMAT</br> <span class="badge">400</span>| The request body is not a valid JSON format</br> <span class="badge error">No retry</span>
+ACCOUNT_CODE_NOT_SUPPORTED_ERROR</br> <span class="badge">400</span>| The code of the account is currently not supported</br> <span class="badge error">No retry</span>
+ACCOUNT_NUMBER_ERROR</br> <span class="badge">400</span>| Where account_code is “BCA”, account_number input needs to be 10 digits. Please check the account number length before retrying.</br> <span class="badge error">No retry</span>
+DUPLICATE_CUSTOMER_ERROR</br> <span class="badge">400</span>| The external_id entered has been used before. Please enter a unique external_id and try again.</br> <span class="badge error">No retry</span>
+CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find customer.</br> <span class="badge error">No retry</span>
+
+## Get Customer With external_id Request
+
+```shell
+GET https://dev.aricos.co.id/api/v1/customer/search/{reference_id}
+```
+
+Returns an array with a single object which contains the customer corresponding to the unique external_id. Returns an empty array if there is no customer corresponding to the external_id.
+
+> Get Customer With external_id Example Request:
+
+```shell
+curl https://dev.aricos.co.id/api/v1/customer/search/r-1234 -X GET \
+  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'
+```
+
+Query Parameter | Description
+--------- | -----------
+external_id </br><small><span style="color:grey">*optional* </span></small>| `string` Unique ID you provided in the Create Customer request</br> <span style="color:grey"><small>The external_id must match the external_id used at customer creation precisely</small></span>
+
+> Get Customer With external_id Example Response:
+
+```shell
+[{
+  "id": "5c1774e76966b43a5b8198fb",
+  "external_id": "r-1234",
+  "customer_type": "INDIVIDUAL",
+  "given_name": "Ichwano",
+  "surname": "Sembo",
+  "address": {
+      "country_code": "ID",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Selatan",
+      "line_1": "Jl. Senayan 1 No.15"
+  },
+  "date_of_birth": "11-01-1990",
+  "identification": {
+      "ktp_number": "0987654321320987",
+      "npwp_number": "098765432132098"
+  },
+  "account_details": {
+      "account_code": "BNI",
+      "account_number": "123456780",
+      "account_holder_name": "Ichwano"
+  },
+  "email": "ichwano@email.com",
+  "mobile_number": "+628111555777",
+  "phone_number": "+622199990000",
+  "created": "2018-12-12T13:50:12.000Z",
+  "updated": "2018-12-12T13:50:12.000Z"
+}]
+```
