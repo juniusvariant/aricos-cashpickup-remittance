@@ -325,4 +325,4 @@ We return a customer object if the call succeeded.
 
 Error Code | Description
 --------- | -----------
-API_VALIDATION_ERROR</br> `400` | Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge">No retry</span>
+API_VALIDATION_ERROR</br> <span class="badge">400</span>| Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge error">No retry</span>
