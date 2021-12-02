@@ -4,9 +4,9 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
-[//]: toc_footers:
-[//]:  - <a href='#'>Contact for API User and Password</a>
-[//]:  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+toc_footers:
+- <a href='#'>Contact for API User and Password</a>
+- <a href='#'>Contact us if you got any trouble for using this API</a>
 
 includes:
   - data-references
