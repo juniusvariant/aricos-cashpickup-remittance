@@ -742,39 +742,37 @@ POST https://dev.aricos.co.id/api/v1/login
 <p>We return a customer object if the call succeeded.</p>
 <h3 id='create-customer-errors'>Create Customer Errors</h3>
 <blockquote>
-<p>Example Create Customer Response
-<code>shell
-{
-  &quot;id&quot;: &quot;5c1774e76966b43a5b8198fb&quot;,
-  &quot;external_id&quot;: &quot;r-1234&quot;,
-  &quot;customer_type&quot;: &quot;INDIVIDUAL&quot;,
-  &quot;given_name&quot;: &quot;Ichwano&quot;,
-  &quot;surname&quot;: &quot;Sembo&quot;,
-  &quot;address&quot;: {
-      &quot;country_code&quot;: &quot;ID&quot;,
-      &quot;province&quot;: &quot;DKI Jakarta&quot;,
-      &quot;city&quot;: &quot;Jakarta Selatan&quot;,
-      &quot;line_1&quot;: &quot;Jl. Senayan 1 No.15&quot;
-  },
-  &quot;date_of_birth&quot;: &quot;11-01-1990&quot;,
-  &quot;identification&quot;: {
-      &quot;ktp_number&quot;: &quot;0987654321320987&quot;,
-      &quot;npwp_number&quot;: &quot;098765432132098&quot;
-  },
-  &quot;account_details&quot;: {
-      &quot;account_code&quot;: &quot;BNI&quot;,
-      &quot;account_number&quot;: &quot;123456780&quot;,
-      &quot;account_holder_name&quot;: &quot;Ichwano&quot;
-  },
-  &quot;email&quot;: &quot;ichwano@email.com&quot;,
-  &quot;mobile_number&quot;: &quot;+628111555777&quot;,
-  &quot;phone_number&quot;: &quot;+622199990000&quot;,
-  &quot;created&quot;: &quot;2018-12-12T13:50:12.000Z&quot;,
-  &quot;updated&quot;: &quot;2018-12-12T13:50:12.000Z&quot;
-}
-</code></p>
+<p>Example Create Customer Response</p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
+  <span class="s2">"external_id"</span>: <span class="s2">"r-1234"</span>,
+  <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+  <span class="s2">"given_name"</span>: <span class="s2">"Ichwano"</span>,
+  <span class="s2">"surname"</span>: <span class="s2">"Sembo"</span>,
+  <span class="s2">"address"</span>: <span class="o">{</span>
+      <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+      <span class="s2">"province"</span>: <span class="s2">"DKI Jakarta"</span>,
+      <span class="s2">"city"</span>: <span class="s2">"Jakarta Selatan"</span>,
+      <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>
+  <span class="o">}</span>,
+  <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
+  <span class="s2">"identification"</span>: <span class="o">{</span>
+      <span class="s2">"ktp_number"</span>: <span class="s2">"0987654321320987"</span>,
+      <span class="s2">"npwp_number"</span>: <span class="s2">"098765432132098"</span>
+  <span class="o">}</span>,
+  <span class="s2">"account_details"</span>: <span class="o">{</span>
+      <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
+      <span class="s2">"account_number"</span>: <span class="s2">"123456780"</span>,
+      <span class="s2">"account_holder_name"</span>: <span class="s2">"Ichwano"</span>
+  <span class="o">}</span>,
+  <span class="s2">"email"</span>: <span class="s2">"ichwano@email.com"</span>,
+  <span class="s2">"mobile_number"</span>: <span class="s2">"+628111555777"</span>,
+  <span class="s2">"phone_number"</span>: <span class="s2">"+622199990000"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
+  <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
+<span class="o">}</span>
+</code></pre></div>
 <table><thead>
 <tr>
 <th>Error Code</th>
@@ -784,6 +782,22 @@ POST https://dev.aricos.co.id/api/v1/login
 <tr>
 <td>API_VALIDATION_ERROR</br> <span class="badge">400</span></td>
 <td>Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>INVALID_JSON_FORMAT</br> <span class="badge">400</span></td>
+<td>The request body is not a valid JSON format</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>ACCOUNT_CODE_NOT_SUPPORTED_ERROR</br> <span class="badge">400</span></td>
+<td>The code of the account is currently not supported</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>ACCOUNT_NUMBER_ERROR</br> <span class="badge">400</span></td>
+<td>Where account_code is “BCA”, account_number input needs to be 10 digits. Please check the account number length before retrying.</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>DUPLICATE_CUSTOMER_ERROR</br> <span class="badge">400</span></td>
+<td>The external_id entered has been used before. Please enter a unique external_id and try again.</br> <span class="badge error">No retry</span></td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
