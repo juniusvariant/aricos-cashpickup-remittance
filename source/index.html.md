@@ -215,7 +215,7 @@ POST https://dev.aricos.co.id/api/v1/customer/register
 
 Create customer for your end-customers for the sender and recipient.
 
-> Create Customer Example Request: </br>
+> Create Customer Example Request:
 
 ```shell
 curl https://dev.aricos.co.id/api/v1/customer/register \
@@ -488,3 +488,12 @@ external_id </br><small><span style="color:grey">*optional* </span></small>| `st
   "updated": "2018-12-12T13:50:12.000Z"
 }]
 ```
+
+# Bank Account Remittance
+
+Our Bank Account Remittance APIs allow you to send remittances from your Aricos Account on behalf of a sender to your designated recipient. Only IDR-IDR transfers supported currently.
+
+<aside class="notice">
+   Please note that you are unable to cancel a remittance request once it has been made.
+</aside>
+
