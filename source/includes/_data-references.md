@@ -11,7 +11,7 @@ COMPLIANCE_VERIFICATION | Request is considered medium or high risk, and is bein
 COMPLIANCE_REJECTED | Request is rejected by compliance.
 PROCESSING | Request has been approved and the remittance is queued to be transferred to the recipient.
 COMPLETED | The sending bank has confirmed transmission of the remittance.
-FAILED | Remittance could not be transferred to the recipient due to certain errors. See [Remittances Failure Codes](#remittances-failure-codes).
+FAILED | Remittance could not be transferred to the recipient due to certain errors. See [Remittances Failure Codes](#remittance-failure-codes).
 
 ## Remittance Failure Codes
 
