@@ -389,6 +389,9 @@
               </ul>
           </li>
           <li>
+            <a href="#bank-account-remittance" class="toc-h1 toc-link" data-title="Bank Account Remittance">Bank Account Remittance</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -583,7 +586,7 @@ POST https://dev.aricos.co.id/api/v1/login
 <p>Create customer for your end-customers for the sender and recipient.</p>
 
 <blockquote>
-<p>Create Customer Example Request: </br></p>
+<p>Create Customer Example Request:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/register <span class="se">\</span>
    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1078,7 +1081,13 @@ POST https://dev.aricos.co.id/api/v1/login
   <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
   <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
 <span class="o">}]</span>
-</code></pre></div><h1 id='errors'>Errors</h1>
+</code></pre></div><h1 id='bank-account-remittance'>Bank Account Remittance</h1>
+<p>Our Bank Account Remittance APIs allow you to send remittances from your Aricos Account on behalf of a sender to your designated recipient. Only IDR-IDR transfers supported currently.</p>
+
+<aside class="notice">
+   Please note that you are unable to cancel a remittance request once it has been made.
+</aside>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
