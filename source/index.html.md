@@ -215,6 +215,40 @@ POST https://dev.aricos.co.id/api/v1/customer/register
 
 Create customer for your end-customers for the sender and recipient.
 
+Parameter | Description
+--------- | -----------
+reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
+customer_type </br><small><span style="color:grey">*required* </span></small>| `string` Legal entity. Valid values: `INDIVIDUAL` or `BUSINESS`
+given_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Given name(s). Required if `customer_type` is `INDIVIDUAL`. Only allowed if `customer_type` is `INDIVIDUAL`
+surname </br><small><span style="color:grey">*optional* </span></small>| `string` Surname or family name, if applicable. Only allowed if `customer_type` is `INDIVIDUAL`
+business_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Required if `customer_type` is `BUSINESS`. Only allowed if `customer_type` is `BUSINESS`
+address </br><small><span style="color:grey">*optional* </span></small>| `object` Customer's address
+address.country_code </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). If `customer_type` is `BUSINESS`, the country in which the corporate entity is registered. If `customer_type` is `INDIVIDUAL`, a country in which the customer holds nationality
+address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state
+address.province </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s province
+address.city </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s city
+address.suburb </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s suburb
+address.post_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s postal code
+address.line_1 </br><small><span style="color:grey">*optional* </span></small>| `string` First line of customer’s address. Typically used for building name and / or apartment number
+address.line_2 </br><small><span style="color:grey">*optional* </span></small>| `string` Second line of customer’s address. Typically used for building name and / or apartment number
+date_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Birth. Only allowed if `customer_type` is `INDIVIDUAL`. ISO 8601 format YYYY-MM-DD
+date_of_registration </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Registration. Only allowed if `customer_type` is `BUSINESS`. ISO 8601 format YYYY-MM-DD
+identification </br><small><span style="color:grey">*optional* </span></small>| `object` A legal document that verifies the identity of the customer
+identification.ktp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>16 characters</small></span>
+identification.npwp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>15 characters</small></span>
+identification.drivers_license </br><small><span style="color:grey">*optional* </span></small>| `string` Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>14 characters</small></span>
+identification.passport_number </br><small><span style="color:grey">*optional* </span></small>| `string` Passport number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br></br> If provided, should provide `passport_country`. In the case of multiple passports, please choose the passport of the country closest to Indonesia
+identification.passport_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Passport country of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br></br> Required if `passport_numberis` provided.
+identification.business_tax_id </br><small><span style="color:grey">*optional* </span></small>| `string` Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if `customer_type` is `BUSINESS`. If provided, should provide `business_tax_id_country`.
+identification.business_tax_id_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Country for tax identification number of the business.</br></br> Only allowed if `customer_type` is `BUSINESS`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). </br></br> Required if `business_tax_id` is provided.
+account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
+account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes]()
+account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
+account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
+email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
+mobile_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX
+phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
+
 > Create Customer Example Request:
 
 ```shell
@@ -249,40 +283,6 @@ curl https://dev.aricos.co.id/api/v1/customer/register \
     }
    '
 ```
-
-Parameter | Description
---------- | -----------
-reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
-customer_type </br><small><span style="color:grey">*required* </span></small>| `string` Legal entity. Valid values: `INDIVIDUAL` or `BUSINESS`
-given_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Given name(s). Required if `customer_type` is `INDIVIDUAL`. Only allowed if `customer_type` is `INDIVIDUAL`
-surname </br><small><span style="color:grey">*optional* </span></small>| `string` Surname or family name, if applicable. Only allowed if `customer_type` is `INDIVIDUAL`
-business_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Required if `customer_type` is `BUSINESS`. Only allowed if `customer_type` is `BUSINESS`
-address </br><small><span style="color:grey">*optional* </span></small>| `object` Customer's address
-address.country_code </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). If `customer_type` is `BUSINESS`, the country in which the corporate entity is registered. If `customer_type` is `INDIVIDUAL`, a country in which the customer holds nationality
-address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state
-address.province </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s province
-address.city </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s city
-address.suburb </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s suburb
-address.post_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s postal code
-address.line_1 </br><small><span style="color:grey">*optional* </span></small>| `string` First line of customer’s address. Typically used for building name and / or apartment number
-address.line_2 </br><small><span style="color:grey">*optional* </span></small>| `string` Second line of customer’s address. Typically used for building name and / or apartment number
-date_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Birth. Only allowed if `customer_type` is `INDIVIDUAL`. ISO 8601 format YYYY-MM-DD
-date_of_registration </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Registration. Only allowed if `customer_type` is `BUSINESS`. ISO 8601 format YYYY-MM-DD
-identification </br><small><span style="color:grey">*optional* </span></small>| `object` A legal document that verifies the identity of the customer
-identification.ktp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>16 characters</small></span>
-identification.npwp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>15 characters</small></span>
-identification.drivers_license </br><small><span style="color:grey">*optional* </span></small>| `string` Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>14 characters</small></span>
-identification.passport_number </br><small><span style="color:grey">*optional* </span></small>| `string` Passport number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br></br> If provided, should provide `passport_country`. In the case of multiple passports, please choose the passport of the country closest to Indonesia
-identification.passport_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Passport country of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br></br> Required if `passport_numberis` provided.
-identification.business_tax_id </br><small><span style="color:grey">*optional* </span></small>| `string` Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if `customer_type` is `BUSINESS`. If provided, should provide `business_tax_id_country`.
-identification.business_tax_id_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Country for tax identification number of the business.</br></br> Only allowed if `customer_type` is `BUSINESS`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). </br></br> Required if `business_tax_id` is provided.
-account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
-account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes]()
-account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
-account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
-email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
-mobile_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX
-phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
 
 ## Create Customer Response
 
@@ -339,22 +339,6 @@ Updates an existing customer
 PUT https://dev.aricos.co.id/api/v1/customer/update/{reference_id}
 ```
 
-> Update Customer Example Request:
-
-```shell
-curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 -X PUT \
-   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
-   -H 'Content-Type: application/json' \
-   -H 'cache-control: no-cache' \
-   --data '{
-     {
-      "given_name": "Ahmad",
-      "surname": "Shahab",
-      "phone_number": "+622199990000"
-    }
-   }'
-```
-
 Parameter | Description
 --------- | -----------
 reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
@@ -388,6 +372,22 @@ account_details.account_holder_name </br><small><span style="color:grey">*option
 email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
 mobile_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX
 phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
+
+> Update Customer Example Request:
+
+```shell
+curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 -X PUT \
+   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
+   -H 'Content-Type: application/json' \
+   -H 'cache-control: no-cache' \
+   --data '{
+     {
+      "given_name": "Ahmad",
+      "surname": "Shahab",
+      "phone_number": "+622199990000"
+    }
+   }'
+```
 
 ## Update Customer Response
 
