@@ -400,6 +400,9 @@
                   <li>
                     <a href="#create-remittance-response" class="toc-h2 toc-link" data-title="Create Remittance Response">Create Remittance Response</a>
                   </li>
+                  <li>
+                    <a href="#get-remittance-with-external_id-request" class="toc-h2 toc-link" data-title="Get Remittance With external_id Request">Get Remittance With external_id Request</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1246,7 +1249,45 @@ POST https://dev.aricos.co.id/api/v1/login
 <td>Error connecting to our server. Please use Get remittance by external_id API to check whether the remittance has already been created. If you receive an empty array, the remittance has not been created; please retry the remittance request in 1-2 hours.</br> <span class="badge error">No retry</span></td>
 </tr>
 </tbody></table>
-<h1 id='data-references'>Data References</h1>
+<h2 id='get-remittance-with-external_id-request'>Get Remittance With external_id Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>GET https://dev.aricos.co.id/api/v1/remittance/check-v2/<span class="o">{</span>external_id<span class="o">}</span>
+</code></pre></div>
+<p>Returns an array with a single object which contains the remittance corresponding to the unique external_id. Returns an empty array if there is no remittance corresponding to the external_id.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>external_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Get Customer With external_id Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code> curl https://dev.aricos.co.id/api/v1/remittance/check-v2/<span class="o">{</span>external_id<span class="o">}</span> <span class="nt">-X</span> GET <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwi’
+</span></code></pre></div>
+<blockquote>
+<p>Get Remittance With external_id Example Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">[{</span>
+  <span class="s2">"external_id"</span>: <span class="s2">"72655"</span>,
+  <span class="s2">"amount"</span>: 11000,
+  <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
+  <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
+  <span class="s2">"description"</span>: <span class="s2">"uang jajan"</span>,
+  <span class="s2">"sender_customer_id"</span> : <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
+  <span class="s2">"recipient_customer_id"</span>: <span class="s2">"5b51e6ba0071ec521008e21d"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2018-12-20T17:00:00.000Z"</span>,
+  <span class="s2">"updated"</span>: <span class="s2">"2018-12-20T17:00:00.000Z"</span>,
+  <span class="s2">"id"</span>: <span class="s2">"5afbf743e28bc2055b3c06ed"</span>
+<span class="o">}]</span>
+</code></pre></div><h1 id='data-references'>Data References</h1>
 <p>Below are some list of data references that you require to use our API&#39;s.</p>
 <h1 id='errors'>Errors</h1>
 <p>Below are some of most common errors across all our endpoints. Specific errors are located under each endpoint. If you have any questions please contact us.</p>
