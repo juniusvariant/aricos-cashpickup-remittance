@@ -1,11 +1,3 @@
-<style>
-code {
-background-color: red !important;
- white-space : pre-wrap !important;
- word-break: break-word !important;
-}
-</style>
-
 ---
 title: API Reference
 
