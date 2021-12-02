@@ -408,9 +408,6 @@
               </ul>
           </li>
           <li>
-            <a href="#testing-remittances" class="toc-h1 toc-link" data-title="Testing Remittances">Testing Remittances</a>
-          </li>
-          <li>
             <a href="#data-references" class="toc-h1 toc-link" data-title="Data References">Data References</a>
               <ul class="toc-list-h2">
                   <li>
@@ -436,6 +433,7 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Contact for API User and Password</a></li>
+            <li><a href='#'>Contact us if you got any trouble for using this API</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -977,7 +975,7 @@ POST https://dev.aricos.co.id/api/v1/login
 </tr>
 <tr>
 <td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#account-codes">Account Codes</a></td>
+<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#">Account Codes</a></td>
 </tr>
 <tr>
 <td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -1306,76 +1304,6 @@ POST https://dev.aricos.co.id/api/v1/login
 <tr>
 <td>external_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span></td>
-</tr>
-</tbody></table>
-<h1 id='testing-remittances'>Testing Remittances</h1>
-<p>In this section, you can find instructions on how to simulate various Remittance results. If you are not able to perform these simulations successfully, or have any other questions, please feel free to contact your account manager.</p>
-
-<table><thead>
-<tr>
-<th>Scenario</th>
-<th>Try these values</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>Successful remittance</strong></br></br> Will complete remittance and send a callback to your callback URL with status: <code>“COMPLETED”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Monica Flange, account_number: 111111}</code></br></br> Then, create a remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Successful SKN remittance</strong></br></br> Will complete remittance and send a callback to your callback URL with status: <code>“COMPLETED”</code></td>
-<td>First, create customers representing the sender and recipient.</br></br> Then, create a remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 50000000}</code></td>
-</tr>
-<tr>
-<td><strong>Successful SKN disbursement which was later found to have been refunded</strong></br></br> This scenario may happen for disbursements &gt;50 million IDR due to reasons including name mismatch.</br></br> Will first send callback with status: <code>&quot;COMPLETED&quot;</code> to your callback URL</br></br> 2 minutes later, will send a second callback to your callback URL with status: <code>“FAILED&quot;</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: BRI, account_holder_name: Manuel Johnson, account_number: 148148}</code></br></br> Then, create a remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 50000000}</code></td>
-</tr>
-<tr>
-<td><strong>Remittance has been assessed to be medium or high risk and requires compliance verification. Remittance is eventually approved by compliance and succeeds</strong></br></br> Will send a callback to your callback URL with status: <code>“COMPLIANCE_VERIFICATION”</code></br></br> 2 minutes later, will send a second callback to your callback URL with status: <code>“COMPLETED”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Perla Semele, account_number: 808080}</code></br></br> Then create a Remittance using the sender and recipient customer ids</td>
-</tr>
-<tr>
-<td><strong>Remittance has been assessed to be medium or high risk and requires compliance verification. Remittance is eventually rejected by compliance</strong></br></br> Will send a callback to your callback URL with status: <code>“COMPLIANCE_VERIFICATION”</code></br></br> 2 minutes later, will send a second callback to your callback URL with status: <code>“COMPLIANCE_REJECTED”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Isabelle Stickney, account_number: 909090}</code></br></br> Then create a Remittance using the sender and recipient customer ids</td>
-</tr>
-<tr>
-<td><strong>Bank account does not exist</strong></br></br> Will return error type: <code>“INVALID_DESTINATION”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Rizky Abdul, account_number: 7654321}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Switching network is experiencing downtime</strong></br></br> Will return error type: <code>&quot;SWITCHING_NETWORK_ERROR&quot;</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Siti Abdul, account_number: 12121212}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Bank networks have rejected the transaction for an unknown reason</strong></br></br> Will return error type: <code>“UNKNOWN_BANK_NETWORK_ERROR”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Andri Senti, account_number: 987654321}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Bank is undergoing unscheduled maintenance</strong></br></br> Will return error type: <code>“TEMPORARY_BANK_NETWORK_ERROR”</code></br></br></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Yono Kustono, account_number: 321321321}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Transaction has been rejected by the destination bank without a clear error reason</strong></br></br> Will return error type: <code>“REJECTED_BY_BANK”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Budi Berkah, account_number: 8787878}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Transaction was rejected because of a fatal error</strong></br></br> Will return error type: <code>“TRANSFER_ERROR”</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Adnin Dita, account_number: 1351357}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Transaction failed because of a known temporary issue</strong></br></br> Will return error for <code>&quot;TEMPORARY_TRANSFER_ERROR&quot;</code></td>
-<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Sutiono Kusro, account_number: 868686}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
-</tr>
-<tr>
-<td><strong>Description not found</strong></br></br> Will return error for <code>&quot;API_VALIDATION_ERROR&quot;</code></td>
-<td>Try to simulate sending a remittance with the “description” parameter empty</td>
-</tr>
-<tr>
-<td><strong>Not enough balance</strong></br></br> Will return error for <code>&quot;INSUFFICIENT_BALANCE&quot;</code></td>
-<td>Try to simulate sending a remittance greater than the balance available in your account</td>
-</tr>
-<tr>
-<td><strong>Invalid API Key</strong></br></br> Will return error for <code>&quot;INVALID_API_KEY&quot;</code></td>
-<td>Try using a random API key</td>
 </tr>
 </tbody></table>
 <h1 id='data-references'>Data References</h1>
