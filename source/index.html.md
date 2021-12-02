@@ -185,21 +185,6 @@ Parameter | Description
 --------- | -----------
 account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`).
 
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td >account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span><code>CASH</code></small> </td>
-<td vertical-align: top !important;> <code>string</code> The selected account type (<code>CASH</code> or <code>HOLDING</code>).</td>
-</tr>
-</tbody>
-</table>
-
 ## Get Balance Response
 
 > Get Balance Example Request:
@@ -238,7 +223,7 @@ curl https://api.instamoney.co/customers -X POST \
    -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
    --data '
      {
-      "external_id": "r-1234",
+      "reference_id": "r-1234",
       "customer_type": "INDIVIDUAL",
       "given_name": "Ichwano",
       "surname": "Sembo",
@@ -267,217 +252,29 @@ curl https://api.instamoney.co/customers -X POST \
 
 Parameter | Description
 --------- | -----------
-account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`).
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
+customer_type </br><small><span style="color:grey">*required* </span></small>| `string` Legal entity. Valid values: `INDIVIDUAL` or `BUSINESS`
+given_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Given name(s). Required if `customer_type` is `INDIVIDUAL`. Only allowed if `customer_type` is `INDIVIDUAL`
+surname </br><small><span style="color:grey">*optional* </span></small>| `string` Surname or family name, if applicable. Only allowed if `customer_type` is `INDIVIDUAL`
+business_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Required if `customer_type` is `BUSINESS`. Only allowed if `customer_type` is `BUSINESS`
+address </br><small><span style="color:grey">*optional* </span></small>| `object` Customer's address
+address.country_code </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). If `customer_type` is `BUSINESS`, the country in which the corporate entity is registered. If `customer_type` is `INDIVIDUAL`, a country in which the customer holds nationality
+address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state
+address.province </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s province
+address.city </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s city
+address.suburb </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s suburb
+address.post_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s postal code
+address.line_1 </br><small><span style="color:grey">*optional* </span></small>| `string` First line of customer’s address. Typically used for building name and / or apartment number
+address.line_2 </br><small><span style="color:grey">*optional* </span></small>| `string` Second line of customer’s address. Typically used for building name and / or apartment number
+date_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Birth. Only allowed if `customer_type` is `INDIVIDUAL`. ISO 8601 format YYYY-MM-DD
+date_of_registration </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Registration. Only allowed if `customer_type` is `BUSINESS`. ISO 8601 format YYYY-MM-DD
+identification </br><small><span style="color:grey">*optional* </span></small>| `object` A legal document that verifies the identity of the customer
+identification.ktp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>16 characters</small></span>
+identification.npwp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>15 characters</small></span>
+identification.drivers_license </br><small><span style="color:grey">*optional* </span></small>| `string` Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>14 characters</small></span>
+identification.passport_number </br><small><span style="color:grey">*optional* </span></small>| `string` Passport number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br></br> If provided, should provide `passport_country`. In the case of multiple passports, please choose the passport of the country closest to Indonesia
+identification.passport_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Passport country of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br></br> Required if `passport_numberis` provided.
+identification.business_tax_id </br><small><span style="color:grey">*optional* </span></small>| `string` Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if `customer_type` is `BUSINESS`. If provided, should provide `business_tax_id_country`.
+identification.business_tax_id_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Country for tax identification number of the business.</br></br> Only allowed if `customer_type` is `BUSINESS`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). </br></br> Required if `business_tax_id` is provided.
+account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
+account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
