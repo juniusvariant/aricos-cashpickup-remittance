@@ -586,16 +586,13 @@ GET https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id}
 
 Returns an array with a single object which contains the remittance corresponding to the unique external_id. Returns an empty array if there is no remittance corresponding to the external_id.
 
-Parameter | Description
---------- | -----------
-external_id </br><small><span style="color:grey">*required* </span></small>| `string` Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span>
-
 > Get Customer With external_id Example Request:
 
 ```shell
  curl https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id} -X GET \
   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwi’
 ```
+
 > Get Remittance With external_id Example Response:
 
 ```shell
@@ -613,3 +610,7 @@ external_id </br><small><span style="color:grey">*required* </span></small>| `st
   "id": "5afbf743e28bc2055b3c06ed"
 }]
 ```
+
+Parameter | Description
+--------- | -----------
+external_id </br><small><span style="color:grey">*required* </span></small>| `string` Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span>
