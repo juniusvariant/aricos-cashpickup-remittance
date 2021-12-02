@@ -408,6 +408,9 @@
               </ul>
           </li>
           <li>
+            <a href="#testing-remittances" class="toc-h1 toc-link" data-title="Testing Remittances">Testing Remittances</a>
+          </li>
+          <li>
             <a href="#data-references" class="toc-h1 toc-link" data-title="Data References">Data References</a>
               <ul class="toc-list-h2">
                   <li>
@@ -415,6 +418,15 @@
                   </li>
                   <li>
                     <a href="#remittance-failure-codes" class="toc-h2 toc-link" data-title="Remittance Failure Codes">Remittance Failure Codes</a>
+                  </li>
+                  <li>
+                    <a href="#account-codes" class="toc-h2 toc-link" data-title="Account Codes">Account Codes</a>
+                  </li>
+                  <li>
+                    <a href="#purpose-codes" class="toc-h2 toc-link" data-title="Purpose Codes">Purpose Codes</a>
+                  </li>
+                  <li>
+                    <a href="#source-of-funds" class="toc-h2 toc-link" data-title="Source of Funds">Source of Funds</a>
                   </li>
               </ul>
           </li>
@@ -424,7 +436,6 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Contact for API User and Password</a></li>
-            <li><a href='#'>Contact us if you got any trouble for using this API</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -440,7 +451,7 @@
 <p>The remittance flow is as follows:</p>
 
 <ol>
-<li><p><a href="#prefund">Prefund</a> your Instamoney account balance</p></li>
+<li><p><a href="#prefund">Prefund</a> your Aricos account balance</p></li>
 <li><p><a href="#create-customer">Create a customer</a> which represents the sender, and a customer which represents the recipient of the remittance. You’ll get an id for each</p></li>
 <li><p><a href="#create-remittance">Create a remittance</a>, attaching ids of the sender and recipient</p></li>
 <li><p>We run this remittance through our risk-scoring system. If necessary, our compliance team will contact you for additional verification of information</p></li>
@@ -471,7 +482,7 @@
 
 <p>a. Under the Authorization tab of each folder, the default authorization type is set to “Inherit auth from parent”. The “Inherit auth from parent” setting indicates that every request in the folder by default uses the authorization type from the parent.</p>
 
-<p>b. Edit the Instamoney API collection.</p>
+<p>b. Edit the Aricos API collection.</p>
 
 <p>c. Under “Authorization”, paste your secret API key into the Username. Use your Development Key to test in the development environment, and your Live Key to send live transactions.</p>
 
@@ -966,7 +977,7 @@ POST https://dev.aricos.co.id/api/v1/login
 </tr>
 <tr>
 <td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#">Account Codes</a></td>
+<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#account-codes">Account Codes</a></td>
 </tr>
 <tr>
 <td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -1153,7 +1164,7 @@ POST https://dev.aricos.co.id/api/v1/login
 </tr>
 <tr>
 <td>sender_customer_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>string</code> The id of the sender customer (as returned by Instamoney’s Create Customer endpoint).</br></br> The following fields are required in the sender customer object: <code>given_name</code> OR <code>business_name</code>, <code>customer_type</code>, <code>country_code</code></td>
+<td><code>string</code> The id of the sender customer (as returned by Aricos’s Create Customer endpoint).</br></br> The following fields are required in the sender customer object: <code>given_name</code> OR <code>business_name</code>, <code>customer_type</code>, <code>country_code</code></td>
 </tr>
 <tr>
 <td>recipient_customer_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
@@ -1297,6 +1308,76 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span></td>
 </tr>
 </tbody></table>
+<h1 id='testing-remittances'>Testing Remittances</h1>
+<p>In this section, you can find instructions on how to simulate various Remittance results. If you are not able to perform these simulations successfully, or have any other questions, please feel free to contact your account manager.</p>
+
+<table><thead>
+<tr>
+<th>Scenario</th>
+<th>Try these values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Successful remittance</strong></br></br> Will complete remittance and send a callback to your callback URL with status: <code>“COMPLETED”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Monica Flange, account_number: 111111}</code></br></br> Then, create a remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Successful SKN remittance</strong></br></br> Will complete remittance and send a callback to your callback URL with status: <code>“COMPLETED”</code></td>
+<td>First, create customers representing the sender and recipient.</br></br> Then, create a remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 50000000}</code></td>
+</tr>
+<tr>
+<td><strong>Successful SKN disbursement which was later found to have been refunded</strong></br></br> This scenario may happen for disbursements &gt;50 million IDR due to reasons including name mismatch.</br></br> Will first send callback with status: <code>&quot;COMPLETED&quot;</code> to your callback URL</br></br> 2 minutes later, will send a second callback to your callback URL with status: <code>“FAILED&quot;</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: BRI, account_holder_name: Manuel Johnson, account_number: 148148}</code></br></br> Then, create a remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 50000000}</code></td>
+</tr>
+<tr>
+<td><strong>Remittance has been assessed to be medium or high risk and requires compliance verification. Remittance is eventually approved by compliance and succeeds</strong></br></br> Will send a callback to your callback URL with status: <code>“COMPLIANCE_VERIFICATION”</code></br></br> 2 minutes later, will send a second callback to your callback URL with status: <code>“COMPLETED”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Perla Semele, account_number: 808080}</code></br></br> Then create a Remittance using the sender and recipient customer ids</td>
+</tr>
+<tr>
+<td><strong>Remittance has been assessed to be medium or high risk and requires compliance verification. Remittance is eventually rejected by compliance</strong></br></br> Will send a callback to your callback URL with status: <code>“COMPLIANCE_VERIFICATION”</code></br></br> 2 minutes later, will send a second callback to your callback URL with status: <code>“COMPLIANCE_REJECTED”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Isabelle Stickney, account_number: 909090}</code></br></br> Then create a Remittance using the sender and recipient customer ids</td>
+</tr>
+<tr>
+<td><strong>Bank account does not exist</strong></br></br> Will return error type: <code>“INVALID_DESTINATION”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Rizky Abdul, account_number: 7654321}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Switching network is experiencing downtime</strong></br></br> Will return error type: <code>&quot;SWITCHING_NETWORK_ERROR&quot;</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Siti Abdul, account_number: 12121212}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Bank networks have rejected the transaction for an unknown reason</strong></br></br> Will return error type: <code>“UNKNOWN_BANK_NETWORK_ERROR”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Andri Senti, account_number: 987654321}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Bank is undergoing unscheduled maintenance</strong></br></br> Will return error type: <code>“TEMPORARY_BANK_NETWORK_ERROR”</code></br></br></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Yono Kustono, account_number: 321321321}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Transaction has been rejected by the destination bank without a clear error reason</strong></br></br> Will return error type: <code>“REJECTED_BY_BANK”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Budi Berkah, account_number: 8787878}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Transaction was rejected because of a fatal error</strong></br></br> Will return error type: <code>“TRANSFER_ERROR”</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Adnin Dita, account_number: 1351357}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Transaction failed because of a known temporary issue</strong></br></br> Will return error for <code>&quot;TEMPORARY_TRANSFER_ERROR&quot;</code></td>
+<td>First, create customers representing the sender and recipient. Use the following values for the recipient customer:</br></br> <code>{channel_code: MANDIRI, account_holder_name: Sutiono Kusro, account_number: 868686}</code></br></br> Then create a Remittance using the sender and recipient customer ids, and the following values:</br></br> <code>{amount: 80000}</code></td>
+</tr>
+<tr>
+<td><strong>Description not found</strong></br></br> Will return error for <code>&quot;API_VALIDATION_ERROR&quot;</code></td>
+<td>Try to simulate sending a remittance with the “description” parameter empty</td>
+</tr>
+<tr>
+<td><strong>Not enough balance</strong></br></br> Will return error for <code>&quot;INSUFFICIENT_BALANCE&quot;</code></td>
+<td>Try to simulate sending a remittance greater than the balance available in your account</td>
+</tr>
+<tr>
+<td><strong>Invalid API Key</strong></br></br> Will return error for <code>&quot;INVALID_API_KEY&quot;</code></td>
+<td>Try using a random API key</td>
+</tr>
+</tbody></table>
 <h1 id='data-references'>Data References</h1>
 <p>Below are some list of data references that you require to use our API&#39;s.</p>
 <h2 id='remittance-statuses'>Remittance Statuses</h2>
@@ -1365,6 +1446,750 @@ POST https://dev.aricos.co.id/api/v1/login
 <tr>
 <td>TRANSFER_ERROR</td>
 <td>We’ve encountered a fatal error while processing this remittance. Certain API fields in your request may be invalid. Please contact our customer support team for more information.</td>
+</tr>
+</tbody></table>
+<h2 id='account-codes'>Account Codes</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ACEH</td>
+<td>BPD Aceh</td>
+</tr>
+<tr>
+<td>ACEH_UUS</td>
+<td>BPD Aceh UUS</td>
+</tr>
+<tr>
+<td>AGRIS</td>
+<td>Bank Agris</td>
+</tr>
+<tr>
+<td>AGRONIAGA</td>
+<td>Bank BRI Agroniaga</td>
+</tr>
+<tr>
+<td>AMAR</td>
+<td>Bank Amar Indonesia (formerly Anglomas International Bank)</td>
+</tr>
+<tr>
+<td>ANZ</td>
+<td>Bank ANZ Indonesia</td>
+</tr>
+<tr>
+<td>ARTA_NIAGA_KENCANA</td>
+<td>Bank Arta Niaga Kencana</td>
+</tr>
+<tr>
+<td>ARTHA</td>
+<td>Bank Artha Graha International</td>
+</tr>
+<tr>
+<td>ARTOS</td>
+<td>Bank Artos Indonesia</td>
+</tr>
+<tr>
+<td>BALI</td>
+<td>BPD Bali</td>
+</tr>
+<tr>
+<td>BAML</td>
+<td>Bank of America Merill-Lynch</td>
+</tr>
+<tr>
+<td>BANGKOK</td>
+<td>Bangkok Bank</td>
+</tr>
+<tr>
+<td>BANTEN</td>
+<td>BPD Banten (formerly Bank Pundi Indonesia)</td>
+</tr>
+<tr>
+<td>BCA</td>
+<td>Bank Central Asia (BCA)</td>
+</tr>
+<tr>
+<td>BCA_DIGITAL</td>
+<td>Bank Central Asia Digital (BluBCA)</td>
+</tr>
+<tr>
+<td>BCA_SYR</td>
+<td>Bank Central Asia (BCA) Syariah</td>
+</tr>
+<tr>
+<td>BENGKULU</td>
+<td>BPD Bengkulu</td>
+</tr>
+<tr>
+<td>BISNIS_INTERNASIONAL</td>
+<td>Bank Bisnis Internasional</td>
+</tr>
+<tr>
+<td>BJB</td>
+<td>Bank BJB</td>
+</tr>
+<tr>
+<td>BJB_SYR</td>
+<td>Bank BJB Syariah</td>
+</tr>
+<tr>
+<td>BNI</td>
+<td>Bank Negara Indonesia (BNI)</td>
+</tr>
+<tr>
+<td>BNI_SYR</td>
+<td>Bank BNI Syariah</td>
+</tr>
+<tr>
+<td>BNP_PARIBAS</td>
+<td>Bank BNP Paribas</td>
+</tr>
+<tr>
+<td>BOC</td>
+<td>Bank of China (BOC)</td>
+</tr>
+<tr>
+<td>BRI</td>
+<td>Bank Rakyat Indonesia (BRI)</td>
+</tr>
+<tr>
+<td>BRI_SYR</td>
+<td>Bank Syariah BRI</td>
+</tr>
+<tr>
+<td>BSI</td>
+<td>Bank Syariah Indonesia (BSI)</td>
+</tr>
+<tr>
+<td>BTN</td>
+<td>Bank Tabungan Negara (BTN)</td>
+</tr>
+<tr>
+<td>BTN_UUS</td>
+<td>Bank Tabungan Negara (BTN) UUS</td>
+</tr>
+<tr>
+<td>BTPN_SYARIAH</td>
+<td>BTPN Syariah (formerly Bank Sahabat Purba Danarta and Bank Tabungan Pensiunan Nasional UUS)</td>
+</tr>
+<tr>
+<td>BUKOPIN</td>
+<td>Bank Bukopin</td>
+</tr>
+<tr>
+<td>BUKOPIN_SYR</td>
+<td>Bank Syariah Bukopin</td>
+</tr>
+<tr>
+<td>BUMI_ARTA</td>
+<td>Bank Bumi Arta</td>
+</tr>
+<tr>
+<td>CAPITAL</td>
+<td>Bank Capital Indonesia</td>
+</tr>
+<tr>
+<td>CCB</td>
+<td>China Construction Bank Indonesia (formerly Bank Antar Daerah and Bank Windu Kentjana Int)</td>
+</tr>
+<tr>
+<td>CENTRATAMA</td>
+<td>Centratama Nasional Bank</td>
+</tr>
+<tr>
+<td>CHINATRUST</td>
+<td>Bank Chinatrust Indonesia</td>
+</tr>
+<tr>
+<td>CIMB</td>
+<td>Bank CIMB Niaga</td>
+</tr>
+<tr>
+<td>CIMB_UUS</td>
+<td>Bank CIMB Niaga UUS</td>
+</tr>
+<tr>
+<td>CITIBANK</td>
+<td>Citibank</td>
+</tr>
+<tr>
+<td>COMMONWEALTH</td>
+<td>Bank Commonwealth</td>
+</tr>
+<tr>
+<td>DAERAH_ISTIMEWA</td>
+<td>BPD Daerah Istimewa Yogyakarta (DIY)</td>
+</tr>
+<tr>
+<td>DAERAH_ISTIMEWA_UUS</td>
+<td>BPD Daerah Istimewa Yogyakarta (DIY) UUS</td>
+</tr>
+<tr>
+<td>DANAMON</td>
+<td>Bank Danamon</td>
+</tr>
+<tr>
+<td>DANAMON_UUS</td>
+<td>Bank Danamon UUS</td>
+</tr>
+<tr>
+<td>DBS</td>
+<td>Bank DBS Indonesia</td>
+</tr>
+<tr>
+<td>DEUTSCHE</td>
+<td>Deutsche Bank</td>
+</tr>
+<tr>
+<td>DINAR_INDONESIA</td>
+<td>Bank Dinar Indonesia</td>
+</tr>
+<tr>
+<td>DKI</td>
+<td>Bank DKI</td>
+</tr>
+<tr>
+<td>DKI_UUS</td>
+<td>Bank DKI UUS</td>
+</tr>
+<tr>
+<td>EXIMBANK</td>
+<td>Indonesia Eximbank (formerly Bank Ekspor Indonesia)</td>
+</tr>
+<tr>
+<td>FAMA</td>
+<td>Bank Fama International</td>
+</tr>
+<tr>
+<td>GANESHA</td>
+<td>Bank Ganesha</td>
+</tr>
+<tr>
+<td>GOPAY</td>
+<td>GoPay</td>
+</tr>
+<tr>
+<td>HANA</td>
+<td>Bank Hana</td>
+</tr>
+<tr>
+<td>HARDA_INTERNASIONAL</td>
+<td>Bank Harda Internasional</td>
+</tr>
+<tr>
+<td>HSBC</td>
+<td>Hongkong and Shanghai Bank Corporation (HSBC) (formerly Bank Ekonomi Raharja)</td>
+</tr>
+<tr>
+<td>ICBC</td>
+<td>Bank ICBC Indonesia</td>
+</tr>
+<tr>
+<td>INA_PERDANA</td>
+<td>Bank Ina Perdania</td>
+</tr>
+<tr>
+<td>INDEX_SELINDO</td>
+<td>Bank Index Selindo</td>
+</tr>
+<tr>
+<td>INDIA</td>
+<td>Bank of India Indonesia</td>
+</tr>
+<tr>
+<td>JAMBI</td>
+<td>BPD Jambi</td>
+</tr>
+<tr>
+<td>JAMBI_UUS</td>
+<td>BPD Jambi UUS</td>
+</tr>
+<tr>
+<td>JASA_JAKARTA</td>
+<td>Bank Jasa Jakarta</td>
+</tr>
+<tr>
+<td>JAWA_TENGAH</td>
+<td>BPD Jawa Tengah</td>
+</tr>
+<tr>
+<td>JAWA_TENGAH_UUS</td>
+<td>BPD Jawa Tengah UUS</td>
+</tr>
+<tr>
+<td>JAWA_TIMUR</td>
+<td>BPD Jawa Timur</td>
+</tr>
+<tr>
+<td>JAWA_TIMUR_UUS</td>
+<td>BPD Jawa Timur UUS</td>
+</tr>
+<tr>
+<td>JPMORGAN</td>
+<td>JP Morgan Chase Bank</td>
+</tr>
+<tr>
+<td>JTRUST</td>
+<td>Bank JTrust Indonesia (formerly Bank Mutiara)</td>
+</tr>
+<tr>
+<td>KALIMANTAN_BARAT</td>
+<td>BPD Kalimantan Barat</td>
+</tr>
+<tr>
+<td>KALIMANTAN_BARAT_UUS</td>
+<td>BPD Kalimantan Barat UUS</td>
+</tr>
+<tr>
+<td>KALIMANTAN_SELATAN</td>
+<td>BPD Kalimantan Selatan</td>
+</tr>
+<tr>
+<td>KALIMANTAN_SELATAN_UUS</td>
+<td>BPD Kalimantan Selatan UUS</td>
+</tr>
+<tr>
+<td>KALIMANTAN_TENGAH</td>
+<td>BPD Kalimantan Tengah</td>
+</tr>
+<tr>
+<td>KALIMANTAN_TIMUR</td>
+<td>BPD Kalimantan Timur</td>
+</tr>
+<tr>
+<td>KALIMANTAN_TIMUR_UUS</td>
+<td>BPD Kalimantan Timur UUS</td>
+</tr>
+<tr>
+<td>KESEJAHTERAAN_EKONOMI</td>
+<td>Bank Kesejahteraan Ekonomi</td>
+</tr>
+<tr>
+<td>LAMPUNG</td>
+<td>BPD Lampung</td>
+</tr>
+<tr>
+<td>MALUKU</td>
+<td>BPD Maluku</td>
+</tr>
+<tr>
+<td>MANDIRI</td>
+<td>Bank Mandiri</td>
+</tr>
+<tr>
+<td>MANDIRI_ECASH</td>
+<td>Mandiri E-Cash</td>
+</tr>
+<tr>
+<td>MANDIRI_SYR Bank</td>
+<td>Syariah Mandiri</td>
+</tr>
+<tr>
+<td>MANDIRI_TASPEN</td>
+<td>Mandiri Taspen Pos (formerly Bank Sinar Harapan Bali)</td>
+</tr>
+<tr>
+<td>MASPION</td>
+<td>Bank Maspion Indonesia</td>
+</tr>
+<tr>
+<td>MAYAPADA</td>
+<td>Bank Mayapada International</td>
+</tr>
+<tr>
+<td>MAYBANK</td>
+<td>Bank Maybank (formerly BII)</td>
+</tr>
+<tr>
+<td>MAYBANK_SYR</td>
+<td>Bank Maybank Syariah Indonesia</td>
+</tr>
+<tr>
+<td>MAYORA</td>
+<td>Bank Mayora</td>
+</tr>
+<tr>
+<td>MEGA</td>
+<td>Bank Mega</td>
+</tr>
+<tr>
+<td>MEGA_SYR</td>
+<td>Bank Syariah Mega</td>
+</tr>
+<tr>
+<td>MESTIKA_DHARMA</td>
+<td>Bank Mestika Dharma</td>
+</tr>
+<tr>
+<td>MITRA_NIAGA</td>
+<td>Bank Mitra Niaga</td>
+</tr>
+<tr>
+<td>MITSUI</td>
+<td>Bank Sumitomo Mitsui Indonesia</td>
+</tr>
+<tr>
+<td>MIZUHO</td>
+<td>Bank Mizuho Indonesia</td>
+</tr>
+<tr>
+<td>MNC_INTERNASIONAL</td>
+<td>Bank MNC Internasional</td>
+</tr>
+<tr>
+<td>MUAMALAT</td>
+<td>Bank Muamalat Indonesia</td>
+</tr>
+<tr>
+<td>MULTI_ARTA_SENTOSA</td>
+<td>Bank Multi Arta Sentosa</td>
+</tr>
+<tr>
+<td>NATIONALNOBU</td>
+<td>Bank Nationalnobu</td>
+</tr>
+<tr>
+<td>NUSA_TENGGARA_BARAT BPD</td>
+<td>Nusa Tenggara Barat</td>
+</tr>
+<tr>
+<td>NUSA_TENGGARA_BARAT_UUS</td>
+<td>BPD Nusa Tenggara Barat UUS</td>
+</tr>
+<tr>
+<td>NUSA_TENGGARA_TIMUR BPD</td>
+<td>Nusa Tenggara Timur</td>
+</tr>
+<tr>
+<td>NUSANTARA_PARAHYANGAN</td>
+<td>Bank Nusantara Parahyangan</td>
+</tr>
+<tr>
+<td>OCBC</td>
+<td>Bank OCBC NISP</td>
+</tr>
+<tr>
+<td>OCBC_UUS</td>
+<td>Bank OCBC NISP UUS</td>
+</tr>
+<tr>
+<td>OKE</td>
+<td>Bank Oke Indonesia (formerly Bank Andara)</td>
+</tr>
+<tr>
+<td>OVO</td>
+<td>OVO</td>
+</tr>
+<tr>
+<td>PANIN</td>
+<td>Bank Panin</td>
+</tr>
+<tr>
+<td>PANIN_SYR</td>
+<td>Bank Panin Syariah</td>
+</tr>
+<tr>
+<td>PAPUA</td>
+<td>BPD Papua</td>
+</tr>
+<tr>
+<td>PERMATA</td>
+<td>Bank Permata</td>
+</tr>
+<tr>
+<td>PERMATA_UUS</td>
+<td>Bank Permata UUS</td>
+</tr>
+<tr>
+<td>PRIMA_MASTER</td>
+<td>Prima Master Bank</td>
+</tr>
+<tr>
+<td>QNB_INDONESIA</td>
+<td>Bank QNB Indonesia (formerly Bank QNB Kesawan)</td>
+</tr>
+<tr>
+<td>RABOBANK</td>
+<td>Bank Rabobank International Indonesia</td>
+</tr>
+<tr>
+<td>RBS</td>
+<td>Royal Bank of Scotland (RBS)</td>
+</tr>
+<tr>
+<td>RESONA</td>
+<td>Bank Resona Perdania</td>
+</tr>
+<tr>
+<td>RIAU_DAN_KEPRI</td>
+<td>BPD Riau Dan Kepri</td>
+</tr>
+<tr>
+<td>RIAU_DAN_KEPRI_UUS</td>
+<td>BPD Riau Dan Kepri UUS</td>
+</tr>
+<tr>
+<td>ROYAL</td>
+<td>Bank Royal Indonesia</td>
+</tr>
+<tr>
+<td>SAHABAT_SAMPOERNA</td>
+<td>Bank Sahabat Sampoerna</td>
+</tr>
+<tr>
+<td>SBI_INDONESIA</td>
+<td>Bank SBI Indonesia</td>
+</tr>
+<tr>
+<td>SHINHAN</td>
+<td>Bank Shinhan Indonesia (formerly Bank Metro Express)</td>
+</tr>
+<tr>
+<td>SINARMAS</td>
+<td>Sinarmas</td>
+</tr>
+<tr>
+<td>SINARMAS_UUS</td>
+<td>Bank Sinarmas UUS</td>
+</tr>
+<tr>
+<td>STANDARD_CHARTERED</td>
+<td>Standard Chartered Bank</td>
+</tr>
+<tr>
+<td>SULAWESI</td>
+<td>BPD Sulawesi Tengah</td>
+</tr>
+<tr>
+<td>SULAWESI_TENGGARA</td>
+<td>BPD Sulawesi Tenggara</td>
+</tr>
+<tr>
+<td>SULSELBAR</td>
+<td>BPD Sulselbar</td>
+</tr>
+<tr>
+<td>SULSELBAR_UUS</td>
+<td>BPD Sulselbar UUS</td>
+</tr>
+<tr>
+<td>SULUT</td>
+<td>BPD Sulut</td>
+</tr>
+<tr>
+<td>SUMATERA_BARAT</td>
+<td>BPD Sumatera Barat</td>
+</tr>
+<tr>
+<td>SUMATERA_BARAT_UUS</td>
+<td>BPD Sumatera Barat UUS</td>
+</tr>
+<tr>
+<td>SUMSEL_DAN_BABEL</td>
+<td>BPD Sumsel Dan Babel</td>
+</tr>
+<tr>
+<td>SUMSEL_DAN_BABEL_UUS</td>
+<td>BPD Sumsel Dan Babel UUS</td>
+</tr>
+<tr>
+<td>SUMUT</td>
+<td>BPD Sumut</td>
+</tr>
+<tr>
+<td>SUMUT_UUS</td>
+<td>BPD Sumut UUS</td>
+</tr>
+<tr>
+<td>TABUNGAN_PENSIUNAN_NASIONAL</td>
+<td>Bank Tabungan Pensiunan Nasional</td>
+</tr>
+<tr>
+<td>TOKYO</td>
+<td>Bank of Tokyo Mitsubishi UFJ</td>
+</tr>
+<tr>
+<td>UOB</td>
+<td>Bank UOB Indonesia</td>
+</tr>
+<tr>
+<td>VICTORIA_INTERNASIONAL</td>
+<td>Bank Victoria Internasional</td>
+</tr>
+<tr>
+<td>VICTORIA_SYR</td>
+<td>Bank Victoria Syariah</td>
+</tr>
+<tr>
+<td>WOORI</td>
+<td>Bank Woori Saudara Indonesia (formerly Bank Himpunan Saudara and Bank Woori Indonesia)</td>
+</tr>
+<tr>
+<td>YUDHA_BHAKTI</td>
+<td>Bank Yudha Bhakti</td>
+</tr>
+</tbody></table>
+<h2 id='purpose-codes'>Purpose Codes</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SELF</td>
+<td>Transfer to own account</td>
+</tr>
+<tr>
+<td>FAMILY</td>
+<td>Family Maintenance</td>
+</tr>
+<tr>
+<td>EDUCATION</td>
+<td>Education-related student expenses</td>
+</tr>
+<tr>
+<td>MEDICAL</td>
+<td>Medical Treatment</td>
+</tr>
+<tr>
+<td>HOTEL</td>
+<td>Hotel Accomodation</td>
+</tr>
+<tr>
+<td>TRAVEL</td>
+<td>Travel</td>
+</tr>
+<tr>
+<td>UTILITIES</td>
+<td>Utility Bills</td>
+</tr>
+<tr>
+<td>LOAN_REPAYMENT</td>
+<td>Repayment of Loans</td>
+</tr>
+<tr>
+<td>TAX_PAYMENT</td>
+<td>Tax Payment</td>
+</tr>
+<tr>
+<td>RESIDENCE_PURCHASE</td>
+<td>Purchase of Residential Property</td>
+</tr>
+<tr>
+<td>RESIDENCE_RENT</td>
+<td>Payment of Property Rental</td>
+</tr>
+<tr>
+<td>INSURANCE</td>
+<td>Insurance</td>
+</tr>
+<tr>
+<td>MUTUAL_FUND</td>
+<td>Mutual Fund Investment</td>
+</tr>
+<tr>
+<td>SHARES_INVESTMENT</td>
+<td>Investment in Shares</td>
+</tr>
+<tr>
+<td>DONATIONS</td>
+<td>Donations</td>
+</tr>
+<tr>
+<td>ADVERTISING</td>
+<td>Advertising &amp; Public relations-related expenses</td>
+</tr>
+<tr>
+<td>ROYALTY_FEES</td>
+<td>Royalty fees, trademark fees, patent fees, and copyright fees</td>
+</tr>
+<tr>
+<td>BROKER_FEES</td>
+<td>Fees for brokers, front end fee, commitment fee, guarantee fee and custodian fee</td>
+</tr>
+<tr>
+<td>ADVISORS</td>
+<td>Fees for advisors, technical assistance, and academic purpose, including remuneration for specialists</td>
+</tr>
+<tr>
+<td>OFFICE</td>
+<td>Representative office expenses</td>
+</tr>
+<tr>
+<td>CONSTRUCTION</td>
+<td>Construction costs / expenses</td>
+</tr>
+<tr>
+<td>SHIPMENT</td>
+<td>Transportation fees for goods</td>
+</tr>
+<tr>
+<td>EXPORT</td>
+<td>For payment of exported goods</td>
+</tr>
+<tr>
+<td>DELIVERY</td>
+<td>Delivery fees for goods</td>
+</tr>
+<tr>
+<td>TRADES</td>
+<td>General Goods Trades - Offline trade</td>
+</tr>
+<tr>
+<td>SALARY</td>
+<td>Salary</td>
+</tr>
+<tr>
+<td>REFUND</td>
+<td>Refund</td>
+</tr>
+<tr>
+<td>LOAN</td>
+<td>Loan</td>
+</tr>
+</tbody></table>
+<h2 id='source-of-funds'>Source of Funds</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>INVESTMENT</td>
+<td>Bonds, fixed deposits, preference shares, business ownership/equity or property ownership</td>
+</tr>
+<tr>
+<td>PERSONAL_SAVINGS</td>
+<td>Funds kept in an account in a bank or a similar organization</td>
+</tr>
+<tr>
+<td>BUSINESS_REVENUE</td>
+<td>Income from a business or a company</td>
+</tr>
+<tr>
+<td>LEGACY</td>
+<td>Inherited money from a will</td>
+</tr>
+<tr>
+<td>BUSINESS_ARRANGEMENT</td>
+<td>Any understanding, procedure, course of dealing, or arrangement between a creditor and a seller</td>
+</tr>
+<tr>
+<td>LOAN</td>
+<td>A sum of money that is borrowed</td>
+</tr>
+<tr>
+<td>SALARY</td>
+<td>A fixed regular payment made by an employer</td>
+</tr>
+<tr>
+<td>OTHER</td>
+<td>Other</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
