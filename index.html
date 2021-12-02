@@ -582,6 +582,40 @@ POST https://dev.aricos.co.id/api/v1/login
 </code></pre></div>
 <p>Create customer for your end-customers for the sender and recipient.</p>
 
+<blockquote>
+<p>Create Customer Example Request: </br></p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/register <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
+   <span class="nt">--data</span> <span class="s1">'
+     {
+      "reference_id": "r-1234",
+      "customer_type": "INDIVIDUAL",
+      "given_name": "Ichwano",
+      "surname": "Sembo",
+      "address": {
+          "country_code": "ID",
+          "province": "DKI Jakarta",
+          "city": "Jakarta Selatan",
+          "line_1": "Jl. Senayan 1 No.15"
+      },
+      "date_of_birth": "11-01-1990",
+      "identification": {
+          "ktp_number": "0987654321320987",
+          "npwp_number": "098765432132098"
+      },
+      "account_details": {
+          "account_code": "BNI",
+          "account_number": "123456780",
+          "account_holder_name": "Ichwano"
+      },
+      "email": "ichwano@email.com",
+      "mobile_number": "+628111555777",
+      "phone_number": "+622199990000"
+    }
+   '</span>
+</code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -713,41 +747,7 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>Create Customer Example Request:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/register <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
-   <span class="nt">--data</span> <span class="s1">'
-     {
-      "reference_id": "r-1234",
-      "customer_type": "INDIVIDUAL",
-      "given_name": "Ichwano",
-      "surname": "Sembo",
-      "address": {
-          "country_code": "ID",
-          "province": "DKI Jakarta",
-          "city": "Jakarta Selatan",
-          "line_1": "Jl. Senayan 1 No.15"
-      },
-      "date_of_birth": "11-01-1990",
-      "identification": {
-          "ktp_number": "0987654321320987",
-          "npwp_number": "098765432132098"
-      },
-      "account_details": {
-          "account_code": "BNI",
-          "account_number": "123456780",
-          "account_holder_name": "Ichwano"
-      },
-      "email": "ichwano@email.com",
-      "mobile_number": "+628111555777",
-      "phone_number": "+622199990000"
-    }
-   '</span>
-</code></pre></div><h2 id='create-customer-response'>Create Customer Response</h2>
+<h2 id='create-customer-response'>Create Customer Response</h2>
 <p>We return a customer object if the call succeeded.</p>
 <h3 id='create-customer-errors'>Create Customer Errors</h3>
 <blockquote>
@@ -813,6 +813,21 @@ POST https://dev.aricos.co.id/api/v1/login
 <p>Updates an existing customer</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>PUT https://dev.aricos.co.id/api/v1/customer/update/<span class="o">{</span>reference_id<span class="o">}</span>
 </code></pre></div>
+<blockquote>
+<p>Update Customer Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 <span class="nt">-X</span> PUT <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+   <span class="nt">--data</span> <span class="s1">'{
+     {
+      "given_name": "Ahmad",
+      "surname": "Shahab",
+      "phone_number": "+622199990000"
+    }
+   }'</span>
+</code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -944,22 +959,7 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>Update Customer Example Request:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 <span class="nt">-X</span> PUT <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
-   <span class="nt">--data</span> <span class="s1">'{
-     {
-      "given_name": "Ahmad",
-      "surname": "Shahab",
-      "phone_number": "+622199990000"
-    }
-   }'</span>
-</code></pre></div><h2 id='update-customer-response'>Update Customer Response</h2>
+<h2 id='update-customer-response'>Update Customer Response</h2>
 <p>We return the updated customer object if the call succeeded.</p>
 <h3 id='update-customer-errors'>Update Customer Errors</h3>
 <blockquote>
