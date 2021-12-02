@@ -374,6 +374,9 @@
                   <li>
                     <a href="#create-customer-request" class="toc-h2 toc-link" data-title="Create Customer Request">Create Customer Request</a>
                   </li>
+                  <li>
+                    <a href="#create-customer-response" class="toc-h2 toc-link" data-title="Create Customer Response">Create Customer Response</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -711,11 +714,31 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>object</code> Customer’s bank account details</td>
 </tr>
 <tr>
-<td>account_details </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>object</code> Customer’s bank account details</td>
+<td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#">Account Codes</a></td>
+</tr>
+<tr>
+<td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey"><code>Characters</code> <small>Numeric and hyphens</small></br> <code>BCA required length</code> <small>10 characters</small></br><code>Other banks maximum length</code> <small>No maximum characters</small></br> <code>Other banks minimum length</code> <small>1 character</small></br> <code>E-wallets</code> <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small></td>
+</tr>
+<tr>
+<td>account_details.account_holder_name </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Name of account holder per the bank&#39;s or e-wallet&#39;s records</br> <span style="color:grey"><code>Characters</code> <small>Special and alphanumeric</small></br> <code>Maximum length</code> <small>No maximum characters</small></br> <code>Minimum length</code> <small>1 character</small></span></td>
+</tr>
+<tr>
+<td>email </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com</td>
+</tr>
+<tr>
+<td>mobile_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX</td>
+</tr>
+<tr>
+<td>phone_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h2 id='create-customer-response'>Create Customer Response</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
