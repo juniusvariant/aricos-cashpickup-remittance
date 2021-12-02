@@ -1,22 +1,12 @@
 # Errors
 
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-The Kittn API uses the following error codes:
-
+Below are some of most common errors across all our endpoints. Specific errors are located under each endpoint. If you have any questions please contact us.
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request is invalid.
-401 | Unauthorized -- Your API key is wrong.
-403 | Forbidden -- The kitten requested is hidden for administrators only.
-404 | Not Found -- The specified kitten could not be found.
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method.
-406 | Not Acceptable -- You requested a format that isn't json.
-410 | Gone -- The kitten requested has been removed from our servers.
-418 | I'm a teapot.
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
+400 | Bad request, e.g. validation error
+401 | Unauthorised access, e.g. the wrong user or password
+403 | Forbidden access, e.g. account does not have permission for this endpoint
+404 | Page or data not found
+500 | Unhandled error - contact us when this happens. If this was a response to a request to send money, please check the status of the resource before retrying to ensure that the request will not be processed twice.
 503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
