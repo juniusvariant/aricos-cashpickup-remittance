@@ -390,6 +390,14 @@
           </li>
           <li>
             <a href="#bank-account-remittance" class="toc-h1 toc-link" data-title="Bank Account Remittance">Bank Account Remittance</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-remittance" class="toc-h2 toc-link" data-title="Create Remittance">Create Remittance</a>
+                  </li>
+                  <li>
+                    <a href="#create-remittance-request" class="toc-h2 toc-link" data-title="Create Remittance Request">Create Remittance Request</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#data-references" class="toc-h1 toc-link" data-title="Data References">Data References</a>
@@ -1090,6 +1098,37 @@ POST https://dev.aricos.co.id/api/v1/login
 <aside class="notice">
    Please note that you are unable to cancel a remittance request once it has been made.
 </aside>
+<h2 id='create-remittance'>Create Remittance</h2>
+<p>Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.</p>
+
+<p>Your Aricos account balance must be able to cover the payout amount and the transaction fees, or you’ll receive an “Insufficient Balance” error.</p>
+<h2 id='create-remittance-request'>Create Remittance Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+</code></pre></div>
+<blockquote>
+<p>Create Remittance Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/remittance/create-v2 <span class="nt">-X</span> POST <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
+   <span class="nt">-d</span> <span class="nv">external_id</span><span class="o">=</span><span class="s1">'demo_1475459775872'</span> <span class="se">\</span>
+   <span class="nt">-d</span> <span class="nv">amount</span><span class="o">=</span>17000
+   <span class="nt">-d</span> <span class="nv">purpose_code</span><span class="o">=</span><span class="s1">'FAMILY'</span>
+   <span class="nt">-d</span> <span class="nv">source_of_funds</span><span class="o">=</span><span class="s1">'PERSONAL_SAVINGS'</span>
+   <span class="nt">-d</span> <span class="nv">description</span><span class="o">=</span><span class="s1">'uang jajan'</span>
+   <span class="nt">-d</span> <span class="nv">sender_customer_id</span><span class="o">=</span><span class="s1">'5c1774e76966b43a5b8198fb'</span>
+   <span class="nt">-d</span> <span class="nv">recipient_customer_id</span><span class="o">=</span><span class="s1">'5b51e6ba0071ec521008e21d'</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>external_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> A unique ID for your remittance. We validate this to protect against accidental duplicate remittances.</br></br> <span style="color:grey"><code>Characters</code> <small>Special and alphanumeric</small></br></br> <code>Maximum length</code> <small>100 characters</small></span></td>
+</tr>
+</tbody></table>
 <h1 id='data-references'>Data References</h1>
 <p>Below are some list of data references that you require to use our API&#39;s.</p>
 <h1 id='errors'>Errors</h1>
