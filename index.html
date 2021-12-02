@@ -377,6 +377,15 @@
                   <li>
                     <a href="#create-customer-response" class="toc-h2 toc-link" data-title="Create Customer Response">Create Customer Response</a>
                   </li>
+                  <li>
+                    <a href="#update-customer-request" class="toc-h2 toc-link" data-title="Update Customer Request">Update Customer Request</a>
+                  </li>
+                  <li>
+                    <a href="#update-customer-response" class="toc-h2 toc-link" data-title="Update Customer Response">Update Customer Response</a>
+                  </li>
+                  <li>
+                    <a href="#get-customer-with-external_id-request" class="toc-h2 toc-link" data-title="Get Customer With external_id Request">Get Customer With external_id Request</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -548,7 +557,7 @@ POST https://dev.aricos.co.id/api/v1/login
 </tbody></table>
 <h2 id='get-balance-response'>Get Balance Response</h2>
 <blockquote>
-<p>Get Balance Example Request:</p>
+<p>Get Balance Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
   <span class="s2">"balance"</span>: 1241231
@@ -576,7 +585,7 @@ POST https://dev.aricos.co.id/api/v1/login
 <blockquote>
 <p>Create Customer Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://api.instamoney.co/customers <span class="nt">-X</span> POST <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/register <span class="se">\</span>
    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
    <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
    <span class="nt">--data</span> <span class="s1">'
@@ -742,7 +751,7 @@ POST https://dev.aricos.co.id/api/v1/login
 <p>We return a customer object if the call succeeded.</p>
 <h3 id='create-customer-errors'>Create Customer Errors</h3>
 <blockquote>
-<p>Example Create Customer Response</p>
+<p>Create Customer Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
   <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
@@ -800,7 +809,276 @@ POST https://dev.aricos.co.id/api/v1/login
 <td>The external_id entered has been used before. Please enter a unique external_id and try again.</br> <span class="badge error">No retry</span></td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h2 id='update-customer-request'>Update Customer Request</h2>
+<p>Updates an existing customer</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>PUT https://dev.aricos.co.id/api/v1/customer/update/<span class="o">{</span>reference_id<span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p>Update Customer Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 <span class="nt">-X</span> PUT <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+   <span class="nt">--data</span> <span class="s1">'{
+     {
+      "given_name": "Ahmad",
+      "surname": "Shahab",
+      "phone_number": "+622199990000"
+    }
+   }'</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Your unique id for this customer. </br></br><span><code>Characters</code> <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span></td>
+</tr>
+<tr>
+<td>customer_type </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Legal entity. Valid values: <code>INDIVIDUAL</code> or <code>BUSINESS</code></td>
+</tr>
+<tr>
+<td>given_name </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
+<td><code>string</code> Given name(s). Required if <code>customer_type</code> is <code>INDIVIDUAL</code>. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+</tr>
+<tr>
+<td>surname </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Surname or family name, if applicable. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+</tr>
+<tr>
+<td>business_name </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
+<td><code>string</code> Required if <code>customer_type</code> is <code>BUSINESS</code>. Only allowed if <code>customer_type</code> is <code>BUSINESS</code></td>
+</tr>
+<tr>
+<td>address </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer&#39;s address</td>
+</tr>
+<tr>
+<td>address.country_code </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. If <code>customer_type</code> is <code>BUSINESS</code>, the country in which the corporate entity is registered. If <code>customer_type</code> is <code>INDIVIDUAL</code>, a country in which the customer holds nationality</td>
+</tr>
+<tr>
+<td>address.state </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s state</td>
+</tr>
+<tr>
+<td>address.province </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s province</td>
+</tr>
+<tr>
+<td>address.city </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s city</td>
+</tr>
+<tr>
+<td>address.suburb </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s suburb</td>
+</tr>
+<tr>
+<td>address.post_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s postal code</td>
+</tr>
+<tr>
+<td>address.line_1 </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> First line of customer’s address. Typically used for building name and / or apartment number</td>
+</tr>
+<tr>
+<td>address.line_2 </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Second line of customer’s address. Typically used for building name and / or apartment number</td>
+</tr>
+<tr>
+<td>date_of_birth </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Date of Birth. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code>. ISO 8601 format YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>date_of_registration </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Date of Registration. Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. ISO 8601 format YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>identification </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> A legal document that verifies the identity of the customer</td>
+</tr>
+<tr>
+<td>identification.ktp_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>16 characters</small></span></td>
+</tr>
+<tr>
+<td>identification.npwp_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>15 characters</small></span></td>
+</tr>
+<tr>
+<td>identification.drivers_license </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>14 characters</small></span></td>
+</tr>
+<tr>
+<td>identification.passport_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Passport number of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br></br> If provided, should provide <code>passport_country</code>. In the case of multiple passports, please choose the passport of the country closest to Indonesia</td>
+</tr>
+<tr>
+<td>identification.passport_country </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
+<td><code>string</code> Passport country of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code>. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>.</br></br> Required if <code>passport_numberis</code> provided.</td>
+</tr>
+<tr>
+<td>identification.business_tax_id </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. If provided, should provide <code>business_tax_id_country</code>.</td>
+</tr>
+<tr>
+<td>identification.business_tax_id_country </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
+<td><code>string</code> Country for tax identification number of the business.</br></br> Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. </br></br> Required if <code>business_tax_id</code> is provided.</td>
+</tr>
+<tr>
+<td>account_details </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s bank account details</td>
+</tr>
+<tr>
+<td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#">Account Codes</a></td>
+</tr>
+<tr>
+<td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey"><code>Characters</code> <small>Numeric and hyphens</small></br> <code>BCA required length</code> <small>10 characters</small></br><code>Other banks maximum length</code> <small>No maximum characters</small></br> <code>Other banks minimum length</code> <small>1 character</small></br> <code>E-wallets</code> <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small></td>
+</tr>
+<tr>
+<td>account_details.account_holder_name </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Name of account holder per the bank&#39;s or e-wallet&#39;s records</br> <span style="color:grey"><code>Characters</code> <small>Special and alphanumeric</small></br> <code>Maximum length</code> <small>No maximum characters</small></br> <code>Minimum length</code> <small>1 character</small></span></td>
+</tr>
+<tr>
+<td>email </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com</td>
+</tr>
+<tr>
+<td>mobile_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX</td>
+</tr>
+<tr>
+<td>phone_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
+</tr>
+</tbody></table>
+<h2 id='update-customer-response'>Update Customer Response</h2>
+<p>We return the updated customer object if the call succeeded.</p>
+<h3 id='update-customer-errors'>Update Customer Errors</h3>
+<blockquote>
+<p>Update Customer Example Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
+  <span class="s2">"external_id"</span>: <span class="s2">"r-1234"</span>,
+  <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+  <span class="s2">"given_name"</span>: <span class="s2">"Ichwano"</span>,
+  <span class="s2">"surname"</span>: <span class="s2">"Sembo"</span>,
+  <span class="s2">"address"</span>: <span class="o">{</span>
+      <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+      <span class="s2">"province"</span>: <span class="s2">"DKI Jakarta"</span>,
+      <span class="s2">"city"</span>: <span class="s2">"Jakarta Selatan"</span>,
+      <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>
+  <span class="o">}</span>,
+  <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
+  <span class="s2">"identification"</span>: <span class="o">{</span>
+      <span class="s2">"ktp_number"</span>: <span class="s2">"0987654321320987"</span>,
+      <span class="s2">"npwp_number"</span>: <span class="s2">"098765432132098"</span>
+  <span class="o">}</span>,
+  <span class="s2">"account_details"</span>: <span class="o">{</span>
+      <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
+      <span class="s2">"account_number"</span>: <span class="s2">"123456780"</span>,
+      <span class="s2">"account_holder_name"</span>: <span class="s2">"Ichwano"</span>
+  <span class="o">}</span>,
+  <span class="s2">"email"</span>: <span class="s2">"ichwano@email.com"</span>,
+  <span class="s2">"mobile_number"</span>: <span class="s2">"+628111555777"</span>,
+  <span class="s2">"phone_number"</span>: <span class="s2">"+622199990000"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
+  <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
+<span class="o">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR</br> <span class="badge">400</span></td>
+<td>Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>INVALID_JSON_FORMAT</br> <span class="badge">400</span></td>
+<td>The request body is not a valid JSON format</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>ACCOUNT_CODE_NOT_SUPPORTED_ERROR</br> <span class="badge">400</span></td>
+<td>The code of the account is currently not supported</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>ACCOUNT_NUMBER_ERROR</br> <span class="badge">400</span></td>
+<td>Where account_code is “BCA”, account_number input needs to be 10 digits. Please check the account number length before retrying.</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>DUPLICATE_CUSTOMER_ERROR</br> <span class="badge">400</span></td>
+<td>The external_id entered has been used before. Please enter a unique external_id and try again.</br> <span class="badge error">No retry</span></td>
+</tr>
+<tr>
+<td>CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span></td>
+<td>Could not find customer.</br> <span class="badge error">No retry</span></td>
+</tr>
+</tbody></table>
+<h2 id='get-customer-with-external_id-request'>Get Customer With external_id Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>GET https://dev.aricos.co.id/api/v1/customer/search/<span class="o">{</span>reference_id<span class="o">}</span>
+</code></pre></div>
+<p>Returns an array with a single object which contains the customer corresponding to the unique external_id. Returns an empty array if there is no customer corresponding to the external_id.</p>
+
+<blockquote>
+<p>Get Customer With external_id Example Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/search/r-1234 <span class="nt">-X</span> GET <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Query Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>external_id </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Unique ID you provided in the Create Customer request</br> <span style="color:grey"><small>The external_id must match the external_id used at customer creation precisely</small></span></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Get Customer With external_id Example Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">[{</span>
+  <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
+  <span class="s2">"external_id"</span>: <span class="s2">"r-1234"</span>,
+  <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+  <span class="s2">"given_name"</span>: <span class="s2">"Ichwano"</span>,
+  <span class="s2">"surname"</span>: <span class="s2">"Sembo"</span>,
+  <span class="s2">"address"</span>: <span class="o">{</span>
+      <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+      <span class="s2">"province"</span>: <span class="s2">"DKI Jakarta"</span>,
+      <span class="s2">"city"</span>: <span class="s2">"Jakarta Selatan"</span>,
+      <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>
+  <span class="o">}</span>,
+  <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
+  <span class="s2">"identification"</span>: <span class="o">{</span>
+      <span class="s2">"ktp_number"</span>: <span class="s2">"0987654321320987"</span>,
+      <span class="s2">"npwp_number"</span>: <span class="s2">"098765432132098"</span>
+  <span class="o">}</span>,
+  <span class="s2">"account_details"</span>: <span class="o">{</span>
+      <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
+      <span class="s2">"account_number"</span>: <span class="s2">"123456780"</span>,
+      <span class="s2">"account_holder_name"</span>: <span class="s2">"Ichwano"</span>
+  <span class="o">}</span>,
+  <span class="s2">"email"</span>: <span class="s2">"ichwano@email.com"</span>,
+  <span class="s2">"mobile_number"</span>: <span class="s2">"+628111555777"</span>,
+  <span class="s2">"phone_number"</span>: <span class="s2">"+622199990000"</span>,
+  <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
+  <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
+<span class="o">}]</span>
+</code></pre></div><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
