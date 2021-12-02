@@ -577,3 +577,39 @@ RECIPIENT_CUSTOMER_VALIDATION_ERROR</br> <span class="badge">400</span>| There a
 SENDER_CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find customer.</br> <span class="badge error">No retry</span>
 RECIPIENT_CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find customer.</br> <span class="badge error">No retry</span>
 SERVER_ERROR</br> <span class="badge">500</span>| Error connecting to our server. Please use Get remittance by external_id API to check whether the remittance has already been created. If you receive an empty array, the remittance has not been created; please retry the remittance request in 1-2 hours.</br> <span class="badge error">No retry</span>
+
+## Get Remittance With external_id Request
+
+```shell
+GET https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id}
+```
+
+Returns an array with a single object which contains the remittance corresponding to the unique external_id. Returns an empty array if there is no remittance corresponding to the external_id.
+
+Parameter | Description
+--------- | -----------
+external_id </br><small><span style="color:grey">*required* </span></small>| `string` Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span>
+
+> Get Customer With external_id Example Request:
+
+```shell
+ curl https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id} -X GET \
+  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwi’
+```
+> Get Remittance With external_id Example Response:
+
+```shell
+[{
+  "external_id": "72655",
+  "amount": 11000,
+  "purpose_code": "FAMILY",
+  "source_of_funds": "PERSONAL_SAVINGS",
+  "description": "uang jajan",
+  "sender_customer_id" : "5c1774e76966b43a5b8198fb",
+  "recipient_customer_id": "5b51e6ba0071ec521008e21d",
+  "status": "PENDING_RISK_ASSESSMENT",
+  "created": "2018-12-20T17:00:00.000Z",
+  "updated": "2018-12-20T17:00:00.000Z",
+  "id": "5afbf743e28bc2055b3c06ed"
+}]
+```
