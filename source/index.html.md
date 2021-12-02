@@ -285,3 +285,44 @@ mobile_number </br><small><span style="color:grey">*optional* </span></small>| `
 phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
 
 ## Create Customer Response
+
+We return a customer object if the call succeeded.
+
+### Create Customer Errors
+
+> Example Create Customer Response
+```shell
+{
+  "id": "5c1774e76966b43a5b8198fb",
+  "external_id": "r-1234",
+  "customer_type": "INDIVIDUAL",
+  "given_name": "Ichwano",
+  "surname": "Sembo",
+  "address": {
+      "country_code": "ID",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Selatan",
+      "line_1": "Jl. Senayan 1 No.15"
+  },
+  "date_of_birth": "11-01-1990",
+  "identification": {
+      "ktp_number": "0987654321320987",
+      "npwp_number": "098765432132098"
+  },
+  "account_details": {
+      "account_code": "BNI",
+      "account_number": "123456780",
+      "account_holder_name": "Ichwano"
+  },
+  "email": "ichwano@email.com",
+  "mobile_number": "+628111555777",
+  "phone_number": "+622199990000",
+  "created": "2018-12-12T13:50:12.000Z",
+  "updated": "2018-12-12T13:50:12.000Z"
+}
+```
+
+
+Error Code | Description
+--------- | -----------
+API_VALIDATION_ERROR</br> `400` | Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge">No retry</span>
