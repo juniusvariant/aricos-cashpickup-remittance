@@ -498,3 +498,36 @@ Our Bank Account Remittance APIs allow you to send remittances from your Aricos 
    Please note that you are unable to cancel a remittance request once it has been made.
 </aside>
 
+## Create Remittance
+
+Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.
+
+Your Aricos account balance must be able to cover the payout amount and the transaction fees, or you’ll receive an “Insufficient Balance” error.
+
+## Create Remittance Request
+
+```shell
+POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+```
+
+> Create Remittance Example Request:
+
+```shell
+POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+```
+
+```shell
+curl https://dev.aricos.co.id/api/v1/remittance/create-v2 -X POST \
+  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
+   -d external_id='demo_1475459775872' \
+   -d amount=17000
+   -d purpose_code='FAMILY'
+   -d source_of_funds='PERSONAL_SAVINGS'
+   -d description='uang jajan'
+   -d sender_customer_id='5c1774e76966b43a5b8198fb'
+   -d recipient_customer_id='5b51e6ba0071ec521008e21d'
+   ```
+
+Parameter | Description
+--------- | -----------
+external_id </br><small><span style="color:grey">*required* </span></small>| `string` A unique ID for your remittance. We validate this to protect against accidental duplicate remittances.</br></br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br></br> `Maximum length` <small>100 characters</small></span>
