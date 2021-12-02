@@ -291,6 +291,7 @@ We return a customer object if the call succeeded.
 ### Create Customer Errors
 
 > Example Create Customer Response
+
 ```shell
 {
   "id": "5c1774e76966b43a5b8198fb",
@@ -322,7 +323,10 @@ We return a customer object if the call succeeded.
 }
 ```
 
-
 Error Code | Description
 --------- | -----------
 API_VALIDATION_ERROR</br> <span class="badge">400</span>| Inputs are failing validation. The errors field contains details about which fields are violating validation</br> <span class="badge error">No retry</span>
+INVALID_JSON_FORMAT</br> <span class="badge">400</span>| The request body is not a valid JSON format</br> <span class="badge error">No retry</span>
+ACCOUNT_CODE_NOT_SUPPORTED_ERROR</br> <span class="badge">400</span>| The code of the account is currently not supported</br> <span class="badge error">No retry</span>
+ACCOUNT_NUMBER_ERROR</br> <span class="badge">400</span>| Where account_code is “BCA”, account_number input needs to be 10 digits. Please check the account number length before retrying.</br> <span class="badge error">No retry</span>
+DUPLICATE_CUSTOMER_ERROR</br> <span class="badge">400</span>| The external_id entered has been used before. Please enter a unique external_id and try again.</br> <span class="badge error">No retry</span>
