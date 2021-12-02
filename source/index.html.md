@@ -117,16 +117,14 @@ You have to login to get token access before you do a request to our APIs. You h
 > Login Example Request:
 
 ```shell
-
 curl https://dev.aricos.co.id/api/v1/login -X POST \
 -H 'Content-Type: application/json' \
 --data '
 {
 "username": "Junius",
 "password": "123456"}'
-
 ```
-> Make sure to replace `username` and `password` with your account credential.
+> Make sure to replace `username` and `password` with your account credential. </br>
 
 Parameter | Description
 --------- | -----------
@@ -156,6 +154,120 @@ Parameter | Description
 success | Response That Given When You're Success To Access Our API
 failed | Response That Given When You're Failed To Access Our API
 data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
+
+# Balance
+
+## Prefund Your Balance
+
+Your balance refers to stored value in your Aricos account which can be sent out in remittances or withdrawn. Before you do any remittances, you will first have to add to your account balance ("prefund"). You can do this by transferring funds to Aricos's bank accounts. You can will get information about our bank account from our team so you can do prefund. After you have transferred the funds, please save the proof of transfer.
+
+If you have prefunding to your account, the balance should be detected and updated in your account in 15-30 minutes. If prefunding failed or have technical issues, please contact our support team with the proof of transfer to complete the prefund.
+
+## Get Balance
+
+```shell
+POST https://dev.aricos.co.id/api/v1/mitra/balance?account_type={account_type}
+```
+
+Retrieves your account balance. There are two balances: <b>CASH</b> refers to funds available for you to remit or withdraw. <b>HOLDING</b> refers to funds which are in transit.
+
+## Get Balance Request
+
+> Get Balance Example Request: </br>
+
+```shell
+curl https://dev.aricos.co.id/api/v1/mitra/balance -X POST \
+-H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'
+--data '{"account_type":"CASH"}'
+```
+
+Parameter | Description
+--------- | -----------
+account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`).
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td >account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span><code>CASH</code></small> </td>
+<td vertical-align: top !important;> <code>string</code> The selected account type (<code>CASH</code> or <code>HOLDING</code>).</td>
+</tr>
+</tbody>
+</table>
+
+## Get Balance Response
+
+> Get Balance Example Request:
+
+```shell
+{
+  "balance": 1241231
+}
+```
+
+Parameter | Description
+--------- | -----------
+balance | The balance remaining in your cash account
+
+# Customers
+
+## Customer Data
+
+Customers are your end-customers, which include the sender and recipient of a remittance. You can perform recurring remittances with the same customers.
+
+Use the following Customers API to manage your customers with Aricos. Your customers’ personal data is retained to comply with regulatory requirements for fund transfer services in Indonesia, and also allows Aricos to fulfill Know-Your-Client obligations.
+
+## Create Customer Request
+
+```shell
+POST https://dev.aricos.co.id/api/v1/customer/register
+```
+
+Create customer for your end-customers for the sender and recipient.
+
+> Create Customer Example Request:
+
+```shell
+curl https://api.instamoney.co/customers -X POST \
+   -H 'Content-Type: application/json' \
+   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
+   --data '
+     {
+      "external_id": "r-1234",
+      "customer_type": "INDIVIDUAL",
+      "given_name": "Ichwano",
+      "surname": "Sembo",
+      "address": {
+          "country_code": "ID",
+          "province": "DKI Jakarta",
+          "city": "Jakarta Selatan",
+          "line_1": "Jl. Senayan 1 No.15"
+      },
+      "date_of_birth": "11-01-1990",
+      "identification": {
+          "ktp_number": "0987654321320987",
+          "npwp_number": "098765432132098"
+      },
+      "account_details": {
+          "account_code": "BNI",
+          "account_number": "123456780",
+          "account_holder_name": "Ichwano"
+      },
+      "email": "ichwano@email.com",
+      "mobile_number": "+628111555777",
+      "phone_number": "+622199990000"
+    }
+   '
+```
+
+Parameter | Description
+--------- | -----------
+account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`).
 
 # Authentication
 
