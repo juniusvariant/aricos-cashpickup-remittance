@@ -1,3 +1,4 @@
+
 ---
 title: API Reference
 
@@ -108,7 +109,7 @@ All information about your account and password will be provide by our support t
 ```shell
 # With shell, you can just pass the correct header with each request
 
-POST https://dev.aricos.co.id/api/v1/login
+POST https://dev-bankaccount.aricos.co.id/oauth/token
 ```
 
 You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
@@ -118,19 +119,29 @@ You have to login to get token access before you do a request to our APIs. You h
 > Login Example Request:
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/login -X POST \
--H 'Content-Type: application/json' \
---data '
-{
-"username": "Junius",
-"password": "123456"}'
+curl --location --request POST 'https://dev-bankaccount.aricos.co.id/oauth/token' \
+
+--header 'Accept: application/json' \
+
+--form 'grant_type="password"' \
+
+--form 'password="password"' \
+
+--form 'username="user@mail.com"' \
+
+--form 'client_id="94c92649-ae06-4f6e-b03b-b5a4327d0a50"' \
+
+--form 'client_secret="te4hNdxm9BM8eRcG4AQMDes4GLQt0ujPbS5d8CHR"'
 ```
 > Make sure to replace `username` and `password` with your account credential. </br>
 
 Parameter | Description
 --------- | -----------
+grant_type | Grant Type To Generate Token And Fix Value
 username | The User Account That Provided By Our Team
 password | The User Password That Provided By Our Team
+client_id | The Client ID That Provided By Our Team
+client_secret | The Client Secret That Provided By Our Team
 
 <aside class="notice">
    Make sure to replace <code>username</code> and <code>password</code> with your account credential.
@@ -142,19 +153,22 @@ password | The User Password That Provided By Our Team
 
 ```shell
 {
-    "success": {
-        "code": 200,
-        "message": "Login Success"
-    },
-    "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcmljb3NhcmcuY28uaWRcL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNTczNzQzNTA3LCJleHAiOjE1NzM3NDcxMDcsIm5iZiI6MTU3Mzc0MzUwNywianRpIjoiVjBGS2JmSnlLOXBYUU00RyIsInN1YiI6IjVkYzRkYjZiYWVlNjEzNjllOSIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.fei1OIN0nDU9-hzT_yAMp_cqs53YmBPIOvjf2sUtf0E"
+
+"token_type": "Bearer",
+
+"expires_in": 31536000,
+
+"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiI1NmU3ZTUyZGQ3ZGNmOTBiM2Q3MDFkY2M5MTVmYzFmYWU2YWFjMjAwNjg1Mjc0ZmI2MThiZjY0ZGZhZmVlY2M1MTEwOGI1OTg4YzIwNTkwNiIsImlhdCI6MTY0MjA2NTU3OS4wNTU1ODksIm5iZiI6MTY0MjA2NTU3OS4wNTU1OTgsImV4cCI6MTY3MzYwMTU3OS4wMjM4NTUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.rgeLHfR97_ntN3lwdfUbM2XqxMGQ8jHXjYYvaXGpsp-JVc9MFPVv-_x9mNE_9JguPV1eyOVrCO2Rsf6RT9VRpLYShZ1bDt4ZFCkJ6GC_iE7rL8GIzdNxXCOOuCmDT8u1L_V6y81f9jdMYfLqtDgU54EFoPTZbIRD9-NPshtzM3bkGLT8PomKdJw5_-fUnuYIsZ3alh8j8hdZ2Yl1nthiBoF4vMBKjRG3SJbex3Rb08Lyy11J6lT26dDcLMMKTHqBIYarfwHdZtJs-qHJxg1Ne142y4L4g_jcAjQ-eVR7EcGWaMDN-3yqqEyX1tlcYkd-d4FcFYxWv6kuZ7y8LuXMUtYgXWlrb8ntcpEvviESVTmK9RN3l26Tmz_-QPVaJMdGJ0tljiS29LIm13kabps0Uav8AR0C3dA7S7XZm2FlaKwBtBunOguO4yIvY4dHuEkFuKcCr5GHFdFgsGWDX6LjBuYxRL9KUaas_gTHvMlMGeAaM7n5w55F44SAWNgZyvvEGciwMW0uOYHr9a1RNUiBafmAsDFpoO7FUu-lrUom2VLzfXWuIZF8sOV4rJRdas5vDwOZTBcMSt7fSUtpR2HdOzAw0MR5hsMYWCV9TjeWTiRGgBXZvE1j6LuD-22idsaInVFrCENyO9jsmrSs7GPLHlkYXDV0-wmZCDoOP1nnQk4",
+
+"refresh_token": "def50200325bd991fab946343ce6c945a498696fce7d15c2b70c8354e5266e595f2853ffdfcd8b918b6c3eba922bd870f1f493bf3803611bd7329512a48d8448524f96a7ec85c984676c7a3856ef5e67cd3cd02fc58235e728cbfd656c43c261a153122804791ba5a31588f3ecbd03b79996aa5b688a3f053fb0b929acba44164cd5df70b8068a871e3fb746f59032d79c81187e4e5c59eb029b562f62f142ab83dbd4b462dd904a44ed6195c89be2996a79702a27b6a5468a1b2cb48abe52b160c243f3790c99cb67dd85e60d1c0e809b22129cbb9fd2f5f36d7468d78d38d77ae8167c49ba8db12c8fc55b94b92cee0d6b85e64a32c575d43953683403a068845bdf06ae6277b0013999d286fe28216726ab85170ab726c7bdb8c4a5fec361a651ec4e984c1ba262b2d755a6206380c6cd5b2f38744a89c8205ceea0760059ac47d67ffc1d358b31fe9516373d652afa396ca9fde9c4f912c0b0bd790a284cbbd5885ffecb88567cd2949b85d0d6853798d63c58812dabeeb59767f81e4a2da0b0b888e3f908fd8ce148eec28ed1f12f889b3798dbf0772486346dced260e0f32d5ba8f1380279d6"
+
 }
 ```
 
 Parameter | Description
 --------- | -----------
-success | Response That Given When You're Success To Access Our API
-failed | Response That Given When You're Failed To Access Our API
-data | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
+expires_in | User Validity Period Time To Access Our API
+access_token | Bearer Token That You Have To Use Everytime When You Want To Access Our APIs
 
 # Balance
 
@@ -501,7 +515,7 @@ Our Bank Account Remittance APIs allow you to send remittances from your Aricos 
 ## Create Remittance
 
 ```shell
-POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+POST https://dev-bankaccount.aricos.co.id/api/customers
 ```
 
 Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.
@@ -513,26 +527,38 @@ Your Aricos account balance must be able to cover the payout amount and the tran
 > Create Remittance Example Request:
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/remittance/create-v2 -X POST \
-  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
-   -d external_id='demo_1475459775872' \
-   -d amount=17000
-   -d purpose_code='FAMILY'
-   -d source_of_funds='PERSONAL_SAVINGS'
-   -d description='uang jajan'
-   -d sender_customer_id='5c1774e76966b43a5b8198fb'
-   -d recipient_customer_id='5b51e6ba0071ec521008e21d'
+curl --location --request POST 'https://dev-bankaccount.aricos.co.id/api/customers' \
+
+--header 'Content-Type: application/json' \
+
+--header 'Accept: application/json' \
+
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJmMWU5NmVkZThkMmViMzgwMjk5MGMxOGYwYTBiOTAyNTlkOGYxMGM3MTZmNjk1MDRjOTNkMzQyYmVhMTRlZWE3YTQ1OGM5ZjdlNWE1MjFjNCIsImlhdCI6MTY0MTQ3MjI1NS4xNzYzMTYsIm5iZiI6MTY0MTQ3MjI1NS4xNzYzMjUsImV4cCI6MTY3MzAwODI1NS4xNTUxMDIsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.rRZS87lN6iILggqSD_QNID-P75whUCdiwJoK6YOjeRFucjaSMPuwLqtW9ihhPg8Ns5Zj6COsRangUvh1UVjCi7lK58z2_dVrQYjqdLN4_Sm-u6i6i_l8YrPpGhde1FjojXJh-_Ld9gHSAK5uSWNjivr2dWkwnPGBOAoJzv6kO8SCBjMdgPO8G_g23nDQcCnejKS91ot09_AUXZq59LaLnmsnFcgn5c6wY56pCMr-gAcSzOVbafoQxOpZs2mxbBDYyEMb0wS2Ne87_-aqFOPYOivCYAhr8e3Nv7EyuEGsgGtKRibHo2adrOpgK8lS8oOZUdYZYnhO9ItXyEG5trb50jtHitLJFdYCYibaIDSZpcmv_7oq3hmsSzbkuj4bO1MOzPWXPWYRS0gZjZq5K7CXBdru1VLszhbtnFCMxMGJsskMsT0pQiyWhdOFQuVICwpQ1H1l8zGpIqq2qd5jPxiMQ6PCcWyc4caqYri5uMdH_j7K6ji0Q6h6FuWP_hJ2M50mqJeJO2FMKuqq_Io1S6ZpfNx_0er0-LbpgRI76N4t7uREej9CgLXDZeV5Zq2lnbCZT7mwFSZdaYASIGt7u4d56GUXYHH76P_4Zc8GafkxCcvak8FgkhWSOeIax3b5cHzIprEOhWd-5LNGJQsJhXKr4S5MIc0BXsneOng5CKBBF9g' \
+
+--data-raw '{
+"external_id": "XXX-10",
+"method": "A2A",
+"amount": 300000,
+"purpose_code": "FAMILY",
+"source_of_funds": "PERSONAL_SAVINGS",
+"description": "Transfer ke kampung via Bank Account",
+"sender_customer_id": "95083094-4d00-42e2-8f8a-d1765ac46592",
+"recipient_customer_id": "9508308d-12c8-4cb2-866d-f31b35342089",
+"agent_id": "e8f04b8b-244a-4a92-8175-0b8b5b40c3d0"
+}'
    ```
 
 Parameter | Description
 --------- | -----------
 external_id </br><small><span style="color:grey">*required* </span></small>| `string` A unique ID for your remittance. We validate this to protect against accidental duplicate remittances.</br></br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>100 characters</small></span>
+method </br><small><span style="color:grey">*required* </span></small>| `string` A fix value method flag for Bank Account Transaction. We validate this to make sure your remittance run in `Bank Account`  transaction.</br></br> <span style="color:grey">Use Fix Value `A2A` <small>always use the fix value when sending remittance request</small></span>
 amount </br><small><span style="color:grey">*required* </span></small>| `number` Transfer amount</br></br> <span style="color:grey">`Characters` <small>Numerical integers, no decimals</small></br> `Maximum limit (BCA, Mandiri, BRI, BNI, BNI Syariah, CIMB, CIMB_UUS, PERMATA)` <small>No Limit**</small></br> `Minimum limit (BCA, Mandiri, BRI, BNI, BNI Syariah, CIMB, CIMB_UUS, PERMATA)` <small>No Limit**</small></br> `Maximum limit (Other banks)` <small>Rp.50.000.000***</small></br> `Minimum limit (Other banks)` <small>Rp. 10.000</small></br></br></span> <small>** While there is theoretically no maximum transfer limit for transfers to these banks, please note that we may have to report all transaction amounts above Rp 100.000.000 to the financial authorities in Indonesia along with supporting documentation regarding the underlying transactions.</small></br></br> <small>*** Disbursements above Rp 50.000.000 to banks other than BCA, Mandiri, BNI, BNI Syariah, BRI, Permata will be processed between 8am-2pm (UTC+07:00) on bank working days. The disbursement can be expected to arrive by the next business day. (Processing times vary by financial institution and is subject to change.)</small>
 description </br><small><span style="color:grey">*required* </span></small>| `string` Description to send with the remittance. The recipient may see this e.g., in their bank statement (if supported) or in email receipts we send on your behalf.</br></br> <span style="color:grey">`Maximum length` <small>512 characters</small></br></br></span> <small></span>
 sender_customer_id </br><small><span style="color:grey">*required* </span></small>| `string` The id of the sender customer (as returned by Aricos’s Create Customer endpoint).</br></br> The following fields are required in the sender customer object: `given_name` OR `business_name`, `customer_type`, `country_code`
 recipient_customer_id </br><small><span style="color:grey">*required* </span></small>| `string` The id of the recipient customer (as returned by Aricos's Create Customer endpoint).</br></br> The following fields are required in the recipient customer object: `given_name` OR `business_name`, `customer_type`, `country_code`, `account_code`, `account_number`, `account_holder_name`
-source_of_funds </br><small><span style="color:grey">*optional* </span></small>| `string` Source of funds. Refer to our list of [Source of Funds Codes](#source-of-funds)
-purpose_code </br><small><span style="color:grey">*optional* </span></small>| `string` Purpose of the remittance. Refer to our list of [Purpose Codes](#purpose-codes)
+source_of_funds </br><small><span style="color:grey">*required* </span></small>| `string` Source of funds. Refer to our list of [Source of Funds Codes](#source-of-funds)
+purpose_code </br><small><span style="color:grey">*required* </span></small>| `string` Purpose of the remittance. Refer to our list of [Purpose Codes](#purpose-codes)
+agent_id </br><small><span style="color:grey">*required* </span></small>| `string` The destination Bank ID of your remittance. Refer to our list of [Bank Lists](#bank-lists)
 
 ## Create Remittance Response
 
@@ -589,26 +615,26 @@ Returns an array with a single object which contains the remittance correspondin
 > Get Customer With external_id Example Request:
 
 ```shell
- curl https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id} -X GET \
+curl https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id} -X GET \
   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwi’
 ```
 
 > Get Remittance With external_id Example Response:
 
 ```shell
-[{
-  "external_id": "72655",
-  "amount": 11000,
-  "purpose_code": "FAMILY",
-  "source_of_funds": "PERSONAL_SAVINGS",
-  "description": "uang jajan",
-  "sender_customer_id" : "5c1774e76966b43a5b8198fb",
-  "recipient_customer_id": "5b51e6ba0071ec521008e21d",
-  "status": "PENDING_RISK_ASSESSMENT",
-  "created": "2018-12-20T17:00:00.000Z",
-  "updated": "2018-12-20T17:00:00.000Z",
-  "id": "5afbf743e28bc2055b3c06ed"
-}]
+{
+	"status": "PENDING_RISK_ASSESSMENT",
+	"external_id": "XXX10",
+	"amount": 300000,
+	"purpose_code": "FAMILY",
+	"source_of_funds": "PERSONAL_SAVINGS",
+	"description": "Transfer ke kampung via Bank Account",
+	"sender_customer_id": "de7ae696-f7b8-4576-ac41ad8bdf680704",
+	"recipient_customer_id": "a6f19ba7-cc86-4747-a9de125eebbb074f",
+	"created": "2022-01-06T15:16:51.505Z",
+	"updated": "2022-01-06T15:16:51.505Z",
+	"id": "61d707e3914969153a346ca3"
+}
 ```
 
 Parameter | Description
