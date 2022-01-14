@@ -5,11 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta
-            name="description"
-            content="Documentation for the Aricos Bank Accout Remittance API"
-        >
-    <title>API Reference</title>
+    <title>API Documentation</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -288,14 +284,11 @@
     </style>
     <link href="stylesheets/screen-2fd4a4c6.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-31802438.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-b12a2749.js"></script>
+      <script src="javascripts/all_nosearch-18c3ed8e.js"></script>
 
-    <script>
-      $(function() { setupCodeCopy(); });
-    </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -306,13 +299,6 @@
       <div class="logo-wrapper">
       <img src="images/logo-2325ab89.png" class="logo" alt="" />
       </div>
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-        </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
@@ -407,39 +393,33 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#data-references" class="toc-h1 toc-link" data-title="Data References">Data References</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#remittance-statuses" class="toc-h2 toc-link" data-title="Remittance Statuses">Remittance Statuses</a>
-                  </li>
-                  <li>
-                    <a href="#remittance-failure-codes" class="toc-h2 toc-link" data-title="Remittance Failure Codes">Remittance Failure Codes</a>
-                  </li>
-                  <li>
-                    <a href="#account-codes" class="toc-h2 toc-link" data-title="Account Codes">Account Codes</a>
-                  </li>
-                  <li>
-                    <a href="#purpose-codes" class="toc-h2 toc-link" data-title="Purpose Codes">Purpose Codes</a>
-                  </li>
-                  <li>
-                    <a href="#source-of-funds" class="toc-h2 toc-link" data-title="Source of Funds">Source of Funds</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Contact for API User and Password</a></li>
-            <li><a href='#'>Contact us if you got any trouble for using this API</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+        <hr>
+
+<p>title: API Reference</p>
+
+<p>language_tabs: # must be one of https://git.io/vQNgJ
+  - shell</p>
+
+<p>toc_footers:
+- <a href='#'>Contact for API User and Password</a>
+- <a href='#'>Contact us if you got any trouble for using this API</a></p>
+
+<p>includes:
+  - data-references
+  - errors</p>
+
+<p>search: true</p>
+
+<p>code_clipboard: true</p>
+
+<p>meta:
+  - name: description</p>
+<h2 id='content-documentation-for-the-aricos-bank-accout-remittance-api'>    content: Documentation for the Aricos Bank Accout Remittance API</h2><h1 id='introduction'>Introduction</h1>
 <p>Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all banks in Indonesia quickly and securely.</p>
 
 <p>Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.</p>
@@ -500,19 +480,26 @@
 <p>All information about your account and password will be provide by our support team by email. So if you&#39;re not getting any information about your account for development testing or for go live, please let us know.</p>
 <h2 id='account-login'>Account Login</h2><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 
-POST https://dev.aricos.co.id/api/v1/login
+POST https://dev-bankaccount.aricos.co.id/oauth/token
 </code></pre></div>
 <p>You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.</p>
 <h3 id='login-request'>Login Request</h3>
 <blockquote>
 <p>Login Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/login <span class="nt">-X</span> POST <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--data</span> <span class="s1">'
-{
-"username": "Junius",
-"password": "123456"}'</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/oauth/token'</span> <span class="se">\</span>
+
+<span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+
+<span class="nt">--form</span> <span class="s1">'grant_type="password"'</span> <span class="se">\</span>
+
+<span class="nt">--form</span> <span class="s1">'password="password"'</span> <span class="se">\</span>
+
+<span class="nt">--form</span> <span class="s1">'username="user@mail.com"'</span> <span class="se">\</span>
+
+<span class="nt">--form</span> <span class="s1">'client_id="94c92649-ae06-4f6e-b03b-b5a4327d0a50"'</span> <span class="se">\</span>
+
+<span class="nt">--form</span> <span class="s1">'client_secret="te4hNdxm9BM8eRcG4AQMDes4GLQt0ujPbS5d8CHR"'</span>
 </code></pre></div>
 <blockquote>
 <p>Make sure to replace <code>username</code> and <code>password</code> with your account credential. </br></p>
@@ -525,12 +512,24 @@ POST https://dev.aricos.co.id/api/v1/login
 </tr>
 </thead><tbody>
 <tr>
+<td>grant_type</td>
+<td>Grant Type To Generate Token And Fix Value</td>
+</tr>
+<tr>
 <td>username</td>
 <td>The User Account That Provided By Our Team</td>
 </tr>
 <tr>
 <td>password</td>
 <td>The User Password That Provided By Our Team</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>The Client ID That Provided By Our Team</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>The Client Secret That Provided By Our Team</td>
 </tr>
 </tbody></table>
 
@@ -542,11 +541,15 @@ POST https://dev.aricos.co.id/api/v1/login
 <p>Login Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"success"</span>: <span class="o">{</span>
-        <span class="s2">"code"</span>: 200,
-        <span class="s2">"message"</span>: <span class="s2">"Login Success"</span>
-    <span class="o">}</span>,
-    <span class="s2">"data"</span>: <span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcmljb3NhcmcuY28uaWRcL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNTczNzQzNTA3LCJleHAiOjE1NzM3NDcxMDcsIm5iZiI6MTU3Mzc0MzUwNywianRpIjoiVjBGS2JmSnlLOXBYUU00RyIsInN1YiI6IjVkYzRkYjZiYWVlNjEzNjllOSIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.fei1OIN0nDU9-hzT_yAMp_cqs53YmBPIOvjf2sUtf0E"</span>
+
+<span class="s2">"token_type"</span>: <span class="s2">"Bearer"</span>,
+
+<span class="s2">"expires_in"</span>: 31536000,
+
+<span class="s2">"access_token"</span>: <span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiI1NmU3ZTUyZGQ3ZGNmOTBiM2Q3MDFkY2M5MTVmYzFmYWU2YWFjMjAwNjg1Mjc0ZmI2MThiZjY0ZGZhZmVlY2M1MTEwOGI1OTg4YzIwNTkwNiIsImlhdCI6MTY0MjA2NTU3OS4wNTU1ODksIm5iZiI6MTY0MjA2NTU3OS4wNTU1OTgsImV4cCI6MTY3MzYwMTU3OS4wMjM4NTUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.rgeLHfR97_ntN3lwdfUbM2XqxMGQ8jHXjYYvaXGpsp-JVc9MFPVv-_x9mNE_9JguPV1eyOVrCO2Rsf6RT9VRpLYShZ1bDt4ZFCkJ6GC_iE7rL8GIzdNxXCOOuCmDT8u1L_V6y81f9jdMYfLqtDgU54EFoPTZbIRD9-NPshtzM3bkGLT8PomKdJw5_-fUnuYIsZ3alh8j8hdZ2Yl1nthiBoF4vMBKjRG3SJbex3Rb08Lyy11J6lT26dDcLMMKTHqBIYarfwHdZtJs-qHJxg1Ne142y4L4g_jcAjQ-eVR7EcGWaMDN-3yqqEyX1tlcYkd-d4FcFYxWv6kuZ7y8LuXMUtYgXWlrb8ntcpEvviESVTmK9RN3l26Tmz_-QPVaJMdGJ0tljiS29LIm13kabps0Uav8AR0C3dA7S7XZm2FlaKwBtBunOguO4yIvY4dHuEkFuKcCr5GHFdFgsGWDX6LjBuYxRL9KUaas_gTHvMlMGeAaM7n5w55F44SAWNgZyvvEGciwMW0uOYHr9a1RNUiBafmAsDFpoO7FUu-lrUom2VLzfXWuIZF8sOV4rJRdas5vDwOZTBcMSt7fSUtpR2HdOzAw0MR5hsMYWCV9TjeWTiRGgBXZvE1j6LuD-22idsaInVFrCENyO9jsmrSs7GPLHlkYXDV0-wmZCDoOP1nnQk4"</span>,
+
+<span class="s2">"refresh_token"</span>: <span class="s2">"def50200325bd991fab946343ce6c945a498696fce7d15c2b70c8354e5266e595f2853ffdfcd8b918b6c3eba922bd870f1f493bf3803611bd7329512a48d8448524f96a7ec85c984676c7a3856ef5e67cd3cd02fc58235e728cbfd656c43c261a153122804791ba5a31588f3ecbd03b79996aa5b688a3f053fb0b929acba44164cd5df70b8068a871e3fb746f59032d79c81187e4e5c59eb029b562f62f142ab83dbd4b462dd904a44ed6195c89be2996a79702a27b6a5468a1b2cb48abe52b160c243f3790c99cb67dd85e60d1c0e809b22129cbb9fd2f5f36d7468d78d38d77ae8167c49ba8db12c8fc55b94b92cee0d6b85e64a32c575d43953683403a068845bdf06ae6277b0013999d286fe28216726ab85170ab726c7bdb8c4a5fec361a651ec4e984c1ba262b2d755a6206380c6cd5b2f38744a89c8205ceea0760059ac47d67ffc1d358b31fe9516373d652afa396ca9fde9c4f912c0b0bd790a284cbbd5885ffecb88567cd2949b85d0d6853798d63c58812dabeeb59767f81e4a2da0b0b888e3f908fd8ce148eec28ed1f12f889b3798dbf0772486346dced260e0f32d5ba8f1380279d6"</span>
+
 <span class="o">}</span>
 </code></pre></div>
 <table><thead>
@@ -556,15 +559,11 @@ POST https://dev.aricos.co.id/api/v1/login
 </tr>
 </thead><tbody>
 <tr>
-<td>success</td>
-<td>Response That Given When You&#39;re Success To Access Our API</td>
+<td>expires_in</td>
+<td>User Validity Period Time To Access Our API</td>
 </tr>
 <tr>
-<td>failed</td>
-<td>Response That Given When You&#39;re Failed To Access Our API</td>
-</tr>
-<tr>
-<td>data</td>
+<td>access_token</td>
 <td>Bearer Token That You Have To Use Everytime When You Want To Access Our APIs</td>
 </tr>
 </tbody></table>
@@ -1123,7 +1122,7 @@ POST https://dev.aricos.co.id/api/v1/login
 <aside class="notice">
    Please note that you are unable to cancel a remittance request once it has been made.
 </aside>
-<h2 id='create-remittance'>Create Remittance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/remittance/create-v2
+<h2 id='create-remittance'>Create Remittance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev-bankaccount.aricos.co.id/api/customers
 </code></pre></div>
 <p>Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.</p>
 
@@ -1132,15 +1131,25 @@ POST https://dev.aricos.co.id/api/v1/login
 <blockquote>
 <p>Create Remittance Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/remittance/create-v2 <span class="nt">-X</span> POST <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
-   <span class="nt">-d</span> <span class="nv">external_id</span><span class="o">=</span><span class="s1">'demo_1475459775872'</span> <span class="se">\</span>
-   <span class="nt">-d</span> <span class="nv">amount</span><span class="o">=</span>17000
-   <span class="nt">-d</span> <span class="nv">purpose_code</span><span class="o">=</span><span class="s1">'FAMILY'</span>
-   <span class="nt">-d</span> <span class="nv">source_of_funds</span><span class="o">=</span><span class="s1">'PERSONAL_SAVINGS'</span>
-   <span class="nt">-d</span> <span class="nv">description</span><span class="o">=</span><span class="s1">'uang jajan'</span>
-   <span class="nt">-d</span> <span class="nv">sender_customer_id</span><span class="o">=</span><span class="s1">'5c1774e76966b43a5b8198fb'</span>
-   <span class="nt">-d</span> <span class="nv">recipient_customer_id</span><span class="o">=</span><span class="s1">'5b51e6ba0071ec521008e21d'</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/api/customers'</span> <span class="se">\</span>
+
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+
+<span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJmMWU5NmVkZThkMmViMzgwMjk5MGMxOGYwYTBiOTAyNTlkOGYxMGM3MTZmNjk1MDRjOTNkMzQyYmVhMTRlZWE3YTQ1OGM5ZjdlNWE1MjFjNCIsImlhdCI6MTY0MTQ3MjI1NS4xNzYzMTYsIm5iZiI6MTY0MTQ3MjI1NS4xNzYzMjUsImV4cCI6MTY3MzAwODI1NS4xNTUxMDIsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.rRZS87lN6iILggqSD_QNID-P75whUCdiwJoK6YOjeRFucjaSMPuwLqtW9ihhPg8Ns5Zj6COsRangUvh1UVjCi7lK58z2_dVrQYjqdLN4_Sm-u6i6i_l8YrPpGhde1FjojXJh-_Ld9gHSAK5uSWNjivr2dWkwnPGBOAoJzv6kO8SCBjMdgPO8G_g23nDQcCnejKS91ot09_AUXZq59LaLnmsnFcgn5c6wY56pCMr-gAcSzOVbafoQxOpZs2mxbBDYyEMb0wS2Ne87_-aqFOPYOivCYAhr8e3Nv7EyuEGsgGtKRibHo2adrOpgK8lS8oOZUdYZYnhO9ItXyEG5trb50jtHitLJFdYCYibaIDSZpcmv_7oq3hmsSzbkuj4bO1MOzPWXPWYRS0gZjZq5K7CXBdru1VLszhbtnFCMxMGJsskMsT0pQiyWhdOFQuVICwpQ1H1l8zGpIqq2qd5jPxiMQ6PCcWyc4caqYri5uMdH_j7K6ji0Q6h6FuWP_hJ2M50mqJeJO2FMKuqq_Io1S6ZpfNx_0er0-LbpgRI76N4t7uREej9CgLXDZeV5Zq2lnbCZT7mwFSZdaYASIGt7u4d56GUXYHH76P_4Zc8GafkxCcvak8FgkhWSOeIax3b5cHzIprEOhWd-5LNGJQsJhXKr4S5MIc0BXsneOng5CKBBF9g'</span> <span class="se">\</span>
+
+<span class="nt">--data-raw</span> <span class="s1">'{
+"external_id": "XXX-10",
+"method": "A2A",
+"amount": 300000,
+"purpose_code": "FAMILY",
+"source_of_funds": "PERSONAL_SAVINGS",
+"description": "Transfer ke kampung via Bank Account",
+"sender_customer_id": "95083094-4d00-42e2-8f8a-d1765ac46592",
+"recipient_customer_id": "9508308d-12c8-4cb2-866d-f31b35342089",
+"agent_id": "e8f04b8b-244a-4a92-8175-0b8b5b40c3d0"
+}'</span>
 </code></pre></div>
 <table><thead>
 <tr>
@@ -1151,6 +1160,10 @@ POST https://dev.aricos.co.id/api/v1/login
 <tr>
 <td>external_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>string</code> A unique ID for your remittance. We validate this to protect against accidental duplicate remittances.</br></br> <span style="color:grey"><code>Characters</code> <small>Special and alphanumeric</small></br> <code>Maximum length</code> <small>100 characters</small></span></td>
+</tr>
+<tr>
+<td>method </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> A fix value method flag for Bank Account Transaction. We validate this to make sure your remittance run in <code>Bank Account</code>  transaction.</br></br> <span style="color:grey">Use Fix Value <code>A2A</code> <small>always use the fix value when sending remittance request</small></span></td>
 </tr>
 <tr>
 <td>amount </br><small><span style="color:grey"><em>required</em> </span></small></td>
@@ -1169,12 +1182,16 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>string</code> The id of the recipient customer (as returned by Aricos&#39;s Create Customer endpoint).</br></br> The following fields are required in the recipient customer object: <code>given_name</code> OR <code>business_name</code>, <code>customer_type</code>, <code>country_code</code>, <code>account_code</code>, <code>account_number</code>, <code>account_holder_name</code></td>
 </tr>
 <tr>
-<td>source_of_funds </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td>source_of_funds </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>string</code> Source of funds. Refer to our list of <a href="#source-of-funds">Source of Funds Codes</a></td>
 </tr>
 <tr>
-<td>purpose_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td>purpose_code </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>string</code> Purpose of the remittance. Refer to our list of <a href="#purpose-codes">Purpose Codes</a></td>
+</tr>
+<tr>
+<td>agent_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> The destination Bank ID of your remittance. Refer to our list of <a href="#bank-lists">Bank Lists</a></td>
 </tr>
 </tbody></table>
 <h2 id='create-remittance-response'>Create Remittance Response</h2>
@@ -1275,25 +1292,25 @@ POST https://dev.aricos.co.id/api/v1/login
 <blockquote>
 <p>Get Customer With external_id Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code> curl https://dev.aricos.co.id/api/v1/remittance/check-v2/<span class="o">{</span>external_id<span class="o">}</span> <span class="nt">-X</span> GET <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/remittance/check-v2/<span class="o">{</span>external_id<span class="o">}</span> <span class="nt">-X</span> GET <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwi’
 </span></code></pre></div>
 <blockquote>
 <p>Get Remittance With external_id Example Response:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">[{</span>
-  <span class="s2">"external_id"</span>: <span class="s2">"72655"</span>,
-  <span class="s2">"amount"</span>: 11000,
-  <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
-  <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
-  <span class="s2">"description"</span>: <span class="s2">"uang jajan"</span>,
-  <span class="s2">"sender_customer_id"</span> : <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
-  <span class="s2">"recipient_customer_id"</span>: <span class="s2">"5b51e6ba0071ec521008e21d"</span>,
-  <span class="s2">"status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2018-12-20T17:00:00.000Z"</span>,
-  <span class="s2">"updated"</span>: <span class="s2">"2018-12-20T17:00:00.000Z"</span>,
-  <span class="s2">"id"</span>: <span class="s2">"5afbf743e28bc2055b3c06ed"</span>
-<span class="o">}]</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
+    <span class="s2">"external_id"</span>: <span class="s2">"XXX10"</span>,
+    <span class="s2">"amount"</span>: 300000,
+    <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
+    <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
+    <span class="s2">"description"</span>: <span class="s2">"Transfer ke kampung via Bank Account"</span>,
+    <span class="s2">"sender_customer_id"</span>: <span class="s2">"de7ae696-f7b8-4576-ac41ad8bdf680704"</span>,
+    <span class="s2">"recipient_customer_id"</span>: <span class="s2">"a6f19ba7-cc86-4747-a9de125eebbb074f"</span>,
+    <span class="s2">"created"</span>: <span class="s2">"2022-01-06T15:16:51.505Z"</span>,
+    <span class="s2">"updated"</span>: <span class="s2">"2022-01-06T15:16:51.505Z"</span>,
+    <span class="s2">"id"</span>: <span class="s2">"61d707e3914969153a346ca3"</span>
+<span class="o">}</span>
 </code></pre></div>
 <table><thead>
 <tr>
@@ -1306,860 +1323,9 @@ POST https://dev.aricos.co.id/api/v1/login
 <td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span></td>
 </tr>
 </tbody></table>
-<h1 id='data-references'>Data References</h1>
-<p>Below are some list of data references that you require to use our API&#39;s.</p>
-<h2 id='remittance-statuses'>Remittance Statuses</h2>
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>PENDING_RISK_ASSESSMENT</td>
-<td>Request is being processed and assessed in the risk scoring system.</td>
-</tr>
-<tr>
-<td>COMPLIANCE_VERIFICATION</td>
-<td>Request is considered medium or high risk, and is being reviewed by our compliance team. Our team will contact you via email for extra information for enhanced due diligence.</td>
-</tr>
-<tr>
-<td>COMPLIANCE_REJECTED</td>
-<td>Request is rejected by compliance.</td>
-</tr>
-<tr>
-<td>PROCESSING</td>
-<td>Request has been approved and the remittance is queued to be transferred to the recipient.</td>
-</tr>
-<tr>
-<td>COMPLETED</td>
-<td>The sending bank has confirmed transmission of the remittance.</td>
-</tr>
-<tr>
-<td>FAILED</td>
-<td>Remittance could not be transferred to the recipient due to certain errors. See <a href="#remittance-failure-codes">Remittances Failure Codes</a>.</td>
-</tr>
-</tbody></table>
-<h2 id='remittance-failure-codes'>Remittance Failure Codes</h2>
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>INSUFFICIENT_BALANCE</td>
-<td>The balance in your account is insufficient to make the remittance in the desired amount.</td>
-</tr>
-<tr>
-<td>UNKNOWN_BANK_NETWORK_ERROR</td>
-<td>The bank networks have returned an unknown error to us. We are unable to predict whether the remittance will succeed should you retry the same remittance request.</td>
-</tr>
-<tr>
-<td>TEMPORARY_BANK_NETWORK_ERROR</td>
-<td>The bank networks are experiencing a temporary error. Please retry the remittance in 1-3 hours.</td>
-</tr>
-<tr>
-<td>TEMPORARY_TRANSFER_ERROR</td>
-<td>We’ve encountered a temporary issue while processing this remittance. Please retry the remittance in 1-2 hours.</td>
-</tr>
-<tr>
-<td>SWITCHING_NETWORK_ERROR</td>
-<td>At least one of the switching networks is encountering an issue. Please retry the remittance in 1-3 hours.</td>
-</tr>
-<tr>
-<td>INVALID_DESTINATION</td>
-<td>The banks have reported that the destination account is unregistered or blocked. If unsure about this, please retry again or contact the destination bank directly regarding the status of the destination account.</td>
-</tr>
-<tr>
-<td>TRANSFER_ERROR</td>
-<td>We’ve encountered a fatal error while processing this remittance. Certain API fields in your request may be invalid. Please contact our customer support team for more information.</td>
-</tr>
-</tbody></table>
-<h2 id='account-codes'>Account Codes</h2>
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ACEH</td>
-<td>BPD Aceh</td>
-</tr>
-<tr>
-<td>ACEH_UUS</td>
-<td>BPD Aceh UUS</td>
-</tr>
-<tr>
-<td>AGRIS</td>
-<td>Bank Agris</td>
-</tr>
-<tr>
-<td>AGRONIAGA</td>
-<td>Bank BRI Agroniaga</td>
-</tr>
-<tr>
-<td>AMAR</td>
-<td>Bank Amar Indonesia (formerly Anglomas International Bank)</td>
-</tr>
-<tr>
-<td>ANZ</td>
-<td>Bank ANZ Indonesia</td>
-</tr>
-<tr>
-<td>ARTA_NIAGA_KENCANA</td>
-<td>Bank Arta Niaga Kencana</td>
-</tr>
-<tr>
-<td>ARTHA</td>
-<td>Bank Artha Graha International</td>
-</tr>
-<tr>
-<td>ARTOS</td>
-<td>Bank Artos Indonesia</td>
-</tr>
-<tr>
-<td>BALI</td>
-<td>BPD Bali</td>
-</tr>
-<tr>
-<td>BAML</td>
-<td>Bank of America Merill-Lynch</td>
-</tr>
-<tr>
-<td>BANGKOK</td>
-<td>Bangkok Bank</td>
-</tr>
-<tr>
-<td>BANTEN</td>
-<td>BPD Banten (formerly Bank Pundi Indonesia)</td>
-</tr>
-<tr>
-<td>BCA</td>
-<td>Bank Central Asia (BCA)</td>
-</tr>
-<tr>
-<td>BCA_DIGITAL</td>
-<td>Bank Central Asia Digital (BluBCA)</td>
-</tr>
-<tr>
-<td>BCA_SYR</td>
-<td>Bank Central Asia (BCA) Syariah</td>
-</tr>
-<tr>
-<td>BENGKULU</td>
-<td>BPD Bengkulu</td>
-</tr>
-<tr>
-<td>BISNIS_INTERNASIONAL</td>
-<td>Bank Bisnis Internasional</td>
-</tr>
-<tr>
-<td>BJB</td>
-<td>Bank BJB</td>
-</tr>
-<tr>
-<td>BJB_SYR</td>
-<td>Bank BJB Syariah</td>
-</tr>
-<tr>
-<td>BNI</td>
-<td>Bank Negara Indonesia (BNI)</td>
-</tr>
-<tr>
-<td>BNI_SYR</td>
-<td>Bank BNI Syariah</td>
-</tr>
-<tr>
-<td>BNP_PARIBAS</td>
-<td>Bank BNP Paribas</td>
-</tr>
-<tr>
-<td>BOC</td>
-<td>Bank of China (BOC)</td>
-</tr>
-<tr>
-<td>BRI</td>
-<td>Bank Rakyat Indonesia (BRI)</td>
-</tr>
-<tr>
-<td>BRI_SYR</td>
-<td>Bank Syariah BRI</td>
-</tr>
-<tr>
-<td>BSI</td>
-<td>Bank Syariah Indonesia (BSI)</td>
-</tr>
-<tr>
-<td>BTN</td>
-<td>Bank Tabungan Negara (BTN)</td>
-</tr>
-<tr>
-<td>BTN_UUS</td>
-<td>Bank Tabungan Negara (BTN) UUS</td>
-</tr>
-<tr>
-<td>BTPN_SYARIAH</td>
-<td>BTPN Syariah (formerly Bank Sahabat Purba Danarta and Bank Tabungan Pensiunan Nasional UUS)</td>
-</tr>
-<tr>
-<td>BUKOPIN</td>
-<td>Bank Bukopin</td>
-</tr>
-<tr>
-<td>BUKOPIN_SYR</td>
-<td>Bank Syariah Bukopin</td>
-</tr>
-<tr>
-<td>BUMI_ARTA</td>
-<td>Bank Bumi Arta</td>
-</tr>
-<tr>
-<td>CAPITAL</td>
-<td>Bank Capital Indonesia</td>
-</tr>
-<tr>
-<td>CCB</td>
-<td>China Construction Bank Indonesia (formerly Bank Antar Daerah and Bank Windu Kentjana Int)</td>
-</tr>
-<tr>
-<td>CENTRATAMA</td>
-<td>Centratama Nasional Bank</td>
-</tr>
-<tr>
-<td>CHINATRUST</td>
-<td>Bank Chinatrust Indonesia</td>
-</tr>
-<tr>
-<td>CIMB</td>
-<td>Bank CIMB Niaga</td>
-</tr>
-<tr>
-<td>CIMB_UUS</td>
-<td>Bank CIMB Niaga UUS</td>
-</tr>
-<tr>
-<td>CITIBANK</td>
-<td>Citibank</td>
-</tr>
-<tr>
-<td>COMMONWEALTH</td>
-<td>Bank Commonwealth</td>
-</tr>
-<tr>
-<td>DAERAH_ISTIMEWA</td>
-<td>BPD Daerah Istimewa Yogyakarta (DIY)</td>
-</tr>
-<tr>
-<td>DAERAH_ISTIMEWA_UUS</td>
-<td>BPD Daerah Istimewa Yogyakarta (DIY) UUS</td>
-</tr>
-<tr>
-<td>DANAMON</td>
-<td>Bank Danamon</td>
-</tr>
-<tr>
-<td>DANAMON_UUS</td>
-<td>Bank Danamon UUS</td>
-</tr>
-<tr>
-<td>DBS</td>
-<td>Bank DBS Indonesia</td>
-</tr>
-<tr>
-<td>DEUTSCHE</td>
-<td>Deutsche Bank</td>
-</tr>
-<tr>
-<td>DINAR_INDONESIA</td>
-<td>Bank Dinar Indonesia</td>
-</tr>
-<tr>
-<td>DKI</td>
-<td>Bank DKI</td>
-</tr>
-<tr>
-<td>DKI_UUS</td>
-<td>Bank DKI UUS</td>
-</tr>
-<tr>
-<td>EXIMBANK</td>
-<td>Indonesia Eximbank (formerly Bank Ekspor Indonesia)</td>
-</tr>
-<tr>
-<td>FAMA</td>
-<td>Bank Fama International</td>
-</tr>
-<tr>
-<td>GANESHA</td>
-<td>Bank Ganesha</td>
-</tr>
-<tr>
-<td>GOPAY</td>
-<td>GoPay</td>
-</tr>
-<tr>
-<td>HANA</td>
-<td>Bank Hana</td>
-</tr>
-<tr>
-<td>HARDA_INTERNASIONAL</td>
-<td>Bank Harda Internasional</td>
-</tr>
-<tr>
-<td>HSBC</td>
-<td>Hongkong and Shanghai Bank Corporation (HSBC) (formerly Bank Ekonomi Raharja)</td>
-</tr>
-<tr>
-<td>ICBC</td>
-<td>Bank ICBC Indonesia</td>
-</tr>
-<tr>
-<td>INA_PERDANA</td>
-<td>Bank Ina Perdania</td>
-</tr>
-<tr>
-<td>INDEX_SELINDO</td>
-<td>Bank Index Selindo</td>
-</tr>
-<tr>
-<td>INDIA</td>
-<td>Bank of India Indonesia</td>
-</tr>
-<tr>
-<td>JAMBI</td>
-<td>BPD Jambi</td>
-</tr>
-<tr>
-<td>JAMBI_UUS</td>
-<td>BPD Jambi UUS</td>
-</tr>
-<tr>
-<td>JASA_JAKARTA</td>
-<td>Bank Jasa Jakarta</td>
-</tr>
-<tr>
-<td>JAWA_TENGAH</td>
-<td>BPD Jawa Tengah</td>
-</tr>
-<tr>
-<td>JAWA_TENGAH_UUS</td>
-<td>BPD Jawa Tengah UUS</td>
-</tr>
-<tr>
-<td>JAWA_TIMUR</td>
-<td>BPD Jawa Timur</td>
-</tr>
-<tr>
-<td>JAWA_TIMUR_UUS</td>
-<td>BPD Jawa Timur UUS</td>
-</tr>
-<tr>
-<td>JPMORGAN</td>
-<td>JP Morgan Chase Bank</td>
-</tr>
-<tr>
-<td>JTRUST</td>
-<td>Bank JTrust Indonesia (formerly Bank Mutiara)</td>
-</tr>
-<tr>
-<td>KALIMANTAN_BARAT</td>
-<td>BPD Kalimantan Barat</td>
-</tr>
-<tr>
-<td>KALIMANTAN_BARAT_UUS</td>
-<td>BPD Kalimantan Barat UUS</td>
-</tr>
-<tr>
-<td>KALIMANTAN_SELATAN</td>
-<td>BPD Kalimantan Selatan</td>
-</tr>
-<tr>
-<td>KALIMANTAN_SELATAN_UUS</td>
-<td>BPD Kalimantan Selatan UUS</td>
-</tr>
-<tr>
-<td>KALIMANTAN_TENGAH</td>
-<td>BPD Kalimantan Tengah</td>
-</tr>
-<tr>
-<td>KALIMANTAN_TIMUR</td>
-<td>BPD Kalimantan Timur</td>
-</tr>
-<tr>
-<td>KALIMANTAN_TIMUR_UUS</td>
-<td>BPD Kalimantan Timur UUS</td>
-</tr>
-<tr>
-<td>KESEJAHTERAAN_EKONOMI</td>
-<td>Bank Kesejahteraan Ekonomi</td>
-</tr>
-<tr>
-<td>LAMPUNG</td>
-<td>BPD Lampung</td>
-</tr>
-<tr>
-<td>MALUKU</td>
-<td>BPD Maluku</td>
-</tr>
-<tr>
-<td>MANDIRI</td>
-<td>Bank Mandiri</td>
-</tr>
-<tr>
-<td>MANDIRI_ECASH</td>
-<td>Mandiri E-Cash</td>
-</tr>
-<tr>
-<td>MANDIRI_SYR Bank</td>
-<td>Syariah Mandiri</td>
-</tr>
-<tr>
-<td>MANDIRI_TASPEN</td>
-<td>Mandiri Taspen Pos (formerly Bank Sinar Harapan Bali)</td>
-</tr>
-<tr>
-<td>MASPION</td>
-<td>Bank Maspion Indonesia</td>
-</tr>
-<tr>
-<td>MAYAPADA</td>
-<td>Bank Mayapada International</td>
-</tr>
-<tr>
-<td>MAYBANK</td>
-<td>Bank Maybank (formerly BII)</td>
-</tr>
-<tr>
-<td>MAYBANK_SYR</td>
-<td>Bank Maybank Syariah Indonesia</td>
-</tr>
-<tr>
-<td>MAYORA</td>
-<td>Bank Mayora</td>
-</tr>
-<tr>
-<td>MEGA</td>
-<td>Bank Mega</td>
-</tr>
-<tr>
-<td>MEGA_SYR</td>
-<td>Bank Syariah Mega</td>
-</tr>
-<tr>
-<td>MESTIKA_DHARMA</td>
-<td>Bank Mestika Dharma</td>
-</tr>
-<tr>
-<td>MITRA_NIAGA</td>
-<td>Bank Mitra Niaga</td>
-</tr>
-<tr>
-<td>MITSUI</td>
-<td>Bank Sumitomo Mitsui Indonesia</td>
-</tr>
-<tr>
-<td>MIZUHO</td>
-<td>Bank Mizuho Indonesia</td>
-</tr>
-<tr>
-<td>MNC_INTERNASIONAL</td>
-<td>Bank MNC Internasional</td>
-</tr>
-<tr>
-<td>MUAMALAT</td>
-<td>Bank Muamalat Indonesia</td>
-</tr>
-<tr>
-<td>MULTI_ARTA_SENTOSA</td>
-<td>Bank Multi Arta Sentosa</td>
-</tr>
-<tr>
-<td>NATIONALNOBU</td>
-<td>Bank Nationalnobu</td>
-</tr>
-<tr>
-<td>NUSA_TENGGARA_BARAT BPD</td>
-<td>Nusa Tenggara Barat</td>
-</tr>
-<tr>
-<td>NUSA_TENGGARA_BARAT_UUS</td>
-<td>BPD Nusa Tenggara Barat UUS</td>
-</tr>
-<tr>
-<td>NUSA_TENGGARA_TIMUR BPD</td>
-<td>Nusa Tenggara Timur</td>
-</tr>
-<tr>
-<td>NUSANTARA_PARAHYANGAN</td>
-<td>Bank Nusantara Parahyangan</td>
-</tr>
-<tr>
-<td>OCBC</td>
-<td>Bank OCBC NISP</td>
-</tr>
-<tr>
-<td>OCBC_UUS</td>
-<td>Bank OCBC NISP UUS</td>
-</tr>
-<tr>
-<td>OKE</td>
-<td>Bank Oke Indonesia (formerly Bank Andara)</td>
-</tr>
-<tr>
-<td>OVO</td>
-<td>OVO</td>
-</tr>
-<tr>
-<td>PANIN</td>
-<td>Bank Panin</td>
-</tr>
-<tr>
-<td>PANIN_SYR</td>
-<td>Bank Panin Syariah</td>
-</tr>
-<tr>
-<td>PAPUA</td>
-<td>BPD Papua</td>
-</tr>
-<tr>
-<td>PERMATA</td>
-<td>Bank Permata</td>
-</tr>
-<tr>
-<td>PERMATA_UUS</td>
-<td>Bank Permata UUS</td>
-</tr>
-<tr>
-<td>PRIMA_MASTER</td>
-<td>Prima Master Bank</td>
-</tr>
-<tr>
-<td>QNB_INDONESIA</td>
-<td>Bank QNB Indonesia (formerly Bank QNB Kesawan)</td>
-</tr>
-<tr>
-<td>RABOBANK</td>
-<td>Bank Rabobank International Indonesia</td>
-</tr>
-<tr>
-<td>RBS</td>
-<td>Royal Bank of Scotland (RBS)</td>
-</tr>
-<tr>
-<td>RESONA</td>
-<td>Bank Resona Perdania</td>
-</tr>
-<tr>
-<td>RIAU_DAN_KEPRI</td>
-<td>BPD Riau Dan Kepri</td>
-</tr>
-<tr>
-<td>RIAU_DAN_KEPRI_UUS</td>
-<td>BPD Riau Dan Kepri UUS</td>
-</tr>
-<tr>
-<td>ROYAL</td>
-<td>Bank Royal Indonesia</td>
-</tr>
-<tr>
-<td>SAHABAT_SAMPOERNA</td>
-<td>Bank Sahabat Sampoerna</td>
-</tr>
-<tr>
-<td>SBI_INDONESIA</td>
-<td>Bank SBI Indonesia</td>
-</tr>
-<tr>
-<td>SHINHAN</td>
-<td>Bank Shinhan Indonesia (formerly Bank Metro Express)</td>
-</tr>
-<tr>
-<td>SINARMAS</td>
-<td>Sinarmas</td>
-</tr>
-<tr>
-<td>SINARMAS_UUS</td>
-<td>Bank Sinarmas UUS</td>
-</tr>
-<tr>
-<td>STANDARD_CHARTERED</td>
-<td>Standard Chartered Bank</td>
-</tr>
-<tr>
-<td>SULAWESI</td>
-<td>BPD Sulawesi Tengah</td>
-</tr>
-<tr>
-<td>SULAWESI_TENGGARA</td>
-<td>BPD Sulawesi Tenggara</td>
-</tr>
-<tr>
-<td>SULSELBAR</td>
-<td>BPD Sulselbar</td>
-</tr>
-<tr>
-<td>SULSELBAR_UUS</td>
-<td>BPD Sulselbar UUS</td>
-</tr>
-<tr>
-<td>SULUT</td>
-<td>BPD Sulut</td>
-</tr>
-<tr>
-<td>SUMATERA_BARAT</td>
-<td>BPD Sumatera Barat</td>
-</tr>
-<tr>
-<td>SUMATERA_BARAT_UUS</td>
-<td>BPD Sumatera Barat UUS</td>
-</tr>
-<tr>
-<td>SUMSEL_DAN_BABEL</td>
-<td>BPD Sumsel Dan Babel</td>
-</tr>
-<tr>
-<td>SUMSEL_DAN_BABEL_UUS</td>
-<td>BPD Sumsel Dan Babel UUS</td>
-</tr>
-<tr>
-<td>SUMUT</td>
-<td>BPD Sumut</td>
-</tr>
-<tr>
-<td>SUMUT_UUS</td>
-<td>BPD Sumut UUS</td>
-</tr>
-<tr>
-<td>TABUNGAN_PENSIUNAN_NASIONAL</td>
-<td>Bank Tabungan Pensiunan Nasional</td>
-</tr>
-<tr>
-<td>TOKYO</td>
-<td>Bank of Tokyo Mitsubishi UFJ</td>
-</tr>
-<tr>
-<td>UOB</td>
-<td>Bank UOB Indonesia</td>
-</tr>
-<tr>
-<td>VICTORIA_INTERNASIONAL</td>
-<td>Bank Victoria Internasional</td>
-</tr>
-<tr>
-<td>VICTORIA_SYR</td>
-<td>Bank Victoria Syariah</td>
-</tr>
-<tr>
-<td>WOORI</td>
-<td>Bank Woori Saudara Indonesia (formerly Bank Himpunan Saudara and Bank Woori Indonesia)</td>
-</tr>
-<tr>
-<td>YUDHA_BHAKTI</td>
-<td>Bank Yudha Bhakti</td>
-</tr>
-</tbody></table>
-<h2 id='purpose-codes'>Purpose Codes</h2>
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>SELF</td>
-<td>Transfer to own account</td>
-</tr>
-<tr>
-<td>FAMILY</td>
-<td>Family Maintenance</td>
-</tr>
-<tr>
-<td>EDUCATION</td>
-<td>Education-related student expenses</td>
-</tr>
-<tr>
-<td>MEDICAL</td>
-<td>Medical Treatment</td>
-</tr>
-<tr>
-<td>HOTEL</td>
-<td>Hotel Accomodation</td>
-</tr>
-<tr>
-<td>TRAVEL</td>
-<td>Travel</td>
-</tr>
-<tr>
-<td>UTILITIES</td>
-<td>Utility Bills</td>
-</tr>
-<tr>
-<td>LOAN_REPAYMENT</td>
-<td>Repayment of Loans</td>
-</tr>
-<tr>
-<td>TAX_PAYMENT</td>
-<td>Tax Payment</td>
-</tr>
-<tr>
-<td>RESIDENCE_PURCHASE</td>
-<td>Purchase of Residential Property</td>
-</tr>
-<tr>
-<td>RESIDENCE_RENT</td>
-<td>Payment of Property Rental</td>
-</tr>
-<tr>
-<td>INSURANCE</td>
-<td>Insurance</td>
-</tr>
-<tr>
-<td>MUTUAL_FUND</td>
-<td>Mutual Fund Investment</td>
-</tr>
-<tr>
-<td>SHARES_INVESTMENT</td>
-<td>Investment in Shares</td>
-</tr>
-<tr>
-<td>DONATIONS</td>
-<td>Donations</td>
-</tr>
-<tr>
-<td>ADVERTISING</td>
-<td>Advertising &amp; Public relations-related expenses</td>
-</tr>
-<tr>
-<td>ROYALTY_FEES</td>
-<td>Royalty fees, trademark fees, patent fees, and copyright fees</td>
-</tr>
-<tr>
-<td>BROKER_FEES</td>
-<td>Fees for brokers, front end fee, commitment fee, guarantee fee and custodian fee</td>
-</tr>
-<tr>
-<td>ADVISORS</td>
-<td>Fees for advisors, technical assistance, and academic purpose, including remuneration for specialists</td>
-</tr>
-<tr>
-<td>OFFICE</td>
-<td>Representative office expenses</td>
-</tr>
-<tr>
-<td>CONSTRUCTION</td>
-<td>Construction costs / expenses</td>
-</tr>
-<tr>
-<td>SHIPMENT</td>
-<td>Transportation fees for goods</td>
-</tr>
-<tr>
-<td>EXPORT</td>
-<td>For payment of exported goods</td>
-</tr>
-<tr>
-<td>DELIVERY</td>
-<td>Delivery fees for goods</td>
-</tr>
-<tr>
-<td>TRADES</td>
-<td>General Goods Trades - Offline trade</td>
-</tr>
-<tr>
-<td>SALARY</td>
-<td>Salary</td>
-</tr>
-<tr>
-<td>REFUND</td>
-<td>Refund</td>
-</tr>
-<tr>
-<td>LOAN</td>
-<td>Loan</td>
-</tr>
-</tbody></table>
-<h2 id='source-of-funds'>Source of Funds</h2>
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>INVESTMENT</td>
-<td>Bonds, fixed deposits, preference shares, business ownership/equity or property ownership</td>
-</tr>
-<tr>
-<td>PERSONAL_SAVINGS</td>
-<td>Funds kept in an account in a bank or a similar organization</td>
-</tr>
-<tr>
-<td>BUSINESS_REVENUE</td>
-<td>Income from a business or a company</td>
-</tr>
-<tr>
-<td>LEGACY</td>
-<td>Inherited money from a will</td>
-</tr>
-<tr>
-<td>BUSINESS_ARRANGEMENT</td>
-<td>Any understanding, procedure, course of dealing, or arrangement between a creditor and a seller</td>
-</tr>
-<tr>
-<td>LOAN</td>
-<td>A sum of money that is borrowed</td>
-</tr>
-<tr>
-<td>SALARY</td>
-<td>A fixed regular payment made by an employer</td>
-</tr>
-<tr>
-<td>OTHER</td>
-<td>Other</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
-<p>Below are some of most common errors across all our endpoints. Specific errors are located under each endpoint. If you have any questions please contact us.</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad request, e.g. validation error</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorised access, e.g. the wrong user or password</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden access, e.g. account does not have permission for this endpoint</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Page or data not found</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Unhandled error - contact us when this happens. If this was a response to a request to send money, please check the status of the resource before retrying to ensure that the request will not be processed twice.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-          </div>
       </div>
     </div>
   </body>
