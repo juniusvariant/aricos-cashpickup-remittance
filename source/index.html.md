@@ -18,18 +18,18 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Aricos Bank Accout Remittance API
+    content: Documentation for the Aricos Cash Pickup Accout Remittance API
 ---
 
 # Introduction
 
-Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all banks in Indonesia quickly and securely.
+Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all Post Office (Kantor POS) in Indonesia quickly and securely.
 
 Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.
 
 ## Cash Pickup Remittance Overview
 
-Use the Remittance API to transfer funds instantly to any bank in Indonesia at any time, including holidays and weekends. Due to restrictions from the banks, we’re unable to disburse when the bank channel are offline or when they fail.
+Use the Remittance API to transfer funds instantly to Post Office (Kantor POS) in Indonesia at any time, including holidays and weekends. Due to restrictions from the agent, we’re unable to disburse when the agent channel are offline or when they fail.
 
 The remittance flow is as follows:
 
@@ -61,7 +61,7 @@ You can access our development end-point url to <span style="color:blue"> https:
 
 ## Start Testing!
 
-You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the banking networks and will not cost you anything.
+You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the agent networks and will not cost you anything.
 
 ## Postman Collection
 
@@ -71,7 +71,7 @@ The following is an outline of actions to get started with Postman.
 
 1. Install [Postman](https://www.getpostman.com/).
 
-2. Download our <a href="https://github.com/juniusvariant/aricos-bankaccount-remittance/raw/main/source/images/logo.png" download> Postman collection</a>.
+2. Download our <a href="https://s.id/-TceK" download> Postman collection</a>.
 
 3. Open Postman and Import the Aricos API Postman Collection.
 
@@ -108,7 +108,7 @@ All information about your account and password will be provide by our support t
 ```shell
 # With shell, you can just pass the correct header with each request
 
-POST https://dev-bankaccount.aricos.co.id/oauth/token
+POST https://dev-cashpickup.aricos.co.id/oauth/token
 ```
 
 You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.
@@ -118,7 +118,7 @@ You have to login to get token access before you do a request to our APIs. You h
 > Login Example Request:
 
 ```shell
-curl --location --request POST 'https://dev-bankaccount.aricos.co.id/oauth/token' \
+curl --location --request POST 'https://dev-cashpickup.aricos.co.id/oauth/token' \
 
 --header 'Accept: application/json' \
 
@@ -190,7 +190,7 @@ Retrieves your account balance. There are two balances: <b>CASH</b> refers to fu
 > Get Balance Example Request: </br>
 
 ```shell
-curl --location --request GET 'https://dev-bankaccount.aricos.co.id/api/user-balances' \
+curl --location --request GET 'https://dev-cashpickup.aricos.co.id/api/user-balances' \
 
 --header 'Accept: application/json' \
 
@@ -218,7 +218,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 		"on_hold_balance": 870000
 	}],
 	"links": {
-		"first": "https://dev-bankaccount.aricos.co.id/api/user-balances?page=1",
+		"first": "https://dev-cashpickup.aricos.co.id/api/user-balances?page=1",
 		"last": null,
 		"prev": null,
 		"next": null
@@ -226,7 +226,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 	"meta": {
 		"current_page": 1,
 		"from": 1,
-		"path": "https://dev-bankaccount.aricos.co.id/api/user-balances",
+		"path": "https://dev-cashpickup.aricos.co.id/api/user-balances",
 		"per_page": 15,
 		"to": 1
 	}
@@ -260,7 +260,7 @@ Create customer for your end-customers for the sender and recipient.
 > Create Customer Example Request:
 
 ```shell
-curl --location --request POST 'https://dev-bankaccount.aricos.co.id/api/user-balances' \
+curl --location --request POST 'https://dev-cashpickup.aricos.co.id/api/user-balances' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
 --data-raw '{
@@ -342,7 +342,7 @@ identification.identification_type </br><small><span style="color:grey">*require
 identification.identification_country </br><small><span style="color:grey">*required* </span></small>| `string` Country identity publisher of the customer.</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br> `Characters` <span style="color:grey"><small>2 characters</small></span>
 identification.identification_number </br><small><span style="color:grey">*required* </span></small>| `string` Identification number of the customer.</br></br> `Characters` <span style="color:grey"><small>15 characters for `NPWP`, 16 characters for `KTP` and other identification type</small></span>
 account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s cash pickup details
-account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes](#account-codes)
+account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Agent Codes](#agent-codes)
 account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination cash pickup number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
 account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
 email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
@@ -434,7 +434,7 @@ PUT https://dev.aricos.co.id/api/v1/customer/update/{reference_id}
 > Update Customer Example Request:
 
 ```shell
-curl --location --request PUT 'https://dev-bankaccount.aricos.co.id/api/customers/c-01256' \
+curl --location --request PUT 'https://dev-cashpickup.aricos.co.id/api/customers/c-01256' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5MzFmODI3Ni1mOTBmLTQ0N2ItYjY0ZS1hMjI3MzQxOGVkMzIiLCJqdGkiOiIwYmE2NDcwMTNjYjE2ZTRmYjNhN2RjMGNkYTEyYjk0ZjkwZjExZmE0OWJjN2NjMDdlMmU4MjhlYzQ1MDkxYmM0NDljYjM0ZmQ0ZjVmNWIzNiIsImlhdCI6MTY0MjczOTQxMi44MzE3MjksIm5iZiI6MTY0MjczOTQxMi44MzE3MzYsImV4cCI6MTY3NDI3NTQxMi44MjI3NTQsInN1YiI6IjVhOWEyOGM2ZDRlOGMxMmFkMCIsInNjb3BlcyI6W119.X9hh_rPgAnlreqXZ-CuG-cIub0ihQc1EBNFBluCpcZcAaWJ8WXLrcl1U22etX2TUrBH5ulc7gL8XVaIV-yWSxoK98AbejjcXLzLnrLWvfphAgPmi3nYg96nIagBroVB1HVNByM8LQ8_TA0a7rp8dYqbOQ4zvUpCEPc6SVQo3kcfnxVoNiGuwTrL754kUaAcYhsqyP17m8aO8yDkVbOQzF9dMZDwMRUU_LMMufYJcTMydIIqQBGfzZOyKPTy0AivTe0icT9QmBM_YY-DgZ6sdVKosT3EsTah8Jo9FXKUPxTlDw3Fzwd8WXg6CBDPyz78F9A-n329CLosa16sILlaenBuwwAE-ObLqTVGcfYdATlWDUDDFdtKIdk4Ip2r-LxdLWfix-qF9W2_qrVmqQqIMQz7govDWSaH5pW_nu-v20deAoY5j2HDrQuPtFnd9iUm1UhmHVNOfDTInDw2EqEJ23E_S0A5CY_mgxbiu4leskFsCVVdcqWTA8aRPlUn22tILpk-SQs-NRuwDzX1Z06nuLrCnfFGGXqeLJC2LSFOf82FTHXoUyNMEkKe_uMO3vvavVw-BHoUgMoLyf5ljR4aev69OkJsmSwBXG36o7Ulu8HT514y2gsn0jJW2HSPfLEgwl0Q6e4yM6AFEIR7o_1AMdI-qf2qCg0bQlQCHEfX6RfY' \
@@ -688,7 +688,7 @@ Our Cash Pickup Remittance APIs allow you to send remittances from your Aricos A
 ## Create Remittance
 
 ```shell
-POST https://dev-bankaccount.aricos.co.id/api/customers
+POST https://dev-cashpickup.aricos.co.id/api/customers
 ```
 
 Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.
@@ -700,7 +700,7 @@ Your Aricos account balance must be able to cover the payout amount and the tran
 > Create Remittance Example Request:
 
 ```shell
-curl --location --request POST 'https://dev-bankaccount.aricos.co.id/api/customers' \
+curl --location --request POST 'https://dev-cashpickup.aricos.co.id/api/customers' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJjNWMxNzVjMDAwOTE3ZjM3NmFlODQxN2YyNzExNzM0YzEyZTExYmIxOGNkNzBlYTMzZjRiMzM5MThmODQ5ZGIwMWMyNTA4ODI0NWEzN2M1NyIsImlhdCI6MTY0MjczMzE2Mi4yMTg2NTksIm5iZiI6MTY0MjczMzE2Mi4yMTg2NjcsImV4cCI6MTY3NDI2OTE2Mi4xOTA4NzUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.SSWzHI2hOKtWDzzwUCTqrZzs7uXK132BXmw5h_yDkIpAKQa91TdxdMTU-VhWMunmsQ8aAHRB2tlj-lyQk5P1XYXqeXCpajKgLHIL-P-r7PkXdHQmg8l8qamy_Vrz26zCtuSgD7YhqaTax7IxEXQL4mR9ixZnJ2wvUWz-lDIV0AbxxB5uQqspYcq-8kRjgMEr_wJvPcNW7gg9cPpznHIMcKP5XKpjjzvkn0LxKDkVB5mnAESpknchTdaMIeqFRQ_u3-kLuIm3Qp7Ri-4iiDY4I0N0MqGH93i-W-bOeF_MVI-CIa0AwLuBac-7gnsCVoxfi5QwJrs-pf1VbwsTTw6RSyxnFhp_DDiwC2pZFkoeyIu5hqPgq-u40wWsdHhCmXrurZJVntRDeMER_aC6nIo5WrMxSb_taqYLrzxuQ_ytht8N9ftkcIGt12xpp10jMcNzpECs5Of1Oc8cz5GudgkwOCpX98btstkVYjG-nu_QU0FI_Fxpv-XGGBJ6sbR9ZY96FRBLmjMfUEX7HPQ-HDo44TonabBvv0UhiEbTTYYman0F9PHWRctuc5Xi31m8fnWpOlRcr5dHKmOqxa2YTZgSzhMsZw2gAOXhmH49ef4TNm3ly2bbMHZqDcx6GwTa-rdIK2TZ4uXU9MwZ6fWliu3O5oKOYu2dcLQLBZyeN_BOPak' \
@@ -722,12 +722,12 @@ Parameter | Description
 reference_id </br><small><span style="color:grey">*required* </span></small>| `string` A unique ID for your remittance. We validate this to protect against accidental duplicate remittances.</br></br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>100 characters</small></span>
 method </br><small><span style="color:grey">*required* </span></small>| `string` A fix value method flag for Cash Pickup Account Transaction. We validate this to make sure your remittance run in `Cash Pickup`  transaction.</br></br> <span style="color:grey">Use Fix Value `A2C` <small>always use the fix value when sending remittance request</small></span>
 amount </br><small><span style="color:grey">*required* </span></small>| `number` Transfer amount</br></br> <span style="color:grey">`Characters` <small>Numerical integers, no decimals</small>
-description </br><small><span style="color:grey">*required* </span></small>| `string` Description to send with the remittance. The recipient may see this e.g., in their bank statement (if supported) or in email receipts we send on your behalf.</br></br> <span style="color:grey">`Maximum length` <small>512 characters</small></br></br></span> <small></span>
+description </br><small><span style="color:grey">*required* </span></small>| `string` Description to send with the remittance. The recipient may see this e.g., in their statement (if supported) or in email receipts we send on your behalf.</br></br> <span style="color:grey">`Maximum length` <small>512 characters</small></br></br></span> <small></span>
 sender_customer_id </br><small><span style="color:grey">*required* </span></small>| `string` The id of the sender customer (as returned by Aricos’s Create Customer endpoint).</br></br> The following fields are required in the sender customer object: `given_name` OR `business_name`, `customer_type`, `country_code`
 recipient_customer_id </br><small><span style="color:grey">*required* </span></small>| `string` The id of the recipient customer (as returned by Aricos's Create Customer endpoint).</br></br> The following fields are required in the recipient customer object: `given_name` OR `business_name`, `customer_type`, `country_code`, `account_code`, `account_number`, `account_holder_name`
 source_of_funds </br><small><span style="color:grey">*required* </span></small>| `string` Source of funds. Refer to our list of [Source of Funds Codes](#source-of-funds)
 purpose_code </br><small><span style="color:grey">*required* </span></small>| `string` Purpose of the remittance. Refer to our list of [Purpose Codes](#purpose-codes)
-agent_id </br><small><span style="color:grey">*required* </span></small>| `string` The destination Agent ID of your remittance. Refer to our list of [Agent Lists](#bank-lists)</br></br> <span style="color:grey">agent id value `0620b618-b2ab-46cf-ab23-679a78945b5e` <small>please use the refer agent id for your cash pickup remittance</small></br></br></span> <small></span>
+agent_id </br><small><span style="color:grey">*required* </span></small>| `string` The destination Agent ID of your remittance. Refer to our list of [Agent Lists](#agent-lists)</br></br> <span style="color:grey">agent id value `0620b618-b2ab-46cf-ab23-679a78945b5e` <small>please use the refer agent id for your cash pickup remittance</small></br></br></span> <small></span>
 
 ## Create Remittance Response
 
@@ -856,8 +856,8 @@ Error Code | Description
 API_VALIDATION_ERROR</br> <span class="badge">400</span>| Inputs are failing validation. The errors field contains details about which fields are violating validation.</br> <span class="badge error">No retry</span>
 INVALID_JSON_FORMAT</br> <span class="badge">400</span>| The request body is not a valid JSON format.</br> <span class="badge error">No retry</span>
 DUPLICATE_REMITTANCE_ERROR</br> <span class="badge">400</span>| External ID has been used before. Use a unique External ID and try again.</br> <span class="badge error">No retry</span>
-RECIPIENT_AMOUNT_ERROR</br> <span class="badge">400</span>| The transfer amount requested is lower than the prescribed minimum for the recipient bank. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span>
-MAXIMUM_TRANSFER_LIMIT_ERROR</br> <span class="badge">400</span>| The transfer amount requested is higher than the prescribed maximum for the recipient bank. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span>
+RECIPIENT_AMOUNT_ERROR</br> <span class="badge">400</span>| The transfer amount requested is lower than the prescribed minimum for the recipient. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span>
+MAXIMUM_TRANSFER_LIMIT_ERROR</br> <span class="badge">400</span>| The transfer amount requested is higher than the prescribed maximum for the recipient. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span>
 SENDER_CUSTOMER_VALIDATION_ERROR</br> <span class="badge">400</span>| There are missing inputs for this customer which are required for the remittance. The errors field contains details about which fields are violating validation.</br> <span class="badge error">No retry</span>
 RECIPIENT_CUSTOMER_VALIDATION_ERROR</br> <span class="badge">400</span>| There are missing inputs for this customer which are required for the remittance. The errors field contains details about which fields are violating validation.</br> <span class="badge error">No retry</span>
 SENDER_CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find customer.</br> <span class="badge error">No retry</span>
