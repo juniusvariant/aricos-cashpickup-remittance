@@ -252,7 +252,7 @@ Use the following Customers API to manage your customers with Aricos. Your custo
 ## Create Customer Request
 
 ```shell
-POST https://dev.aricos.co.id/api/v1/customer/register
+POST https://dev-cashpickup.aricos.co.id/api/v1/customer/register
 ```
 
 Create customer for your end-customers for the sender and recipient.
@@ -260,7 +260,7 @@ Create customer for your end-customers for the sender and recipient.
 > Create Customer Example Request:
 
 ```shell
-curl --location --request POST 'https://dev-cashpickup.aricos.co.id/api/user-balances' \
+curl --location --request POST 'https://dev-cashpickup.aricos.co.id/api/v1/customer/register' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
 --data-raw '{
