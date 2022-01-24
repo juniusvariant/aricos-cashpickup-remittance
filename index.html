@@ -318,7 +318,7 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#bank-account-remittance-overview" class="toc-h2 toc-link" data-title="Bank Account Remittance Overview">Bank Account Remittance Overview</a>
+                    <a href="#cash-pickup-remittance-overview" class="toc-h2 toc-link" data-title="Cash Pickup Remittance Overview">Cash Pickup Remittance Overview</a>
                   </li>
               </ul>
           </li>
@@ -391,7 +391,7 @@
               </ul>
           </li>
           <li>
-            <a href="#bank-account-remittance" class="toc-h1 toc-link" data-title="Bank Account Remittance">Bank Account Remittance</a>
+            <a href="#cash-pickup-remittance" class="toc-h1 toc-link" data-title="Cash Pickup Remittance">Cash Pickup Remittance</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-remittance" class="toc-h2 toc-link" data-title="Create Remittance">Create Remittance</a>
@@ -403,7 +403,7 @@
                     <a href="#create-remittance-response" class="toc-h2 toc-link" data-title="Create Remittance Response">Create Remittance Response</a>
                   </li>
                   <li>
-                    <a href="#get-remittance-with-external_id-request" class="toc-h2 toc-link" data-title="Get Remittance With external_id Request">Get Remittance With external_id Request</a>
+                    <a href="#get-remittance-with-reference_id-request" class="toc-h2 toc-link" data-title="Get Remittance With reference_id Request">Get Remittance With reference_id Request</a>
                   </li>
               </ul>
           </li>
@@ -443,7 +443,7 @@
 <p>Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all banks in Indonesia quickly and securely.</p>
 
 <p>Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.</p>
-<h2 id='bank-account-remittance-overview'>Bank Account Remittance Overview</h2>
+<h2 id='cash-pickup-remittance-overview'>Cash Pickup Remittance Overview</h2>
 <p>Use the Remittance API to transfer funds instantly to any bank in Indonesia at any time, including holidays and weekends. Due to restrictions from the banks, we’re unable to disburse when the bank channel are offline or when they fail.</p>
 
 <p>The remittance flow is as follows:</p>
@@ -456,7 +456,7 @@
 <li><p>We process the remittance and return a callback with the status of the remittance. You may also query the status of a remittance anytime via the <a href="#get-remittance">Get Remittance</a> API</p></li>
 </ol>
 <h1 id='getting-started'>Getting Started</h1><h2 id='set-up-your-account'>Set Up Your Account</h2>
-<p>To use our Bank Account Remittance APIs, register for an Aricos account by contacting your account manager or our support team.</p>
+<p>To use our Cash Pickup Remittance APIs, register for an Aricos account by contacting your account manager or our support team.</p>
 
 <p>You can start testing our APIs immediately in development environment. When you are ready to process live transactions, contact your account manager to go live.</p>
 <h2 id='retrieve-your-api-account'>Retrieve Your API Account</h2>
@@ -588,7 +588,7 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 </tr>
 </tbody></table>
 <h1 id='balance'>Balance</h1><h2 id='prefund-your-balance'>Prefund Your Balance</h2>
-<p>Your balance refers to stored value in your Aricos account which can be sent out in remittances or withdrawn. Before you do any remittances, you will first have to add to your account balance (&quot;prefund&quot;). You can do this by transferring funds to Aricos&#39;s bank accounts. You can will get information about our bank account from our team so you can do prefund. After you have transferred the funds, please save the proof of transfer.</p>
+<p>Your balance refers to stored value in your Aricos account which can be sent out in remittances or withdrawn. Before you do any remittances, you will first have to add to your account balance (&quot;prefund&quot;). You can do this by transferring funds to Aricos&#39;s cash pickup accounts. You can will get information about our cash pickup from our team so you can do prefund. After you have transferred the funds, please save the proof of transfer.</p>
 
 <p>If you have prefunding to your account, the balance should be detected and updated in your account in 15-30 minutes. If prefunding failed or have technical issues, please contact our support team with the proof of transfer to complete the prefund.</p>
 <h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/mitra/balance?account_type<span class="o">={</span>account_type<span class="o">}</span>
@@ -837,7 +837,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>account_details </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>object</code> Customer’s bank account details</td>
+<td><code>object</code> Customer’s cash pickup details</td>
 </tr>
 <tr>
 <td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -845,7 +845,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey"><code>Characters</code> <small>Numeric and hyphens</small></br> <code>BCA required length</code> <small>10 characters</small></br><code>Other banks maximum length</code> <small>No maximum characters</small></br> <code>Other banks minimum length</code> <small>1 character</small></br> <code>E-wallets</code> <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small></td>
+<td><code>string</code> Destination cash pickup number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey"><code>Characters</code> <small>Numeric and hyphens</small></br> <code>BCA required length</code> <small>10 characters</small></br><code>Other banks maximum length</code> <small>No maximum characters</small></br> <code>Other banks minimum length</code> <small>1 character</small></br> <code>E-wallets</code> <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small></td>
 </tr>
 <tr>
 <td>account_details.account_holder_name </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -1144,7 +1144,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>account_details </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>object</code> Customer’s bank account details</td>
+<td><code>object</code> Customer’s cash pickup details</td>
 </tr>
 <tr>
 <td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -1152,7 +1152,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey"><code>Characters</code> <small>Numeric and hyphens</small></br> <code>BCA required length</code> <small>10 characters</small></br><code>Other banks maximum length</code> <small>No maximum characters</small></br> <code>Other banks minimum length</code> <small>1 character</small></br> <code>E-wallets</code> <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small></td>
+<td><code>string</code> Destination cash pickup number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey"><code>Characters</code> <small>Numeric and hyphens</small></br> <code>BCA required length</code> <small>10 characters</small></br><code>Other banks maximum length</code> <small>No maximum characters</small></br> <code>Other banks minimum length</code> <small>1 character</small></br> <code>E-wallets</code> <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small></td>
 </tr>
 <tr>
 <td>account_details.account_holder_name </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -1363,8 +1363,8 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><h1 id='bank-account-remittance'>Bank Account Remittance</h1>
-<p>Our Bank Account Remittance APIs allow you to send remittances from your Aricos Account on behalf of a sender to your designated recipient. Only IDR-IDR transfers supported currently.</p>
+</code></pre></div><h1 id='cash-pickup-remittance'>Cash Pickup Remittance</h1>
+<p>Our Cash Pickup Remittance APIs allow you to send remittances from your Aricos Account on behalf of a sender to your designated recipient. Only IDR-IDR transfers supported currently.</p>
 
 <aside class="notice">
    Please note that you are unable to cancel a remittance request once it has been made.
@@ -1379,23 +1379,19 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <p>Create Remittance Example Request:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/api/customers'</span> <span class="se">\</span>
-
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-
-<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJmMWU5NmVkZThkMmViMzgwMjk5MGMxOGYwYTBiOTAyNTlkOGYxMGM3MTZmNjk1MDRjOTNkMzQyYmVhMTRlZWE3YTQ1OGM5ZjdlNWE1MjFjNCIsImlhdCI6MTY0MTQ3MjI1NS4xNzYzMTYsIm5iZiI6MTY0MTQ3MjI1NS4xNzYzMjUsImV4cCI6MTY3MzAwODI1NS4xNTUxMDIsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.rRZS87lN6iILggqSD_QNID-P75whUCdiwJoK6YOjeRFucjaSMPuwLqtW9ihhPg8Ns5Zj6COsRangUvh1UVjCi7lK58z2_dVrQYjqdLN4_Sm-u6i6i_l8YrPpGhde1FjojXJh-_Ld9gHSAK5uSWNjivr2dWkwnPGBOAoJzv6kO8SCBjMdgPO8G_g23nDQcCnejKS91ot09_AUXZq59LaLnmsnFcgn5c6wY56pCMr-gAcSzOVbafoQxOpZs2mxbBDYyEMb0wS2Ne87_-aqFOPYOivCYAhr8e3Nv7EyuEGsgGtKRibHo2adrOpgK8lS8oOZUdYZYnhO9ItXyEG5trb50jtHitLJFdYCYibaIDSZpcmv_7oq3hmsSzbkuj4bO1MOzPWXPWYRS0gZjZq5K7CXBdru1VLszhbtnFCMxMGJsskMsT0pQiyWhdOFQuVICwpQ1H1l8zGpIqq2qd5jPxiMQ6PCcWyc4caqYri5uMdH_j7K6ji0Q6h6FuWP_hJ2M50mqJeJO2FMKuqq_Io1S6ZpfNx_0er0-LbpgRI76N4t7uREej9CgLXDZeV5Zq2lnbCZT7mwFSZdaYASIGt7u4d56GUXYHH76P_4Zc8GafkxCcvak8FgkhWSOeIax3b5cHzIprEOhWd-5LNGJQsJhXKr4S5MIc0BXsneOng5CKBBF9g'</span> <span class="se">\</span>
-
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJjNWMxNzVjMDAwOTE3ZjM3NmFlODQxN2YyNzExNzM0YzEyZTExYmIxOGNkNzBlYTMzZjRiMzM5MThmODQ5ZGIwMWMyNTA4ODI0NWEzN2M1NyIsImlhdCI6MTY0MjczMzE2Mi4yMTg2NTksIm5iZiI6MTY0MjczMzE2Mi4yMTg2NjcsImV4cCI6MTY3NDI2OTE2Mi4xOTA4NzUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.SSWzHI2hOKtWDzzwUCTqrZzs7uXK132BXmw5h_yDkIpAKQa91TdxdMTU-VhWMunmsQ8aAHRB2tlj-lyQk5P1XYXqeXCpajKgLHIL-P-r7PkXdHQmg8l8qamy_Vrz26zCtuSgD7YhqaTax7IxEXQL4mR9ixZnJ2wvUWz-lDIV0AbxxB5uQqspYcq-8kRjgMEr_wJvPcNW7gg9cPpznHIMcKP5XKpjjzvkn0LxKDkVB5mnAESpknchTdaMIeqFRQ_u3-kLuIm3Qp7Ri-4iiDY4I0N0MqGH93i-W-bOeF_MVI-CIa0AwLuBac-7gnsCVoxfi5QwJrs-pf1VbwsTTw6RSyxnFhp_DDiwC2pZFkoeyIu5hqPgq-u40wWsdHhCmXrurZJVntRDeMER_aC6nIo5WrMxSb_taqYLrzxuQ_ytht8N9ftkcIGt12xpp10jMcNzpECs5Of1Oc8cz5GudgkwOCpX98btstkVYjG-nu_QU0FI_Fxpv-XGGBJ6sbR9ZY96FRBLmjMfUEX7HPQ-HDo44TonabBvv0UhiEbTTYYman0F9PHWRctuc5Xi31m8fnWpOlRcr5dHKmOqxa2YTZgSzhMsZw2gAOXhmH49ef4TNm3ly2bbMHZqDcx6GwTa-rdIK2TZ4uXU9MwZ6fWliu3O5oKOYu2dcLQLBZyeN_BOPak'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
-"external_id": "XXX-10",
-"method": "A2A",
-"amount": 300000,
-"purpose_code": "FAMILY",
-"source_of_funds": "PERSONAL_SAVINGS",
-"description": "Transfer ke kampung via Bank Account",
-"sender_customer_id": "95083094-4d00-42e2-8f8a-d1765ac46592",
-"recipient_customer_id": "9508308d-12c8-4cb2-866d-f31b35342089",
-"agent_id": "e8f04b8b-244a-4a92-8175-0b8b5b40c3d0"
+    "reference_id": "XXX-3344",
+    "method": "A2C",
+    "amount": 50000,
+    "purpose_code": "FAMILY",
+    "source_of_funds": "PERSONAL_SAVINGS",
+    "description": "Transfer untuk ibu",
+    "sender_customer_id": "9564d736-8852-4e4a-ad8a-0f40d14acb69",
+    "recipient_customer_id": "9564d7a6-f5d3-4dd4-911f-4d13144e8311",
+    "agent_id": "0620b618-b2ab-46cf-ab23-679a78945b5e"
 }'</span>
 </code></pre></div>
 <table><thead>
@@ -1405,16 +1401,16 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 </thead><tbody>
 <tr>
-<td>external_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td>reference_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>string</code> A unique ID for your remittance. We validate this to protect against accidental duplicate remittances.</br></br> <span style="color:grey"><code>Characters</code> <small>Special and alphanumeric</small></br> <code>Maximum length</code> <small>100 characters</small></span></td>
 </tr>
 <tr>
 <td>method </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>string</code> A fix value method flag for Bank Account Transaction. We validate this to make sure your remittance run in <code>Bank Account</code>  transaction.</br></br> <span style="color:grey">Use Fix Value <code>A2A</code> <small>always use the fix value when sending remittance request</small></span></td>
+<td><code>string</code> A fix value method flag for Cash Pickup Account Transaction. We validate this to make sure your remittance run in <code>Cash Pickup</code>  transaction.</br></br> <span style="color:grey">Use Fix Value <code>A2C</code> <small>always use the fix value when sending remittance request</small></span></td>
 </tr>
 <tr>
 <td>amount </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>number</code> Transfer amount</br></br> <span style="color:grey"><code>Characters</code> <small>Numerical integers, no decimals</small></br> <code>Maximum limit (BCA, Mandiri, BRI, BNI, BNI Syariah, CIMB, CIMB_UUS, PERMATA)</code> <small>No Limit*<em></small></br> <code>Minimum limit (BCA, Mandiri, BRI, BNI, BNI Syariah, CIMB, CIMB_UUS, PERMATA)</code> <small>No Limit</em><em></small></br> <code>Maximum limit (Other banks)</code> <small>Rp.50.000.000</em><strong></small></br> <code>Minimum limit (Other banks)</code> <small>Rp. 10.000</small></br></br></span> <small></strong> While there is theoretically no maximum transfer limit for transfers to these banks, please note that we may have to report all transaction amounts above Rp 100.000.000 to the financial authorities in Indonesia along with supporting documentation regarding the underlying transactions.</small></br></br> <small>*** Disbursements above Rp 50.000.000 to banks other than BCA, Mandiri, BNI, BNI Syariah, BRI, Permata will be processed between 8am-2pm (UTC+07:00) on bank working days. The disbursement can be expected to arrive by the next business day. (Processing times vary by financial institution and is subject to change.)</small></td>
+<td><code>number</code> Transfer amount</br></br> <span style="color:grey"><code>Characters</code> <small>Numerical integers, no decimals</small></td>
 </tr>
 <tr>
 <td>description </br><small><span style="color:grey"><em>required</em> </span></small></td>
@@ -1438,7 +1434,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>agent_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>string</code> The destination Bank ID of your remittance. Refer to our list of <a href="#bank-lists">Bank Lists</a></td>
+<td><code>string</code> The destination Agent ID of your remittance. Refer to our list of <a href="#bank-lists">Agent Lists</a></br></br> <span style="color:grey">agent id value <code>0620b618-b2ab-46cf-ab23-679a78945b5e</code> <small>please use the refer agent id for your cash pickup remittance</small></br></br></span> <small></span></td>
 </tr>
 </tbody></table>
 <h2 id='create-remittance-response'>Create Remittance Response</h2>
@@ -1447,19 +1443,19 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"data"</span>: <span class="o">{</span>
-        <span class="s2">"id"</span>: <span class="s2">"956685f1-e12b-4085-ba72-5b66ab568eb9"</span>,
-        <span class="s2">"reference_id"</span>: <span class="s2">"1638158760806-54"</span>,
-        <span class="s2">"method"</span>: <span class="s2">"A2A"</span>,
-        <span class="s2">"amount"</span>: 90000,
+        <span class="s2">"id"</span>: <span class="s2">"9564e523-fd13-4d9b-89c5-13bccd500eec"</span>,
+        <span class="s2">"reference_id"</span>: <span class="s2">"XXX-2233"</span>,
+        <span class="s2">"method"</span>: <span class="s2">"A2C"</span>,
+        <span class="s2">"amount"</span>: 72000,
         <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
         <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
-        <span class="s2">"description"</span>: <span class="s2">"Transfer ke kampung"</span>,
-        <span class="s2">"transaction_status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Transfer untuk ibu"</span>,
+        <span class="s2">"transaction_status"</span>: <span class="s2">"COMPLETED"</span>,
         <span class="s2">"sender"</span>: <span class="o">{</span>
-            <span class="s2">"id"</span>: <span class="s2">"9560ea7c-a505-47a9-8482-c2063ba64ae7"</span>,
-            <span class="s2">"reference_id"</span>: <span class="s2">"x-7986"</span>,
+            <span class="s2">"id"</span>: <span class="s2">"9564d736-8852-4e4a-ad8a-0f40d14acb69"</span>,
+            <span class="s2">"reference_id"</span>: <span class="s2">"x-15648"</span>,
             <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
-            <span class="s2">"given_name"</span>: <span class="s2">"Cika Jerika"</span>,
+            <span class="s2">"given_name"</span>: <span class="s2">"Cika Jeriko"</span>,
             <span class="s2">"surname"</span>: <span class="s2">"Cijer"</span>,
             <span class="s2">"gender"</span>: <span class="s2">"Female"</span>,
             <span class="s2">"occupation"</span>: <span class="s2">"OTHER"</span>,
@@ -1490,12 +1486,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
                     <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
                 <span class="o">}</span>
             <span class="o">]</span>,
-            <span class="s2">"account_details"</span>: <span class="o">{</span>
-                <span class="s2">"id"</span>: <span class="s2">"9560ea7c-ad42-4ef9-8d71-39a42f24d1c5"</span>,
-                <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
-                <span class="s2">"account_number"</span>: <span class="s2">"123456789"</span>,
-                <span class="s2">"account_holder_name"</span>: <span class="s2">"Cika Jerika"</span>
-            <span class="o">}</span>,
+            <span class="s2">"account_details"</span>: null,
             <span class="s2">"email"</span>: <span class="s2">"cijer@email.com"</span>,
             <span class="s2">"mobile"</span>: <span class="o">{</span>
                 <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
@@ -1507,13 +1498,13 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
             <span class="o">}</span>
         <span class="o">}</span>,
         <span class="s2">"recipient"</span>: <span class="o">{</span>
-            <span class="s2">"id"</span>: <span class="s2">"9560e576-28b1-4fe2-9c7c-fb75f5fe40a0"</span>,
-            <span class="s2">"reference_id"</span>: <span class="s2">"x-7984"</span>,
+            <span class="s2">"id"</span>: <span class="s2">"9564d7a6-f5d3-4dd4-911f-4d13144e8311"</span>,
+            <span class="s2">"reference_id"</span>: <span class="s2">"x-89456"</span>,
             <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
-            <span class="s2">"given_name"</span>: <span class="s2">"Mamang Daya"</span>,
-            <span class="s2">"surname"</span>: <span class="s2">"Mangday"</span>,
-            <span class="s2">"gender"</span>: <span class="s2">"Male"</span>,
-            <span class="s2">"occupation"</span>: <span class="s2">"PILOT"</span>,
+            <span class="s2">"given_name"</span>: <span class="s2">"Thomas Djorgi"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"Thomdjor"</span>,
+            <span class="s2">"gender"</span>: <span class="s2">"Female"</span>,
+            <span class="s2">"occupation"</span>: <span class="s2">"OTHER"</span>,
             <span class="s2">"fax"</span>: <span class="o">{</span>
                 <span class="s2">"number"</span>: <span class="s2">"02199991111"</span>,
                 <span class="s2">"country_code"</span>: <span class="s2">"62"</span>
@@ -1541,13 +1532,8 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
                     <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
                 <span class="o">}</span>
             <span class="o">]</span>,
-            <span class="s2">"account_details"</span>: <span class="o">{</span>
-                <span class="s2">"id"</span>: <span class="s2">"9560e576-2efa-4e7a-8553-567bfdbaf3e8"</span>,
-                <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
-                <span class="s2">"account_number"</span>: <span class="s2">"00987654321"</span>,
-                <span class="s2">"account_holder_name"</span>: <span class="s2">"Mamang Daya"</span>
-            <span class="o">}</span>,
-            <span class="s2">"email"</span>: <span class="s2">"dewi@email.com"</span>,
+            <span class="s2">"account_details"</span>: null,
+            <span class="s2">"email"</span>: <span class="s2">"tomdjor@email.com"</span>,
             <span class="s2">"mobile"</span>: <span class="o">{</span>
                 <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
                 <span class="s2">"number"</span>: <span class="s2">"08111555777"</span>
@@ -1560,7 +1546,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
-<p>We return a response with additional fields described below if there were no initial errors with the remittance creation (request formatted incorrectly, invalid purpose code, insufficient funds, etc). The status of the remittance will be initially marked as <code>PENDING_RISK_ASSESSMENT</code>.</p>
+<p>We return a response with additional fields described below if there were no initial errors with the remittance creation (request formatted incorrectly, invalid purpose code, insufficient funds, etc). The status of the remittance will be initially marked as <code>COMPLETED</code>.</p>
 
 <table><thead>
 <tr>
@@ -1570,7 +1556,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </thead><tbody>
 <tr>
 <td>status</td>
-<td><code>string</code> Status of the remittance. Default is <code>PENDING_RISK_ASSESSMENT</code>: Request is being processed and assessed in the risk scoring system. See <a href="#remittance-statuses">Remittance Statuses</a></td>
+<td><code>string</code> Status of the remittance. Default is <code>COMPLETED</code>.</td>
 </tr>
 <tr>
 <td>created</td>
@@ -1633,9 +1619,9 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <td>Error connecting to our server. Please use Get remittance by external_id API to check whether the remittance has already been created. If you receive an empty array, the remittance has not been created; please retry the remittance request in 1-2 hours.</br> <span class="badge error">No retry</span></td>
 </tr>
 </tbody></table>
-<h2 id='get-remittance-with-external_id-request'>Get Remittance With external_id Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>GET https://dev.aricos.co.id/api/v1/remittance/check-v2/<span class="o">{</span>external_id<span class="o">}</span>
+<h2 id='get-remittance-with-reference_id-request'>Get Remittance With reference_id Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>GET https://dev.aricos.co.id/api/v1/remittance/check-v2/<span class="o">{</span>external_id<span class="o">}</span>
 </code></pre></div>
-<p>Returns an array with a single object which contains the remittance corresponding to the unique external_id. Returns an empty array if there is no remittance corresponding to the external_id.</p>
+<p>Returns an array with a single object which contains the remittance corresponding to the unique reference_id. Returns an empty array if there is no remittance corresponding to the reference_id.</p>
 
 <blockquote>
 <p>Get Customer With external_id Example Request:</p>
@@ -1647,17 +1633,16 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <p>Get Remittance With external_id Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
-    <span class="s2">"external_id"</span>: <span class="s2">"XXX10"</span>,
-    <span class="s2">"amount"</span>: 300000,
-    <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
-    <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
-    <span class="s2">"description"</span>: <span class="s2">"Transfer ke kampung via Bank Account"</span>,
-    <span class="s2">"sender_customer_id"</span>: <span class="s2">"de7ae696-f7b8-4576-ac41ad8bdf680704"</span>,
-    <span class="s2">"recipient_customer_id"</span>: <span class="s2">"a6f19ba7-cc86-4747-a9de125eebbb074f"</span>,
-    <span class="s2">"created"</span>: <span class="s2">"2022-01-06T15:16:51.505Z"</span>,
-    <span class="s2">"updated"</span>: <span class="s2">"2022-01-06T15:16:51.505Z"</span>,
-    <span class="s2">"id"</span>: <span class="s2">"61d707e3914969153a346ca3"</span>
+    <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"id"</span>: <span class="s2">"9564e523-fd13-4d9b-89c5-13bccd500eec"</span>,
+        <span class="s2">"reference_id"</span>: <span class="s2">"XXX-2233"</span>,
+        <span class="s2">"method"</span>: <span class="s2">"A2C"</span>,
+        <span class="s2">"amount"</span>: 72000,
+        <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
+        <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Transfer untuk ibu"</span>,
+        <span class="s2">"transaction_status"</span>: <span class="s2">"COMPLETED"</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
 <table><thead>
@@ -1667,8 +1652,8 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 </thead><tbody>
 <tr>
-<td>external_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span></td>
+<td>reference_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The reference_id must match the reference_id used at remittance creation precisely</small></span></td>
 </tr>
 </tbody></table>
 <h1 id='data-references'>Data References</h1>
