@@ -588,7 +588,7 @@ POST https://dev-cashpickup.aricos.co.id/oauth/token
 <p>Your balance refers to stored value in your Aricos account which can be sent out in remittances or withdrawn. Before you do any remittances, you will first have to add to your account balance (&quot;prefund&quot;). You can do this by transferring funds to Aricos&#39;s cash pickup accounts. You can will get information about our cash pickup from our team so you can do prefund. After you have transferred the funds, please save the proof of transfer.</p>
 
 <p>If you have prefunding to your account, the balance should be detected and updated in your account in 15-30 minutes. If prefunding failed or have technical issues, please contact our support team with the proof of transfer to complete the prefund.</p>
-<h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>https://dev-cashpickup.aricos.co.id/api/user-balances
+<h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>GET https://dev-cashpickup.aricos.co.id/api/user-balances
 </code></pre></div>
 <p>Retrieves your account balance. There are two balances: <b>CASH</b> refers to funds available for you to remit or withdraw. <b>HOLDING</b> refers to funds which are in transit.</p>
 <h2 id='get-balance-request'>Get Balance Request</h2>
