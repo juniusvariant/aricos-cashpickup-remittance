@@ -428,7 +428,7 @@ DUPLICATE_CUSTOMER_ERROR</br> <span class="badge">400</span>| The external_id en
 Updates an existing customer
 
 ```shell
-PUT https://dev.aricos.co.id/api/v1/customer/update/{reference_id}
+PUT https://dev-cashpickup.aricos.co.id/api/customers/{reference_id}
 ```
 
 > Update Customer Example Request:
@@ -603,7 +603,7 @@ CUSTOMER_NOT_FOUND_ERROR</br> <span class="badge">400</span>| Could not find cus
 ## Get Customer With external_id Request
 
 ```shell
-GET https://dev.aricos.co.id/api/v1/customer/search/{reference_id}
+GET https://dev-cashpickup.aricos.co.id/api/customers/{reference_id}
 ```
 
 Returns an array with a single object which contains the customer corresponding to the unique external_id. Returns an empty array if there is no customer corresponding to the external_id.
@@ -611,8 +611,9 @@ Returns an array with a single object which contains the customer corresponding 
 > Get Customer With external_id Example Request:
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/customer/search/r-1234 -X GET \
-  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'
+curl --location --request GET 'https://dev-cashpickup.aricos.co.id/api/customers/x-7986' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJjNWMxNzVjMDAwOTE3ZjM3NmFlODQxN2YyNzExNzM0YzEyZTExYmIxOGNkNzBlYTMzZjRiMzM5MThmODQ5ZGIwMWMyNTA4ODI0NWEzN2M1NyIsImlhdCI6MTY0MjczMzE2Mi4yMTg2NTksIm5iZiI6MTY0MjczMzE2Mi4yMTg2NjcsImV4cCI6MTY3NDI2OTE2Mi4xOTA4NzUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.SSWzHI2hOKtWDzzwUCTqrZzs7uXK132BXmw5h_yDkIpAKQa91TdxdMTU-VhWMunmsQ8aAHRB2tlj-lyQk5P1XYXqeXCpajKgLHIL-P-r7PkXdHQmg8l8qamy_Vrz26zCtuSgD7YhqaTax7IxEXQL4mR9ixZnJ2wvUWz-lDIV0AbxxB5uQqspYcq-8kRjgMEr_wJvPcNW7gg9cPpznHIMcKP5XKpjjzvkn0LxKDkVB5mnAESpknchTdaMIeqFRQ_u3-kLuIm3Qp7Ri-4iiDY4I0N0MqGH93i-W-bOeF_MVI-CIa0AwLuBac-7gnsCVoxfi5QwJrs-pf1VbwsTTw6RSyxnFhp_DDiwC2pZFkoeyIu5hqPgq-u40wWsdHhCmXrurZJVntRDeMER_aC6nIo5WrMxSb_taqYLrzxuQ_ytht8N9ftkcIGt12xpp10jMcNzpECs5Of1Oc8cz5GudgkwOCpX98btstkVYjG-nu_QU0FI_Fxpv-XGGBJ6sbR9ZY96FRBLmjMfUEX7HPQ-HDo44TonabBvv0UhiEbTTYYman0F9PHWRctuc5Xi31m8fnWpOlRcr5dHKmOqxa2YTZgSzhMsZw2gAOXhmH49ef4TNm3ly2bbMHZqDcx6GwTa-rdIK2TZ4uXU9MwZ6fWliu3O5oKOYu2dcLQLBZyeN_BOPak'
 ```
 
 Query Parameter | Description
@@ -688,7 +689,7 @@ Our Cash Pickup Remittance APIs allow you to send remittances from your Aricos A
 ## Create Remittance
 
 ```shell
-POST https://dev-cashpickup.aricos.co.id/api/customers
+POST https://dev-cashpickup.aricos.co.id/api/remittances
 ```
 
 Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.
@@ -700,7 +701,7 @@ Your Aricos account balance must be able to cover the payout amount and the tran
 > Create Remittance Example Request:
 
 ```shell
-curl --location --request POST 'https://dev-cashpickup.aricos.co.id/api/customers' \
+curl --location --request POST 'https://dev-cashpickup.aricos.co.id/api/remittances' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJjNWMxNzVjMDAwOTE3ZjM3NmFlODQxN2YyNzExNzM0YzEyZTExYmIxOGNkNzBlYTMzZjRiMzM5MThmODQ5ZGIwMWMyNTA4ODI0NWEzN2M1NyIsImlhdCI6MTY0MjczMzE2Mi4yMTg2NTksIm5iZiI6MTY0MjczMzE2Mi4yMTg2NjcsImV4cCI6MTY3NDI2OTE2Mi4xOTA4NzUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.SSWzHI2hOKtWDzzwUCTqrZzs7uXK132BXmw5h_yDkIpAKQa91TdxdMTU-VhWMunmsQ8aAHRB2tlj-lyQk5P1XYXqeXCpajKgLHIL-P-r7PkXdHQmg8l8qamy_Vrz26zCtuSgD7YhqaTax7IxEXQL4mR9ixZnJ2wvUWz-lDIV0AbxxB5uQqspYcq-8kRjgMEr_wJvPcNW7gg9cPpznHIMcKP5XKpjjzvkn0LxKDkVB5mnAESpknchTdaMIeqFRQ_u3-kLuIm3Qp7Ri-4iiDY4I0N0MqGH93i-W-bOeF_MVI-CIa0AwLuBac-7gnsCVoxfi5QwJrs-pf1VbwsTTw6RSyxnFhp_DDiwC2pZFkoeyIu5hqPgq-u40wWsdHhCmXrurZJVntRDeMER_aC6nIo5WrMxSb_taqYLrzxuQ_ytht8N9ftkcIGt12xpp10jMcNzpECs5Of1Oc8cz5GudgkwOCpX98btstkVYjG-nu_QU0FI_Fxpv-XGGBJ6sbR9ZY96FRBLmjMfUEX7HPQ-HDo44TonabBvv0UhiEbTTYYman0F9PHWRctuc5Xi31m8fnWpOlRcr5dHKmOqxa2YTZgSzhMsZw2gAOXhmH49ef4TNm3ly2bbMHZqDcx6GwTa-rdIK2TZ4uXU9MwZ6fWliu3O5oKOYu2dcLQLBZyeN_BOPak' \
@@ -867,7 +868,7 @@ SERVER_ERROR</br> <span class="badge">500</span>| Error connecting to our server
 ## Get Remittance With reference_id Request
 
 ```shell
-GET https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id}
+GET https://dev-cashpickup.aricos.co.id/api/remittances/{external_id}
 ```
 
 Returns an array with a single object which contains the remittance corresponding to the unique reference_id. Returns an empty array if there is no remittance corresponding to the reference_id.
@@ -875,8 +876,9 @@ Returns an array with a single object which contains the remittance correspondin
 > Get Customer With external_id Example Request:
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/remittance/check-v2/{external_id} -X GET \
-  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwi’
+curl --location --request GET 'https://dev-cashpickup.aricos.co.id/api/remittances/XXX-2233' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJjNWMxNzVjMDAwOTE3ZjM3NmFlODQxN2YyNzExNzM0YzEyZTExYmIxOGNkNzBlYTMzZjRiMzM5MThmODQ5ZGIwMWMyNTA4ODI0NWEzN2M1NyIsImlhdCI6MTY0MjczMzE2Mi4yMTg2NTksIm5iZiI6MTY0MjczMzE2Mi4yMTg2NjcsImV4cCI6MTY3NDI2OTE2Mi4xOTA4NzUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.SSWzHI2hOKtWDzzwUCTqrZzs7uXK132BXmw5h_yDkIpAKQa91TdxdMTU-VhWMunmsQ8aAHRB2tlj-lyQk5P1XYXqeXCpajKgLHIL-P-r7PkXdHQmg8l8qamy_Vrz26zCtuSgD7YhqaTax7IxEXQL4mR9ixZnJ2wvUWz-lDIV0AbxxB5uQqspYcq-8kRjgMEr_wJvPcNW7gg9cPpznHIMcKP5XKpjjzvkn0LxKDkVB5mnAESpknchTdaMIeqFRQ_u3-kLuIm3Qp7Ri-4iiDY4I0N0MqGH93i-W-bOeF_MVI-CIa0AwLuBac-7gnsCVoxfi5QwJrs-pf1VbwsTTw6RSyxnFhp_DDiwC2pZFkoeyIu5hqPgq-u40wWsdHhCmXrurZJVntRDeMER_aC6nIo5WrMxSb_taqYLrzxuQ_ytht8N9ftkcIGt12xpp10jMcNzpECs5Of1Oc8cz5GudgkwOCpX98btstkVYjG-nu_QU0FI_Fxpv-XGGBJ6sbR9ZY96FRBLmjMfUEX7HPQ-HDo44TonabBvv0UhiEbTTYYman0F9PHWRctuc5Xi31m8fnWpOlRcr5dHKmOqxa2YTZgSzhMsZw2gAOXhmH49ef4TNm3ly2bbMHZqDcx6GwTa-rdIK2TZ4uXU9MwZ6fWliu3O5oKOYu2dcLQLBZyeN_BOPak'
 ```
 
 > Get Remittance With external_id Example Response:
