@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Documentation</title>
+        <meta
+            name="description"
+            content="Documentation for the Aricos Bank Accout Remittance API"
+        >
+    <title>API Reference</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -284,11 +288,14 @@
     </style>
     <link href="stylesheets/screen-2fd4a4c6.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-31802438.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all_nosearch-18c3ed8e.js"></script>
+      <script src="javascripts/all-b12a2749.js"></script>
 
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
   </head>
 
-  <body class="index" data-languages="[]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -299,6 +306,13 @@
       <div class="logo-wrapper">
       <img src="images/logo-2325ab89.png" class="logo" alt="" />
       </div>
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
@@ -393,33 +407,39 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#data-references" class="toc-h1 toc-link" data-title="Data References">Data References</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#remittance-statuses" class="toc-h2 toc-link" data-title="Remittance Statuses">Remittance Statuses</a>
+                  </li>
+                  <li>
+                    <a href="#remittance-failure-codes" class="toc-h2 toc-link" data-title="Remittance Failure Codes">Remittance Failure Codes</a>
+                  </li>
+                  <li>
+                    <a href="#account-codes" class="toc-h2 toc-link" data-title="Account Codes">Account Codes</a>
+                  </li>
+                  <li>
+                    <a href="#purpose-codes" class="toc-h2 toc-link" data-title="Purpose Codes">Purpose Codes</a>
+                  </li>
+                  <li>
+                    <a href="#source-of-funds" class="toc-h2 toc-link" data-title="Source of Funds">Source of Funds</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
       </ul>
+        <ul class="toc-footer">
+            <li><a href='#'>Contact for API User and Password</a></li>
+            <li><a href='#'>Contact us if you got any trouble for using this API</a></li>
+        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <hr>
-
-<p>title: API Reference</p>
-
-<p>language_tabs: # must be one of https://git.io/vQNgJ
-  - shell</p>
-
-<p>toc_footers:
-- <a href='#'>Contact for API User and Password</a>
-- <a href='#'>Contact us if you got any trouble for using this API</a></p>
-
-<p>includes:
-  - data-references
-  - errors</p>
-
-<p>search: true</p>
-
-<p>code_clipboard: true</p>
-
-<p>meta:
-  - name: description</p>
-<h2 id='content-documentation-for-the-aricos-bank-accout-remittance-api'>    content: Documentation for the Aricos Bank Accout Remittance API</h2><h1 id='introduction'>Introduction</h1>
+        <h1 id='introduction'>Introduction</h1>
 <p>Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all banks in Indonesia quickly and securely.</p>
 
 <p>Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.</p>
@@ -578,27 +598,44 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <blockquote>
 <p>Get Balance Example Request: </br></p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/mitra/balance <span class="nt">-X</span> POST <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span>
-<span class="nt">--data</span> <span class="s1">'{"account_type":"CASH"}'</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev-bankaccount.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
+
+<span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJiZTcwMTJjZWIyOTNiYTJlMWNlZDE0MWI0YmZiZWExNzA5MmNiZjI5NTIyNTQzOWMyZDMzY2E4N2YwMjVmZDQ4ZTg0NTc5OGI2N2YzNWRmNiIsImlhdCI6MTY0MjY3NTYyMC42NTQ3MywibmJmIjoxNjQyNjc1NjIwLjY1NDczNywiZXhwIjoxNjc0MjExNjIwLjYzODE4OSwic3ViIjoiYWUzNjBmOTYtY2QyNi00ZWVjLWE3MWUtOTUxNmQ3ZjNmNTBhIiwic2NvcGVzIjpbXX0.faK3IffH8w5R7EEIscvnYbnhn9uQMS6206TEovhP9lgh1XUD6PubsPiyYtPWyCo_NhO-RzRI_8CHpKaMTPK9hLRUvAeNpV2CjUmM3GG2HSmgwC5a863IJoGvaGSL90aBtw-Ub3DBv1dzn00_-98982o-gSKHElsgf1o0EYGA1Y7vXEdEfN45Eww5rFG2cVUyKQo_eh8J8aITQQ15xydDsWe1lFPYYqrDIfZ6xTNa00b-GYP-DIVHP1NOYPdihOKPgt4uSzb03vfu62PFYzlR2gQiodW7Ellf-5-kIrGVRbogcZzTnBw41yKm7jU9hxx5hLgfEB5sImBMRcihER4W4GM5fLmpVQHmlOT9hTCQrtr__XEZK481OrZ75TsEYE0oaAygP2qMrlGgMYPxXvtsF9jLOrIzSmBx16mV7OeV1hytgot2KcppO-5hui5UI1kRuSY-YIY8I0y7AGX74Sq3SGQnvnesF0r5LbrxZiGP1pDUKHmn37O0SFYXT1QNEJPwwkMwVHmqsaggrl0QNejCXQRNr2eQHc1zq5umw1oTDvoxQhHTfmtyJx3zGYhKfQckoULUZs79Z0MXsqVB1n_8fFxymdagoI2EVMQ-geb0k8a9VdXTffXzAcEMD4z7ZUhx56jnNYJz62R-ZNtkxrMAOsjS3tfMje7WKoRhgOJ4HKY'</span>
 </code></pre></div>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>account_type </br><small><span style="color:grey"><em>optional</em> </span></small> </br> <small><span style="color:grey"><em>default</em> </span> <code>CASH</code></small></td>
-<td><code>string</code> The selected account type (<code>CASH</code> or <code>HOLDING</code>).</td>
-</tr>
-</tbody></table>
+<p>Our get balance end-point doesn&#39;t have any body request just send the <code>BEARER TOKEN</code>  as auth</p>
+
+<!--- 
+Parameter | Description
+--------- | -----------
+account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`). 
+--->
 <h2 id='get-balance-response'>Get Balance Response</h2>
 <blockquote>
 <p>Get Balance Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-  <span class="s2">"balance"</span>: 1241231
+    <span class="s2">"data"</span>: <span class="o">[{</span>
+        <span class="s2">"id"</span>: <span class="s2">"ae360f96-cd26-4eec-a71e-9516d7f3f50a"</span>,
+        <span class="s2">"email"</span>: <span class="s2">"argjkt2@gmail.com"</span>,
+        <span class="s2">"name"</span>: <span class="s2">"ARG_OTR"</span>,
+        <span class="s2">"balance"</span>: 8288000,
+        <span class="s2">"on_hold_balance"</span>: 870000
+    <span class="o">}]</span>,
+    <span class="s2">"links"</span>: <span class="o">{</span>
+        <span class="s2">"first"</span>: <span class="s2">"https://dev-bankaccount.aricos.co.id/api/user-balances?page=1"</span>,
+        <span class="s2">"last"</span>: null,
+        <span class="s2">"prev"</span>: null,
+        <span class="s2">"next"</span>: null
+    <span class="o">}</span>,
+    <span class="s2">"meta"</span>: <span class="o">{</span>
+        <span class="s2">"current_page"</span>: 1,
+        <span class="s2">"from"</span>: 1,
+        <span class="s2">"path"</span>: <span class="s2">"https://dev-bankaccount.aricos.co.id/api/user-balances"</span>,
+        <span class="s2">"per_page"</span>: 15,
+        <span class="s2">"to"</span>: 1
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
 <table><thead>
@@ -608,8 +645,24 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 </tr>
 </thead><tbody>
 <tr>
+<td>id</td>
+<td>The unique identity of your account</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The user account that you use</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The user name of your account</td>
+</tr>
+<tr>
 <td>balance</td>
-<td>The balance remaining in your cash account</td>
+<td>The real balance that you can use to transfer remittance</td>
+</tr>
+<tr>
+<td>on_hold_balance</td>
+<td>The retained balance from accumulation of every unfinished transaction</td>
 </tr>
 </tbody></table>
 <h1 id='customers'>Customers</h1><h2 id='customer-data'>Customer Data</h2>
@@ -623,36 +676,58 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <blockquote>
 <p>Create Customer Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/register <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
-   <span class="nt">--data</span> <span class="s1">'
-     {
-      "reference_id": "r-1234",
-      "customer_type": "INDIVIDUAL",
-      "given_name": "Ichwano",
-      "surname": "Sembo",
-      "address": {
-          "country_code": "ID",
-          "province": "DKI Jakarta",
-          "city": "Jakarta Selatan",
-          "line_1": "Jl. Senayan 1 No.15"
-      },
-      "date_of_birth": "11-01-1990",
-      "identification": {
-          "ktp_number": "0987654321320987",
-          "npwp_number": "098765432132098"
-      },
-      "account_details": {
-          "account_code": "BNI",
-          "account_number": "123456780",
-          "account_holder_name": "Ichwano"
-      },
-      "email": "ichwano@email.com",
-      "mobile_number": "+628111555777",
-      "phone_number": "+622199990000"
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "reference_id": "x-7986",
+    "customer_type": "INDIVIDUAL",
+    "given_name": "Cika Jerika",
+    "surname": "Cijer",
+    "nationality":"ID",
+    "gender": "Female",
+    "occupation":"OTHER",
+    "address": {
+        "country_code": "ID",
+        "province_id": "31",
+        "city_id": "3171",
+        "line_1": "Jl. Senayan 1 No.15",
+        "line_2": "Komplek BNI",
+        "postal_code": "16320"
+    },
+    "date_of_birth": "11-01-1990",
+    "place_of_birth": "Prabumulih",
+    "identifications": [
+        {
+            "identification_type": "ktp",
+            "identification_country": "ID",
+            "identification_number": "1025456545454545"
+        },
+        {
+            "identification_type": "npwp",
+            "identification_country": "ID",
+            "identification_number": "254545465425489"
+        }
+    ],
+    "account_details": {
+        "account_code": "BNI",
+        "account_number": "123456789",
+        "account_holder_name": "Cika Jerika"
+    },
+    "email": "cijer@email.com",
+    "mobile": {
+        "country_code": "62",
+        "number": "08111555777"
+    },
+    "phone": {
+        "country_code": "62",
+        "number": "02199990000"
+    },
+    "fax": {
+        "country_code": "62",
+        "number": "02199991111"
     }
-   '</span>
+}'</span>
 </code></pre></div>
 <table><thead>
 <tr>
@@ -673,8 +748,20 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Given name(s). Required if <code>customer_type</code> is <code>INDIVIDUAL</code>. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
 </tr>
 <tr>
-<td>surname </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Surname or family name, if applicable. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+<td>surname </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Surname or family name or last name. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+</tr>
+<tr>
+<td>nationality </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Nationality country of the Customer. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
+</tr>
+<tr>
+<td>gender </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Gender of the Customer. Only allowed <code>Male</code> or <code>Female</code> value</td>
+</tr>
+<tr>
+<td>occupation </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Occupation of the Customer. See <a href="#occupation-codes">Occupation Codes</a></td>
 </tr>
 <tr>
 <td>business_name </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
@@ -690,19 +777,23 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 </tr>
 <tr>
 <td>address.state </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s state</td>
+<td><code>string</code> Customer’s state. Download <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
-<td>address.province </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s province</td>
+<td>address.province </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Customer’s province. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
-<td>address.city </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s city</td>
+<td>address.city </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Customer’s city. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
-<td>address.suburb </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s suburb</td>
+<td>address.district </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s district. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
+</tr>
+<tr>
+<td>address.village </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s village. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
 <td>address.post_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -721,40 +812,28 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Date of Birth. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code>. ISO 8601 format YYYY-MM-DD</td>
 </tr>
 <tr>
+<td>place_of_birth </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Place of Birth. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+</tr>
+<tr>
 <td>date_of_registration </br><small><span style="color:grey"><em>optional</em> </span></small></td>
 <td><code>string</code> Date of Registration. Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. ISO 8601 format YYYY-MM-DD</td>
 </tr>
 <tr>
-<td>identification </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td>identifications </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>object</code> A legal document that verifies the identity of the customer</td>
 </tr>
 <tr>
-<td>identification.ktp_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>16 characters</small></span></td>
+<td>identification.identification_type </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Type of identity of the customer.</br></br> Only allowed value  <code>KTP</code>,<code>NPWP</code>,<code>SIM</code>,<code>PASSPORT</code>,<code>KITAS</code>,<code>KITAP</code></br> <code>Characters</code> <span style="color:grey"><small>10 characters</small></span></td>
 </tr>
 <tr>
-<td>identification.npwp_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>15 characters</small></span></td>
+<td>identification.identification_country </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Country identity publisher of the customer.</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>.</br> <code>Characters</code> <span style="color:grey"><small>2 characters</small></span></td>
 </tr>
 <tr>
-<td>identification.drivers_license </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>14 characters</small></span></td>
-</tr>
-<tr>
-<td>identification.passport_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Passport number of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br></br> If provided, should provide <code>passport_country</code>. In the case of multiple passports, please choose the passport of the country closest to Indonesia</td>
-</tr>
-<tr>
-<td>identification.passport_country </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
-<td><code>string</code> Passport country of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code>. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>.</br></br> Required if <code>passport_numberis</code> provided.</td>
-</tr>
-<tr>
-<td>identification.business_tax_id </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. If provided, should provide <code>business_tax_id_country</code>.</td>
-</tr>
-<tr>
-<td>identification.business_tax_id_country </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
-<td><code>string</code> Country for tax identification number of the business.</br></br> Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. </br></br> Required if <code>business_tax_id</code> is provided.</td>
+<td>identification.identification_number </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Identification number of the customer.</br></br> <code>Characters</code> <span style="color:grey"><small>15 characters for <code>NPWP</code>, 16 characters for <code>KTP</code> and other identification type</small></span></td>
 </tr>
 <tr>
 <td>account_details </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -777,12 +856,40 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com</td>
 </tr>
 <tr>
-<td>mobile_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX</td>
+<td>mobile </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s mobile number.</td>
 </tr>
 <tr>
-<td>phone_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
+<td>mobile.country_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s mobile number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. Example: 62</td>
+</tr>
+<tr>
+<td>mobile.number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s mobile number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX</td>
+</tr>
+<tr>
+<td>phone </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s phone number.</td>
+</tr>
+<tr>
+<td>phone.country_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s phone number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. Example: 62</td>
+</tr>
+<tr>
+<td>phone.number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s phone number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX</td>
+</tr>
+<tr>
+<td>fax </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s fax number.</td>
+</tr>
+<tr>
+<td>fax.country_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s fax number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. Example: 62</td>
+</tr>
+<tr>
+<td>fax.number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s fax number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX</td>
 </tr>
 </tbody></table>
 <h2 id='create-customer-response'>Create Customer Response</h2>
@@ -792,32 +899,52 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <p>Create Customer Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-  <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
-  <span class="s2">"external_id"</span>: <span class="s2">"r-1234"</span>,
-  <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
-  <span class="s2">"given_name"</span>: <span class="s2">"Ichwano"</span>,
-  <span class="s2">"surname"</span>: <span class="s2">"Sembo"</span>,
-  <span class="s2">"address"</span>: <span class="o">{</span>
-      <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
-      <span class="s2">"province"</span>: <span class="s2">"DKI Jakarta"</span>,
-      <span class="s2">"city"</span>: <span class="s2">"Jakarta Selatan"</span>,
-      <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>
-  <span class="o">}</span>,
-  <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
-  <span class="s2">"identification"</span>: <span class="o">{</span>
-      <span class="s2">"ktp_number"</span>: <span class="s2">"0987654321320987"</span>,
-      <span class="s2">"npwp_number"</span>: <span class="s2">"098765432132098"</span>
-  <span class="o">}</span>,
-  <span class="s2">"account_details"</span>: <span class="o">{</span>
-      <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
-      <span class="s2">"account_number"</span>: <span class="s2">"123456780"</span>,
-      <span class="s2">"account_holder_name"</span>: <span class="s2">"Ichwano"</span>
-  <span class="o">}</span>,
-  <span class="s2">"email"</span>: <span class="s2">"ichwano@email.com"</span>,
-  <span class="s2">"mobile_number"</span>: <span class="s2">"+628111555777"</span>,
-  <span class="s2">"phone_number"</span>: <span class="s2">"+622199990000"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
-  <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
+    <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"id"</span>: <span class="s2">"9564d7a6-f5d3-4dd4-911f-4d13144e8311"</span>,
+        <span class="s2">"reference_id"</span>: <span class="s2">"x-89456"</span>,
+        <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+        <span class="s2">"given_name"</span>: <span class="s2">"Thomas Djorgi"</span>,
+        <span class="s2">"surname"</span>: <span class="s2">"Thomdjor"</span>,
+        <span class="s2">"gender"</span>: <span class="s2">"Female"</span>,
+        <span class="s2">"occupation"</span>: <span class="s2">"OTHER"</span>,
+        <span class="s2">"fax"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"02199991111"</span>
+        <span class="o">}</span>,
+        <span class="s2">"address"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+            <span class="s2">"province_id"</span>: <span class="s2">"31"</span>,
+            <span class="s2">"city_id"</span>: <span class="s2">"3171"</span>,
+            <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>,
+            <span class="s2">"line_2"</span>: <span class="s2">"Komplek BNI"</span>,
+            <span class="s2">"postal_code"</span>: <span class="s2">"16320"</span>
+        <span class="o">}</span>,
+        <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
+        <span class="s2">"place_of_birth"</span>: <span class="s2">"Prabumulih"</span>,
+        <span class="s2">"nationality"</span>: <span class="s2">"ID"</span>,
+        <span class="s2">"identifications"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"identification_type"</span>: <span class="s2">"ktp"</span>,
+                <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>,
+                <span class="s2">"identification_number"</span>: <span class="s2">"1025456545454545"</span>
+            <span class="o">}</span>,
+            <span class="o">{</span>
+                <span class="s2">"identification_type"</span>: <span class="s2">"npwp"</span>,
+                <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>,
+                <span class="s2">"identification_number"</span>: <span class="s2">"254545465425489"</span>
+            <span class="o">}</span>
+        <span class="o">]</span>,
+        <span class="s2">"account_details"</span>: null,
+        <span class="s2">"email"</span>: <span class="s2">"tomdjor@email.com"</span>,
+        <span class="s2">"mobile"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"08111555777"</span>
+        <span class="o">}</span>,
+        <span class="s2">"phone"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"02199990000"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
 <table><thead>
@@ -854,17 +981,60 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <blockquote>
 <p>Update Customer Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 <span class="nt">-X</span> PUT <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'</span> <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-   <span class="nt">-H</span> <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
-   <span class="nt">--data</span> <span class="s1">'{
-     {
-      "given_name": "Ahmad",
-      "surname": "Shahab",
-      "phone_number": "+622199990000"
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'https://dev-bankaccount.aricos.co.id/api/customers/c-01256'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5MzFmODI3Ni1mOTBmLTQ0N2ItYjY0ZS1hMjI3MzQxOGVkMzIiLCJqdGkiOiIwYmE2NDcwMTNjYjE2ZTRmYjNhN2RjMGNkYTEyYjk0ZjkwZjExZmE0OWJjN2NjMDdlMmU4MjhlYzQ1MDkxYmM0NDljYjM0ZmQ0ZjVmNWIzNiIsImlhdCI6MTY0MjczOTQxMi44MzE3MjksIm5iZiI6MTY0MjczOTQxMi44MzE3MzYsImV4cCI6MTY3NDI3NTQxMi44MjI3NTQsInN1YiI6IjVhOWEyOGM2ZDRlOGMxMmFkMCIsInNjb3BlcyI6W119.X9hh_rPgAnlreqXZ-CuG-cIub0ihQc1EBNFBluCpcZcAaWJ8WXLrcl1U22etX2TUrBH5ulc7gL8XVaIV-yWSxoK98AbejjcXLzLnrLWvfphAgPmi3nYg96nIagBroVB1HVNByM8LQ8_TA0a7rp8dYqbOQ4zvUpCEPc6SVQo3kcfnxVoNiGuwTrL754kUaAcYhsqyP17m8aO8yDkVbOQzF9dMZDwMRUU_LMMufYJcTMydIIqQBGfzZOyKPTy0AivTe0icT9QmBM_YY-DgZ6sdVKosT3EsTah8Jo9FXKUPxTlDw3Fzwd8WXg6CBDPyz78F9A-n329CLosa16sILlaenBuwwAE-ObLqTVGcfYdATlWDUDDFdtKIdk4Ip2r-LxdLWfix-qF9W2_qrVmqQqIMQz7govDWSaH5pW_nu-v20deAoY5j2HDrQuPtFnd9iUm1UhmHVNOfDTInDw2EqEJ23E_S0A5CY_mgxbiu4leskFsCVVdcqWTA8aRPlUn22tILpk-SQs-NRuwDzX1Z06nuLrCnfFGGXqeLJC2LSFOf82FTHXoUyNMEkKe_uMO3vvavVw-BHoUgMoLyf5ljR4aev69OkJsmSwBXG36o7Ulu8HT514y2gsn0jJW2HSPfLEgwl0Q6e4yM6AFEIR7o_1AMdI-qf2qCg0bQlQCHEfX6RfY'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Cookie: TS0126f9dc=01b53461a60cbb3f4b604b6067dc0e494a06a620f7e7e7fef619c6d89a06a08065941af2f434a23c7687fde6280acf1128be33d60b'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "reference_id": "x-7986",
+    "customer_type": "INDIVIDUAL",
+    "given_name": "Cika Jerika",
+    "surname": "Cijer",
+    "nationality":"ID",
+    "gender": "Female",
+    "occupation":"OTHER",
+    "address": {
+        "country_code": "ID",
+        "province_id": "31",
+        "city_id": "3171",
+        "line_1": "Jl. Senayan 1 No.15",
+        "line_2": "Komplek BNI",
+        "postal_code": "16320"
+    },
+    "date_of_birth": "11-01-1990",
+    "place_of_birth": "Prabumulih",
+    "identifications": [
+        {
+            "identification_type": "ktp",
+            "identification_country": "ID",
+            "identification_number": "1025456545454545"
+        },
+        {
+            "identification_type": "npwp",
+            "identification_country": "ID",
+            "identification_number": "254545465425489"
+        }
+    ],
+    "account_details": {
+        "account_code": "BNI",
+        "account_number": "123456789",
+        "account_holder_name": "Cika Jerika"
+    },
+    "email": "cijer@email.com",
+    "mobile": {
+        "country_code": "62",
+        "number": "08111555777"
+    },
+    "phone": {
+        "country_code": "62",
+        "number": "02199990000"
+    },
+    "fax": {
+        "country_code": "62",
+        "number": "02199991111"
     }
-   }'</span>
+}'</span>
 </code></pre></div>
 <table><thead>
 <tr>
@@ -885,8 +1055,20 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Given name(s). Required if <code>customer_type</code> is <code>INDIVIDUAL</code>. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
 </tr>
 <tr>
-<td>surname </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Surname or family name, if applicable. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+<td>surname </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Surname or family name or last name. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+</tr>
+<tr>
+<td>nationality </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Nationality country of the Customer. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
+</tr>
+<tr>
+<td>gender </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Gender of the Customer. Only allowed <code>Male</code> or <code>Female</code> value</td>
+</tr>
+<tr>
+<td>occupation </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Occupation of the Customer. See <a href="#occupation-codes">Occupation Codes</a></td>
 </tr>
 <tr>
 <td>business_name </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
@@ -902,19 +1084,23 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 </tr>
 <tr>
 <td>address.state </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s state</td>
+<td><code>string</code> Customer’s state. Download <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
-<td>address.province </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s province</td>
+<td>address.province </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Customer’s province. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
-<td>address.city </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s city</td>
+<td>address.city </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Customer’s city. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
-<td>address.suburb </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s suburb</td>
+<td>address.district </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s district. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
+</tr>
+<tr>
+<td>address.village </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s village. Download list <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a></td>
 </tr>
 <tr>
 <td>address.post_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -933,40 +1119,28 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Date of Birth. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code>. ISO 8601 format YYYY-MM-DD</td>
 </tr>
 <tr>
+<td>place_of_birth </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Place of Birth. Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></td>
+</tr>
+<tr>
 <td>date_of_registration </br><small><span style="color:grey"><em>optional</em> </span></small></td>
 <td><code>string</code> Date of Registration. Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. ISO 8601 format YYYY-MM-DD</td>
 </tr>
 <tr>
-<td>identification </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td>identifications </br><small><span style="color:grey"><em>required</em> </span></small></td>
 <td><code>object</code> A legal document that verifies the identity of the customer</td>
 </tr>
 <tr>
-<td>identification.ktp_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>16 characters</small></span></td>
+<td>identification.identification_type </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Type of identity of the customer.</br></br> Only allowed value  <code>KTP</code>,<code>NPWP</code>,<code>SIM</code>,<code>PASSPORT</code>,<code>KITAS</code>,<code>KITAP</code></br> <code>Characters</code> <span style="color:grey"><small>10 characters</small></span></td>
 </tr>
 <tr>
-<td>identification.npwp_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>15 characters</small></span></td>
+<td>identification.identification_country </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Country identity publisher of the customer.</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>.</br> <code>Characters</code> <span style="color:grey"><small>2 characters</small></span></td>
 </tr>
 <tr>
-<td>identification.drivers_license </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br> <code>Characters</code> <span style="color:grey"><small>14 characters</small></span></td>
-</tr>
-<tr>
-<td>identification.passport_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Passport number of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code></br></br> If provided, should provide <code>passport_country</code>. In the case of multiple passports, please choose the passport of the country closest to Indonesia</td>
-</tr>
-<tr>
-<td>identification.passport_country </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
-<td><code>string</code> Passport country of the customer.</br></br> Only allowed if <code>customer_type</code> is <code>INDIVIDUAL</code>. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>.</br></br> Required if <code>passport_numberis</code> provided.</td>
-</tr>
-<tr>
-<td>identification.business_tax_id </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. If provided, should provide <code>business_tax_id_country</code>.</td>
-</tr>
-<tr>
-<td>identification.business_tax_id_country </br><small><span style="color:grey"><em>conditionally required</em> </span></small></td>
-<td><code>string</code> Country for tax identification number of the business.</br></br> Only allowed if <code>customer_type</code> is <code>BUSINESS</code>. 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. </br></br> Required if <code>business_tax_id</code> is provided.</td>
+<td>identification.identification_number </br><small><span style="color:grey"><em>required</em> </span></small></td>
+<td><code>string</code> Identification number of the customer.</br></br> <code>Characters</code> <span style="color:grey"><small>15 characters for <code>NPWP</code>, 16 characters for <code>KTP</code> and other identification type</small></span></td>
 </tr>
 <tr>
 <td>account_details </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -989,12 +1163,40 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com</td>
 </tr>
 <tr>
-<td>mobile_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX</td>
+<td>mobile </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s mobile number.</td>
 </tr>
 <tr>
-<td>phone_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX</td>
+<td>mobile.country_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s mobile number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. Example: 62</td>
+</tr>
+<tr>
+<td>mobile.number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s mobile number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX</td>
+</tr>
+<tr>
+<td>phone </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s phone number.</td>
+</tr>
+<tr>
+<td>phone.country_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s phone number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. Example: 62</td>
+</tr>
+<tr>
+<td>phone.number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s phone number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX</td>
+</tr>
+<tr>
+<td>fax </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>object</code> Customer’s fax number.</td>
+</tr>
+<tr>
+<td>fax.country_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s fax number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">here</a>. Example: 62</td>
+</tr>
+<tr>
+<td>fax.number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
+<td><code>string</code> Customer’s fax number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX</td>
 </tr>
 </tbody></table>
 <h2 id='update-customer-response'>Update Customer Response</h2>
@@ -1004,32 +1206,52 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <p>Update Customer Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-  <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
-  <span class="s2">"external_id"</span>: <span class="s2">"r-1234"</span>,
-  <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
-  <span class="s2">"given_name"</span>: <span class="s2">"Ichwano"</span>,
-  <span class="s2">"surname"</span>: <span class="s2">"Sembo"</span>,
-  <span class="s2">"address"</span>: <span class="o">{</span>
-      <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
-      <span class="s2">"province"</span>: <span class="s2">"DKI Jakarta"</span>,
-      <span class="s2">"city"</span>: <span class="s2">"Jakarta Selatan"</span>,
-      <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>
-  <span class="o">}</span>,
-  <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
-  <span class="s2">"identification"</span>: <span class="o">{</span>
-      <span class="s2">"ktp_number"</span>: <span class="s2">"0987654321320987"</span>,
-      <span class="s2">"npwp_number"</span>: <span class="s2">"098765432132098"</span>
-  <span class="o">}</span>,
-  <span class="s2">"account_details"</span>: <span class="o">{</span>
-      <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
-      <span class="s2">"account_number"</span>: <span class="s2">"123456780"</span>,
-      <span class="s2">"account_holder_name"</span>: <span class="s2">"Ichwano"</span>
-  <span class="o">}</span>,
-  <span class="s2">"email"</span>: <span class="s2">"ichwano@email.com"</span>,
-  <span class="s2">"mobile_number"</span>: <span class="s2">"+628111555777"</span>,
-  <span class="s2">"phone_number"</span>: <span class="s2">"+622199990000"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
-  <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
+    <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"id"</span>: <span class="s2">"9564d7a6-f5d3-4dd4-911f-4d13144e8311"</span>,
+        <span class="s2">"reference_id"</span>: <span class="s2">"x-89456"</span>,
+        <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+        <span class="s2">"given_name"</span>: <span class="s2">"Thomas Djorgi"</span>,
+        <span class="s2">"surname"</span>: <span class="s2">"Thomdjor"</span>,
+        <span class="s2">"gender"</span>: <span class="s2">"Female"</span>,
+        <span class="s2">"occupation"</span>: <span class="s2">"OTHER"</span>,
+        <span class="s2">"fax"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"02199991111"</span>
+        <span class="o">}</span>,
+        <span class="s2">"address"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+            <span class="s2">"province_id"</span>: <span class="s2">"31"</span>,
+            <span class="s2">"city_id"</span>: <span class="s2">"3171"</span>,
+            <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>,
+            <span class="s2">"line_2"</span>: <span class="s2">"Komplek BNI"</span>,
+            <span class="s2">"postal_code"</span>: <span class="s2">"16320"</span>
+        <span class="o">}</span>,
+        <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
+        <span class="s2">"place_of_birth"</span>: <span class="s2">"Prabumulih"</span>,
+        <span class="s2">"nationality"</span>: <span class="s2">"ID"</span>,
+        <span class="s2">"identifications"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"identification_type"</span>: <span class="s2">"ktp"</span>,
+                <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>,
+                <span class="s2">"identification_number"</span>: <span class="s2">"1025456545454545"</span>
+            <span class="o">}</span>,
+            <span class="o">{</span>
+                <span class="s2">"identification_type"</span>: <span class="s2">"npwp"</span>,
+                <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>,
+                <span class="s2">"identification_number"</span>: <span class="s2">"254545465425489"</span>
+            <span class="o">}</span>
+        <span class="o">]</span>,
+        <span class="s2">"account_details"</span>: null,
+        <span class="s2">"email"</span>: <span class="s2">"tomdjor@email.com"</span>,
+        <span class="s2">"mobile"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"08111555777"</span>
+        <span class="o">}</span>,
+        <span class="s2">"phone"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"02199990000"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
 <table><thead>
@@ -1088,34 +1310,59 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <blockquote>
 <p>Get Customer With external_id Example Response:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">[{</span>
-  <span class="s2">"id"</span>: <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
-  <span class="s2">"external_id"</span>: <span class="s2">"r-1234"</span>,
-  <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
-  <span class="s2">"given_name"</span>: <span class="s2">"Ichwano"</span>,
-  <span class="s2">"surname"</span>: <span class="s2">"Sembo"</span>,
-  <span class="s2">"address"</span>: <span class="o">{</span>
-      <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
-      <span class="s2">"province"</span>: <span class="s2">"DKI Jakarta"</span>,
-      <span class="s2">"city"</span>: <span class="s2">"Jakarta Selatan"</span>,
-      <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>
-  <span class="o">}</span>,
-  <span class="s2">"date_of_birth"</span>: <span class="s2">"11-01-1990"</span>,
-  <span class="s2">"identification"</span>: <span class="o">{</span>
-      <span class="s2">"ktp_number"</span>: <span class="s2">"0987654321320987"</span>,
-      <span class="s2">"npwp_number"</span>: <span class="s2">"098765432132098"</span>
-  <span class="o">}</span>,
-  <span class="s2">"account_details"</span>: <span class="o">{</span>
-      <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
-      <span class="s2">"account_number"</span>: <span class="s2">"123456780"</span>,
-      <span class="s2">"account_holder_name"</span>: <span class="s2">"Ichwano"</span>
-  <span class="o">}</span>,
-  <span class="s2">"email"</span>: <span class="s2">"ichwano@email.com"</span>,
-  <span class="s2">"mobile_number"</span>: <span class="s2">"+628111555777"</span>,
-  <span class="s2">"phone_number"</span>: <span class="s2">"+622199990000"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>,
-  <span class="s2">"updated"</span>: <span class="s2">"2018-12-12T13:50:12.000Z"</span>
-<span class="o">}]</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"id"</span>: <span class="s2">"9560ea7c-a505-47a9-8482-c2063ba64ae7"</span>,
+        <span class="s2">"reference_id"</span>: <span class="s2">"x-7986"</span>,
+        <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+        <span class="s2">"given_name"</span>: <span class="s2">"Cika Jerika"</span>,
+        <span class="s2">"surname"</span>: <span class="s2">"Cijer"</span>,
+        <span class="s2">"gender"</span>: <span class="s2">"Female"</span>,
+        <span class="s2">"occupation"</span>: <span class="s2">"OTHER"</span>,
+        <span class="s2">"fax"</span>: <span class="o">{</span>
+            <span class="s2">"number"</span>: <span class="s2">"02199991111"</span>,
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>
+        <span class="o">}</span>,
+        <span class="s2">"address"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+            <span class="s2">"province_id"</span>: <span class="s2">"31"</span>,
+            <span class="s2">"city_id"</span>: <span class="s2">"3171"</span>,
+            <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>,
+            <span class="s2">"line_2"</span>: <span class="s2">"Komplek BNI"</span>,
+            <span class="s2">"postal_code"</span>: <span class="s2">"16320"</span>
+        <span class="o">}</span>,
+        <span class="s2">"date_of_birth"</span>: <span class="s2">"1990-11-01"</span>,
+        <span class="s2">"place_of_birth"</span>: <span class="s2">"Prabumulih"</span>,
+        <span class="s2">"nationality"</span>: <span class="s2">"ID"</span>,
+        <span class="s2">"identifications"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"identification_type"</span>: <span class="s2">"ktp"</span>,
+                <span class="s2">"identification_number"</span>: <span class="s2">"1025456545454545"</span>,
+                <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
+            <span class="o">}</span>,
+            <span class="o">{</span>
+                <span class="s2">"identification_type"</span>: <span class="s2">"npwp"</span>,
+                <span class="s2">"identification_number"</span>: <span class="s2">"254545465425489"</span>,
+                <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
+            <span class="o">}</span>
+        <span class="o">]</span>,
+        <span class="s2">"account_details"</span>: <span class="o">{</span>
+            <span class="s2">"id"</span>: <span class="s2">"9560ea7c-ad42-4ef9-8d71-39a42f24d1c5"</span>,
+            <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
+            <span class="s2">"account_number"</span>: <span class="s2">"123456789"</span>,
+            <span class="s2">"account_holder_name"</span>: <span class="s2">"Cika Jerika"</span>
+        <span class="o">}</span>,
+        <span class="s2">"email"</span>: <span class="s2">"cijer@email.com"</span>,
+        <span class="s2">"mobile"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"08111555777"</span>
+        <span class="o">}</span>,
+        <span class="s2">"phone"</span>: <span class="o">{</span>
+            <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"02199990000"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><h1 id='bank-account-remittance'>Bank Account Remittance</h1>
 <p>Our Bank Account Remittance APIs allow you to send remittances from your Aricos Account on behalf of a sender to your designated recipient. Only IDR-IDR transfers supported currently.</p>
 
@@ -1199,17 +1446,118 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <p>Create Remittance Example Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
-  <span class="s2">"external_id"</span>: <span class="s2">"72655"</span>,
-  <span class="s2">"amount"</span>: 11000,
-  <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
-  <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
-  <span class="s2">"description"</span>: <span class="s2">"uang jajan"</span>,
-  <span class="s2">"sender_customer_id"</span> : <span class="s2">"5c1774e76966b43a5b8198fb"</span>,
-  <span class="s2">"recipient_customer_id"</span>: <span class="s2">"5b51e6ba0071ec521008e21d"</span>,
-  <span class="s2">"status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
-  <span class="s2">"created"</span>: <span class="s2">"2018-12-20T17:00:00.000Z"</span>,
-  <span class="s2">"updated"</span>: <span class="s2">"2018-12-20T17:00:00.000Z"</span>,
-  <span class="s2">"id"</span>: <span class="s2">"5afbf743e28bc2055b3c06ed"</span>
+    <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"id"</span>: <span class="s2">"956685f1-e12b-4085-ba72-5b66ab568eb9"</span>,
+        <span class="s2">"reference_id"</span>: <span class="s2">"1638158760806-54"</span>,
+        <span class="s2">"method"</span>: <span class="s2">"A2A"</span>,
+        <span class="s2">"amount"</span>: 90000,
+        <span class="s2">"purpose_code"</span>: <span class="s2">"FAMILY"</span>,
+        <span class="s2">"source_of_funds"</span>: <span class="s2">"PERSONAL_SAVINGS"</span>,
+        <span class="s2">"description"</span>: <span class="s2">"Transfer ke kampung"</span>,
+        <span class="s2">"transaction_status"</span>: <span class="s2">"PENDING_RISK_ASSESSMENT"</span>,
+        <span class="s2">"sender"</span>: <span class="o">{</span>
+            <span class="s2">"id"</span>: <span class="s2">"9560ea7c-a505-47a9-8482-c2063ba64ae7"</span>,
+            <span class="s2">"reference_id"</span>: <span class="s2">"x-7986"</span>,
+            <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+            <span class="s2">"given_name"</span>: <span class="s2">"Cika Jerika"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"Cijer"</span>,
+            <span class="s2">"gender"</span>: <span class="s2">"Female"</span>,
+            <span class="s2">"occupation"</span>: <span class="s2">"OTHER"</span>,
+            <span class="s2">"fax"</span>: <span class="o">{</span>
+                <span class="s2">"number"</span>: <span class="s2">"02199991111"</span>,
+                <span class="s2">"country_code"</span>: <span class="s2">"62"</span>
+            <span class="o">}</span>,
+            <span class="s2">"address"</span>: <span class="o">{</span>
+                <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+                <span class="s2">"province_id"</span>: <span class="s2">"31"</span>,
+                <span class="s2">"city_id"</span>: <span class="s2">"3171"</span>,
+                <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>,
+                <span class="s2">"line_2"</span>: <span class="s2">"Komplek BNI"</span>,
+                <span class="s2">"postal_code"</span>: <span class="s2">"16320"</span>
+            <span class="o">}</span>,
+            <span class="s2">"date_of_birth"</span>: <span class="s2">"1990-11-01"</span>,
+            <span class="s2">"place_of_birth"</span>: <span class="s2">"Prabumulih"</span>,
+            <span class="s2">"nationality"</span>: <span class="s2">"ID"</span>,
+            <span class="s2">"identifications"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">"identification_type"</span>: <span class="s2">"ktp"</span>,
+                    <span class="s2">"identification_number"</span>: <span class="s2">"1025456545454545"</span>,
+                    <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"identification_type"</span>: <span class="s2">"npwp"</span>,
+                    <span class="s2">"identification_number"</span>: <span class="s2">"254545465425489"</span>,
+                    <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"account_details"</span>: <span class="o">{</span>
+                <span class="s2">"id"</span>: <span class="s2">"9560ea7c-ad42-4ef9-8d71-39a42f24d1c5"</span>,
+                <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
+                <span class="s2">"account_number"</span>: <span class="s2">"123456789"</span>,
+                <span class="s2">"account_holder_name"</span>: <span class="s2">"Cika Jerika"</span>
+            <span class="o">}</span>,
+            <span class="s2">"email"</span>: <span class="s2">"cijer@email.com"</span>,
+            <span class="s2">"mobile"</span>: <span class="o">{</span>
+                <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+                <span class="s2">"number"</span>: <span class="s2">"08111555777"</span>
+            <span class="o">}</span>,
+            <span class="s2">"phone"</span>: <span class="o">{</span>
+                <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+                <span class="s2">"number"</span>: <span class="s2">"02199990000"</span>
+            <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">"recipient"</span>: <span class="o">{</span>
+            <span class="s2">"id"</span>: <span class="s2">"9560e576-28b1-4fe2-9c7c-fb75f5fe40a0"</span>,
+            <span class="s2">"reference_id"</span>: <span class="s2">"x-7984"</span>,
+            <span class="s2">"customer_type"</span>: <span class="s2">"INDIVIDUAL"</span>,
+            <span class="s2">"given_name"</span>: <span class="s2">"Mamang Daya"</span>,
+            <span class="s2">"surname"</span>: <span class="s2">"Mangday"</span>,
+            <span class="s2">"gender"</span>: <span class="s2">"Male"</span>,
+            <span class="s2">"occupation"</span>: <span class="s2">"PILOT"</span>,
+            <span class="s2">"fax"</span>: <span class="o">{</span>
+                <span class="s2">"number"</span>: <span class="s2">"02199991111"</span>,
+                <span class="s2">"country_code"</span>: <span class="s2">"62"</span>
+            <span class="o">}</span>,
+            <span class="s2">"address"</span>: <span class="o">{</span>
+                <span class="s2">"country_code"</span>: <span class="s2">"ID"</span>,
+                <span class="s2">"province_id"</span>: <span class="s2">"31"</span>,
+                <span class="s2">"city_id"</span>: <span class="s2">"3171"</span>,
+                <span class="s2">"line_1"</span>: <span class="s2">"Jl. Senayan 1 No.15"</span>,
+                <span class="s2">"line_2"</span>: <span class="s2">"Komplek BNI"</span>,
+                <span class="s2">"postal_code"</span>: <span class="s2">"16320"</span>
+            <span class="o">}</span>,
+            <span class="s2">"date_of_birth"</span>: <span class="s2">"1990-11-01"</span>,
+            <span class="s2">"place_of_birth"</span>: <span class="s2">"Prabumulih"</span>,
+            <span class="s2">"nationality"</span>: <span class="s2">"ID"</span>,
+            <span class="s2">"identifications"</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">"identification_type"</span>: <span class="s2">"ktp"</span>,
+                    <span class="s2">"identification_number"</span>: <span class="s2">"1025456545454545"</span>,
+                    <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
+                <span class="o">}</span>,
+                <span class="o">{</span>
+                    <span class="s2">"identification_type"</span>: <span class="s2">"npwp"</span>,
+                    <span class="s2">"identification_number"</span>: <span class="s2">"254545465425489"</span>,
+                    <span class="s2">"identification_country"</span>: <span class="s2">"ID"</span>
+                <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"account_details"</span>: <span class="o">{</span>
+                <span class="s2">"id"</span>: <span class="s2">"9560e576-2efa-4e7a-8553-567bfdbaf3e8"</span>,
+                <span class="s2">"account_code"</span>: <span class="s2">"BNI"</span>,
+                <span class="s2">"account_number"</span>: <span class="s2">"00987654321"</span>,
+                <span class="s2">"account_holder_name"</span>: <span class="s2">"Mamang Daya"</span>
+            <span class="o">}</span>,
+            <span class="s2">"email"</span>: <span class="s2">"dewi@email.com"</span>,
+            <span class="s2">"mobile"</span>: <span class="o">{</span>
+                <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+                <span class="s2">"number"</span>: <span class="s2">"08111555777"</span>
+            <span class="o">}</span>,
+            <span class="s2">"phone"</span>: <span class="o">{</span>
+                <span class="s2">"country_code"</span>: <span class="s2">"62"</span>,
+                <span class="s2">"number"</span>: <span class="s2">"02199990000"</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
 <p>We return a response with additional fields described below if there were no initial errors with the remittance creation (request formatted incorrectly, invalid purpose code, insufficient funds, etc). The status of the remittance will be initially marked as <code>PENDING_RISK_ASSESSMENT</code>.</p>
@@ -1323,9 +1671,860 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <td><code>string</code> Unique ID you provided in the Create Remittance request</br> <span style="color:grey"><small>The external_id must match the external_id used at remittance creation precisely</small></span></td>
 </tr>
 </tbody></table>
+<h1 id='data-references'>Data References</h1>
+<p>Below are some list of data references that you require to use our API&#39;s.</p>
+<h2 id='remittance-statuses'>Remittance Statuses</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PENDING_RISK_ASSESSMENT</td>
+<td>Request is being processed and assessed in the risk scoring system.</td>
+</tr>
+<tr>
+<td>COMPLIANCE_VERIFICATION</td>
+<td>Request is considered medium or high risk, and is being reviewed by our compliance team. Our team will contact you via email for extra information for enhanced due diligence.</td>
+</tr>
+<tr>
+<td>COMPLIANCE_REJECTED</td>
+<td>Request is rejected by compliance.</td>
+</tr>
+<tr>
+<td>PROCESSING</td>
+<td>Request has been approved and the remittance is queued to be transferred to the recipient.</td>
+</tr>
+<tr>
+<td>COMPLETED</td>
+<td>The sending bank has confirmed transmission of the remittance.</td>
+</tr>
+<tr>
+<td>FAILED</td>
+<td>Remittance could not be transferred to the recipient due to certain errors. See <a href="#remittance-failure-codes">Remittances Failure Codes</a>.</td>
+</tr>
+</tbody></table>
+<h2 id='remittance-failure-codes'>Remittance Failure Codes</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>INSUFFICIENT_BALANCE</td>
+<td>The balance in your account is insufficient to make the remittance in the desired amount.</td>
+</tr>
+<tr>
+<td>UNKNOWN_BANK_NETWORK_ERROR</td>
+<td>The bank networks have returned an unknown error to us. We are unable to predict whether the remittance will succeed should you retry the same remittance request.</td>
+</tr>
+<tr>
+<td>TEMPORARY_BANK_NETWORK_ERROR</td>
+<td>The bank networks are experiencing a temporary error. Please retry the remittance in 1-3 hours.</td>
+</tr>
+<tr>
+<td>TEMPORARY_TRANSFER_ERROR</td>
+<td>We’ve encountered a temporary issue while processing this remittance. Please retry the remittance in 1-2 hours.</td>
+</tr>
+<tr>
+<td>SWITCHING_NETWORK_ERROR</td>
+<td>At least one of the switching networks is encountering an issue. Please retry the remittance in 1-3 hours.</td>
+</tr>
+<tr>
+<td>INVALID_DESTINATION</td>
+<td>The banks have reported that the destination account is unregistered or blocked. If unsure about this, please retry again or contact the destination bank directly regarding the status of the destination account.</td>
+</tr>
+<tr>
+<td>TRANSFER_ERROR</td>
+<td>We’ve encountered a fatal error while processing this remittance. Certain API fields in your request may be invalid. Please contact our customer support team for more information.</td>
+</tr>
+</tbody></table>
+<h2 id='account-codes'>Account Codes</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ACEH</td>
+<td>BPD Aceh</td>
+</tr>
+<tr>
+<td>ACEH_UUS</td>
+<td>BPD Aceh UUS</td>
+</tr>
+<tr>
+<td>AGRIS</td>
+<td>Bank Agris</td>
+</tr>
+<tr>
+<td>AGRONIAGA</td>
+<td>Bank BRI Agroniaga</td>
+</tr>
+<tr>
+<td>AMAR</td>
+<td>Bank Amar Indonesia (formerly Anglomas International Bank)</td>
+</tr>
+<tr>
+<td>ANZ</td>
+<td>Bank ANZ Indonesia</td>
+</tr>
+<tr>
+<td>ARTA_NIAGA_KENCANA</td>
+<td>Bank Arta Niaga Kencana</td>
+</tr>
+<tr>
+<td>ARTHA</td>
+<td>Bank Artha Graha International</td>
+</tr>
+<tr>
+<td>ARTOS</td>
+<td>Bank Artos Indonesia</td>
+</tr>
+<tr>
+<td>BALI</td>
+<td>BPD Bali</td>
+</tr>
+<tr>
+<td>BAML</td>
+<td>Bank of America Merill-Lynch</td>
+</tr>
+<tr>
+<td>BANGKOK</td>
+<td>Bangkok Bank</td>
+</tr>
+<tr>
+<td>BANTEN</td>
+<td>BPD Banten (formerly Bank Pundi Indonesia)</td>
+</tr>
+<tr>
+<td>BCA</td>
+<td>Bank Central Asia (BCA)</td>
+</tr>
+<tr>
+<td>BCA_DIGITAL</td>
+<td>Bank Central Asia Digital (BluBCA)</td>
+</tr>
+<tr>
+<td>BCA_SYR</td>
+<td>Bank Central Asia (BCA) Syariah</td>
+</tr>
+<tr>
+<td>BENGKULU</td>
+<td>BPD Bengkulu</td>
+</tr>
+<tr>
+<td>BISNIS_INTERNASIONAL</td>
+<td>Bank Bisnis Internasional</td>
+</tr>
+<tr>
+<td>BJB</td>
+<td>Bank BJB</td>
+</tr>
+<tr>
+<td>BJB_SYR</td>
+<td>Bank BJB Syariah</td>
+</tr>
+<tr>
+<td>BNI</td>
+<td>Bank Negara Indonesia (BNI)</td>
+</tr>
+<tr>
+<td>BNI_SYR</td>
+<td>Bank BNI Syariah</td>
+</tr>
+<tr>
+<td>BNP_PARIBAS</td>
+<td>Bank BNP Paribas</td>
+</tr>
+<tr>
+<td>BOC</td>
+<td>Bank of China (BOC)</td>
+</tr>
+<tr>
+<td>BRI</td>
+<td>Bank Rakyat Indonesia (BRI)</td>
+</tr>
+<tr>
+<td>BRI_SYR</td>
+<td>Bank Syariah BRI</td>
+</tr>
+<tr>
+<td>BSI</td>
+<td>Bank Syariah Indonesia (BSI)</td>
+</tr>
+<tr>
+<td>BTN</td>
+<td>Bank Tabungan Negara (BTN)</td>
+</tr>
+<tr>
+<td>BTN_UUS</td>
+<td>Bank Tabungan Negara (BTN) UUS</td>
+</tr>
+<tr>
+<td>BTPN_SYARIAH</td>
+<td>BTPN Syariah (formerly Bank Sahabat Purba Danarta and Bank Tabungan Pensiunan Nasional UUS)</td>
+</tr>
+<tr>
+<td>BUKOPIN</td>
+<td>Bank Bukopin</td>
+</tr>
+<tr>
+<td>BUKOPIN_SYR</td>
+<td>Bank Syariah Bukopin</td>
+</tr>
+<tr>
+<td>BUMI_ARTA</td>
+<td>Bank Bumi Arta</td>
+</tr>
+<tr>
+<td>CAPITAL</td>
+<td>Bank Capital Indonesia</td>
+</tr>
+<tr>
+<td>CCB</td>
+<td>China Construction Bank Indonesia (formerly Bank Antar Daerah and Bank Windu Kentjana Int)</td>
+</tr>
+<tr>
+<td>CENTRATAMA</td>
+<td>Centratama Nasional Bank</td>
+</tr>
+<tr>
+<td>CHINATRUST</td>
+<td>Bank Chinatrust Indonesia</td>
+</tr>
+<tr>
+<td>CIMB</td>
+<td>Bank CIMB Niaga</td>
+</tr>
+<tr>
+<td>CIMB_UUS</td>
+<td>Bank CIMB Niaga UUS</td>
+</tr>
+<tr>
+<td>CITIBANK</td>
+<td>Citibank</td>
+</tr>
+<tr>
+<td>COMMONWEALTH</td>
+<td>Bank Commonwealth</td>
+</tr>
+<tr>
+<td>DAERAH_ISTIMEWA</td>
+<td>BPD Daerah Istimewa Yogyakarta (DIY)</td>
+</tr>
+<tr>
+<td>DAERAH_ISTIMEWA_UUS</td>
+<td>BPD Daerah Istimewa Yogyakarta (DIY) UUS</td>
+</tr>
+<tr>
+<td>DANAMON</td>
+<td>Bank Danamon</td>
+</tr>
+<tr>
+<td>DANAMON_UUS</td>
+<td>Bank Danamon UUS</td>
+</tr>
+<tr>
+<td>DBS</td>
+<td>Bank DBS Indonesia</td>
+</tr>
+<tr>
+<td>DEUTSCHE</td>
+<td>Deutsche Bank</td>
+</tr>
+<tr>
+<td>DINAR_INDONESIA</td>
+<td>Bank Dinar Indonesia</td>
+</tr>
+<tr>
+<td>DKI</td>
+<td>Bank DKI</td>
+</tr>
+<tr>
+<td>DKI_UUS</td>
+<td>Bank DKI UUS</td>
+</tr>
+<tr>
+<td>EXIMBANK</td>
+<td>Indonesia Eximbank (formerly Bank Ekspor Indonesia)</td>
+</tr>
+<tr>
+<td>FAMA</td>
+<td>Bank Fama International</td>
+</tr>
+<tr>
+<td>GANESHA</td>
+<td>Bank Ganesha</td>
+</tr>
+<tr>
+<td>GOPAY</td>
+<td>GoPay</td>
+</tr>
+<tr>
+<td>HANA</td>
+<td>Bank Hana</td>
+</tr>
+<tr>
+<td>HARDA_INTERNASIONAL</td>
+<td>Bank Harda Internasional</td>
+</tr>
+<tr>
+<td>HSBC</td>
+<td>Hongkong and Shanghai Bank Corporation (HSBC) (formerly Bank Ekonomi Raharja)</td>
+</tr>
+<tr>
+<td>ICBC</td>
+<td>Bank ICBC Indonesia</td>
+</tr>
+<tr>
+<td>INA_PERDANA</td>
+<td>Bank Ina Perdania</td>
+</tr>
+<tr>
+<td>INDEX_SELINDO</td>
+<td>Bank Index Selindo</td>
+</tr>
+<tr>
+<td>INDIA</td>
+<td>Bank of India Indonesia</td>
+</tr>
+<tr>
+<td>JAMBI</td>
+<td>BPD Jambi</td>
+</tr>
+<tr>
+<td>JAMBI_UUS</td>
+<td>BPD Jambi UUS</td>
+</tr>
+<tr>
+<td>JASA_JAKARTA</td>
+<td>Bank Jasa Jakarta</td>
+</tr>
+<tr>
+<td>JAWA_TENGAH</td>
+<td>BPD Jawa Tengah</td>
+</tr>
+<tr>
+<td>JAWA_TENGAH_UUS</td>
+<td>BPD Jawa Tengah UUS</td>
+</tr>
+<tr>
+<td>JAWA_TIMUR</td>
+<td>BPD Jawa Timur</td>
+</tr>
+<tr>
+<td>JAWA_TIMUR_UUS</td>
+<td>BPD Jawa Timur UUS</td>
+</tr>
+<tr>
+<td>JPMORGAN</td>
+<td>JP Morgan Chase Bank</td>
+</tr>
+<tr>
+<td>JTRUST</td>
+<td>Bank JTrust Indonesia (formerly Bank Mutiara)</td>
+</tr>
+<tr>
+<td>KALIMANTAN_BARAT</td>
+<td>BPD Kalimantan Barat</td>
+</tr>
+<tr>
+<td>KALIMANTAN_BARAT_UUS</td>
+<td>BPD Kalimantan Barat UUS</td>
+</tr>
+<tr>
+<td>KALIMANTAN_SELATAN</td>
+<td>BPD Kalimantan Selatan</td>
+</tr>
+<tr>
+<td>KALIMANTAN_SELATAN_UUS</td>
+<td>BPD Kalimantan Selatan UUS</td>
+</tr>
+<tr>
+<td>KALIMANTAN_TENGAH</td>
+<td>BPD Kalimantan Tengah</td>
+</tr>
+<tr>
+<td>KALIMANTAN_TIMUR</td>
+<td>BPD Kalimantan Timur</td>
+</tr>
+<tr>
+<td>KALIMANTAN_TIMUR_UUS</td>
+<td>BPD Kalimantan Timur UUS</td>
+</tr>
+<tr>
+<td>KESEJAHTERAAN_EKONOMI</td>
+<td>Bank Kesejahteraan Ekonomi</td>
+</tr>
+<tr>
+<td>LAMPUNG</td>
+<td>BPD Lampung</td>
+</tr>
+<tr>
+<td>MALUKU</td>
+<td>BPD Maluku</td>
+</tr>
+<tr>
+<td>MANDIRI</td>
+<td>Bank Mandiri</td>
+</tr>
+<tr>
+<td>MANDIRI_ECASH</td>
+<td>Mandiri E-Cash</td>
+</tr>
+<tr>
+<td>MANDIRI_SYR Bank</td>
+<td>Syariah Mandiri</td>
+</tr>
+<tr>
+<td>MANDIRI_TASPEN</td>
+<td>Mandiri Taspen Pos (formerly Bank Sinar Harapan Bali)</td>
+</tr>
+<tr>
+<td>MASPION</td>
+<td>Bank Maspion Indonesia</td>
+</tr>
+<tr>
+<td>MAYAPADA</td>
+<td>Bank Mayapada International</td>
+</tr>
+<tr>
+<td>MAYBANK</td>
+<td>Bank Maybank (formerly BII)</td>
+</tr>
+<tr>
+<td>MAYBANK_SYR</td>
+<td>Bank Maybank Syariah Indonesia</td>
+</tr>
+<tr>
+<td>MAYORA</td>
+<td>Bank Mayora</td>
+</tr>
+<tr>
+<td>MEGA</td>
+<td>Bank Mega</td>
+</tr>
+<tr>
+<td>MEGA_SYR</td>
+<td>Bank Syariah Mega</td>
+</tr>
+<tr>
+<td>MESTIKA_DHARMA</td>
+<td>Bank Mestika Dharma</td>
+</tr>
+<tr>
+<td>MITRA_NIAGA</td>
+<td>Bank Mitra Niaga</td>
+</tr>
+<tr>
+<td>MITSUI</td>
+<td>Bank Sumitomo Mitsui Indonesia</td>
+</tr>
+<tr>
+<td>MIZUHO</td>
+<td>Bank Mizuho Indonesia</td>
+</tr>
+<tr>
+<td>MNC_INTERNASIONAL</td>
+<td>Bank MNC Internasional</td>
+</tr>
+<tr>
+<td>MUAMALAT</td>
+<td>Bank Muamalat Indonesia</td>
+</tr>
+<tr>
+<td>MULTI_ARTA_SENTOSA</td>
+<td>Bank Multi Arta Sentosa</td>
+</tr>
+<tr>
+<td>NATIONALNOBU</td>
+<td>Bank Nationalnobu</td>
+</tr>
+<tr>
+<td>NUSA_TENGGARA_BARAT BPD</td>
+<td>Nusa Tenggara Barat</td>
+</tr>
+<tr>
+<td>NUSA_TENGGARA_BARAT_UUS</td>
+<td>BPD Nusa Tenggara Barat UUS</td>
+</tr>
+<tr>
+<td>NUSA_TENGGARA_TIMUR BPD</td>
+<td>Nusa Tenggara Timur</td>
+</tr>
+<tr>
+<td>NUSANTARA_PARAHYANGAN</td>
+<td>Bank Nusantara Parahyangan</td>
+</tr>
+<tr>
+<td>OCBC</td>
+<td>Bank OCBC NISP</td>
+</tr>
+<tr>
+<td>OCBC_UUS</td>
+<td>Bank OCBC NISP UUS</td>
+</tr>
+<tr>
+<td>OKE</td>
+<td>Bank Oke Indonesia (formerly Bank Andara)</td>
+</tr>
+<tr>
+<td>OVO</td>
+<td>OVO</td>
+</tr>
+<tr>
+<td>PANIN</td>
+<td>Bank Panin</td>
+</tr>
+<tr>
+<td>PANIN_SYR</td>
+<td>Bank Panin Syariah</td>
+</tr>
+<tr>
+<td>PAPUA</td>
+<td>BPD Papua</td>
+</tr>
+<tr>
+<td>PERMATA</td>
+<td>Bank Permata</td>
+</tr>
+<tr>
+<td>PERMATA_UUS</td>
+<td>Bank Permata UUS</td>
+</tr>
+<tr>
+<td>PRIMA_MASTER</td>
+<td>Prima Master Bank</td>
+</tr>
+<tr>
+<td>QNB_INDONESIA</td>
+<td>Bank QNB Indonesia (formerly Bank QNB Kesawan)</td>
+</tr>
+<tr>
+<td>RABOBANK</td>
+<td>Bank Rabobank International Indonesia</td>
+</tr>
+<tr>
+<td>RBS</td>
+<td>Royal Bank of Scotland (RBS)</td>
+</tr>
+<tr>
+<td>RESONA</td>
+<td>Bank Resona Perdania</td>
+</tr>
+<tr>
+<td>RIAU_DAN_KEPRI</td>
+<td>BPD Riau Dan Kepri</td>
+</tr>
+<tr>
+<td>RIAU_DAN_KEPRI_UUS</td>
+<td>BPD Riau Dan Kepri UUS</td>
+</tr>
+<tr>
+<td>ROYAL</td>
+<td>Bank Royal Indonesia</td>
+</tr>
+<tr>
+<td>SAHABAT_SAMPOERNA</td>
+<td>Bank Sahabat Sampoerna</td>
+</tr>
+<tr>
+<td>SBI_INDONESIA</td>
+<td>Bank SBI Indonesia</td>
+</tr>
+<tr>
+<td>SHINHAN</td>
+<td>Bank Shinhan Indonesia (formerly Bank Metro Express)</td>
+</tr>
+<tr>
+<td>SINARMAS</td>
+<td>Sinarmas</td>
+</tr>
+<tr>
+<td>SINARMAS_UUS</td>
+<td>Bank Sinarmas UUS</td>
+</tr>
+<tr>
+<td>STANDARD_CHARTERED</td>
+<td>Standard Chartered Bank</td>
+</tr>
+<tr>
+<td>SULAWESI</td>
+<td>BPD Sulawesi Tengah</td>
+</tr>
+<tr>
+<td>SULAWESI_TENGGARA</td>
+<td>BPD Sulawesi Tenggara</td>
+</tr>
+<tr>
+<td>SULSELBAR</td>
+<td>BPD Sulselbar</td>
+</tr>
+<tr>
+<td>SULSELBAR_UUS</td>
+<td>BPD Sulselbar UUS</td>
+</tr>
+<tr>
+<td>SULUT</td>
+<td>BPD Sulut</td>
+</tr>
+<tr>
+<td>SUMATERA_BARAT</td>
+<td>BPD Sumatera Barat</td>
+</tr>
+<tr>
+<td>SUMATERA_BARAT_UUS</td>
+<td>BPD Sumatera Barat UUS</td>
+</tr>
+<tr>
+<td>SUMSEL_DAN_BABEL</td>
+<td>BPD Sumsel Dan Babel</td>
+</tr>
+<tr>
+<td>SUMSEL_DAN_BABEL_UUS</td>
+<td>BPD Sumsel Dan Babel UUS</td>
+</tr>
+<tr>
+<td>SUMUT</td>
+<td>BPD Sumut</td>
+</tr>
+<tr>
+<td>SUMUT_UUS</td>
+<td>BPD Sumut UUS</td>
+</tr>
+<tr>
+<td>TABUNGAN_PENSIUNAN_NASIONAL</td>
+<td>Bank Tabungan Pensiunan Nasional</td>
+</tr>
+<tr>
+<td>TOKYO</td>
+<td>Bank of Tokyo Mitsubishi UFJ</td>
+</tr>
+<tr>
+<td>UOB</td>
+<td>Bank UOB Indonesia</td>
+</tr>
+<tr>
+<td>VICTORIA_INTERNASIONAL</td>
+<td>Bank Victoria Internasional</td>
+</tr>
+<tr>
+<td>VICTORIA_SYR</td>
+<td>Bank Victoria Syariah</td>
+</tr>
+<tr>
+<td>WOORI</td>
+<td>Bank Woori Saudara Indonesia (formerly Bank Himpunan Saudara and Bank Woori Indonesia)</td>
+</tr>
+<tr>
+<td>YUDHA_BHAKTI</td>
+<td>Bank Yudha Bhakti</td>
+</tr>
+</tbody></table>
+<h2 id='purpose-codes'>Purpose Codes</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SELF</td>
+<td>Transfer to own account</td>
+</tr>
+<tr>
+<td>FAMILY</td>
+<td>Family Maintenance</td>
+</tr>
+<tr>
+<td>EDUCATION</td>
+<td>Education-related student expenses</td>
+</tr>
+<tr>
+<td>MEDICAL</td>
+<td>Medical Treatment</td>
+</tr>
+<tr>
+<td>HOTEL</td>
+<td>Hotel Accomodation</td>
+</tr>
+<tr>
+<td>TRAVEL</td>
+<td>Travel</td>
+</tr>
+<tr>
+<td>UTILITIES</td>
+<td>Utility Bills</td>
+</tr>
+<tr>
+<td>LOAN_REPAYMENT</td>
+<td>Repayment of Loans</td>
+</tr>
+<tr>
+<td>TAX_PAYMENT</td>
+<td>Tax Payment</td>
+</tr>
+<tr>
+<td>RESIDENCE_PURCHASE</td>
+<td>Purchase of Residential Property</td>
+</tr>
+<tr>
+<td>RESIDENCE_RENT</td>
+<td>Payment of Property Rental</td>
+</tr>
+<tr>
+<td>INSURANCE</td>
+<td>Insurance</td>
+</tr>
+<tr>
+<td>MUTUAL_FUND</td>
+<td>Mutual Fund Investment</td>
+</tr>
+<tr>
+<td>SHARES_INVESTMENT</td>
+<td>Investment in Shares</td>
+</tr>
+<tr>
+<td>DONATIONS</td>
+<td>Donations</td>
+</tr>
+<tr>
+<td>ADVERTISING</td>
+<td>Advertising &amp; Public relations-related expenses</td>
+</tr>
+<tr>
+<td>ROYALTY_FEES</td>
+<td>Royalty fees, trademark fees, patent fees, and copyright fees</td>
+</tr>
+<tr>
+<td>BROKER_FEES</td>
+<td>Fees for brokers, front end fee, commitment fee, guarantee fee and custodian fee</td>
+</tr>
+<tr>
+<td>ADVISORS</td>
+<td>Fees for advisors, technical assistance, and academic purpose, including remuneration for specialists</td>
+</tr>
+<tr>
+<td>OFFICE</td>
+<td>Representative office expenses</td>
+</tr>
+<tr>
+<td>CONSTRUCTION</td>
+<td>Construction costs / expenses</td>
+</tr>
+<tr>
+<td>SHIPMENT</td>
+<td>Transportation fees for goods</td>
+</tr>
+<tr>
+<td>EXPORT</td>
+<td>For payment of exported goods</td>
+</tr>
+<tr>
+<td>DELIVERY</td>
+<td>Delivery fees for goods</td>
+</tr>
+<tr>
+<td>TRADES</td>
+<td>General Goods Trades - Offline trade</td>
+</tr>
+<tr>
+<td>SALARY</td>
+<td>Salary</td>
+</tr>
+<tr>
+<td>REFUND</td>
+<td>Refund</td>
+</tr>
+<tr>
+<td>LOAN</td>
+<td>Loan</td>
+</tr>
+</tbody></table>
+<h2 id='source-of-funds'>Source of Funds</h2>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>INVESTMENT</td>
+<td>Bonds, fixed deposits, preference shares, business ownership/equity or property ownership</td>
+</tr>
+<tr>
+<td>PERSONAL_SAVINGS</td>
+<td>Funds kept in an account in a bank or a similar organization</td>
+</tr>
+<tr>
+<td>BUSINESS_REVENUE</td>
+<td>Income from a business or a company</td>
+</tr>
+<tr>
+<td>LEGACY</td>
+<td>Inherited money from a will</td>
+</tr>
+<tr>
+<td>BUSINESS_ARRANGEMENT</td>
+<td>Any understanding, procedure, course of dealing, or arrangement between a creditor and a seller</td>
+</tr>
+<tr>
+<td>LOAN</td>
+<td>A sum of money that is borrowed</td>
+</tr>
+<tr>
+<td>SALARY</td>
+<td>A fixed regular payment made by an employer</td>
+</tr>
+<tr>
+<td>OTHER</td>
+<td>Other</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<p>Below are some of most common errors across all our endpoints. Specific errors are located under each endpoint. If you have any questions please contact us.</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad request, e.g. validation error</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorised access, e.g. the wrong user or password</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden access, e.g. account does not have permission for this endpoint</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Page or data not found</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Unhandled error - contact us when this happens. If this was a response to a request to send money, please check the status of the resource before retrying to ensure that the request will not be processed twice.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
       </div>
     </div>
   </body>
