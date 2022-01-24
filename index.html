@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta
             name="description"
-            content="Documentation for the Aricos Bank Accout Remittance API"
+            content="Documentation for the Aricos Cash Pickup Accout Remittance API"
         >
     <title>API Reference</title>
 
@@ -437,11 +437,11 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all banks in Indonesia quickly and securely.</p>
+<p>Aricos is middleware that is make transfer transaction easy, fast, secure, reliable and accessible from all around the World. We provide simple APIs which you can use to send money to all Post Office (Kantor POS) in Indonesia quickly and securely.</p>
 
 <p>Aricos is organized around REST. We use built-in HTTP features and HTTP verbs and we return all responses in JSON.</p>
 <h2 id='cash-pickup-remittance-overview'>Cash Pickup Remittance Overview</h2>
-<p>Use the Remittance API to transfer funds instantly to any bank in Indonesia at any time, including holidays and weekends. Due to restrictions from the banks, we’re unable to disburse when the bank channel are offline or when they fail.</p>
+<p>Use the Remittance API to transfer funds instantly to Post Office (Kantor POS) in Indonesia at any time, including holidays and weekends. Due to restrictions from the agent, we’re unable to disburse when the agent channel are offline or when they fail.</p>
 
 <p>The remittance flow is as follows:</p>
 
@@ -463,7 +463,7 @@
 
 <p>You can access our development end-point url to <span style="color:blue"> https://dev.aricos.co.id </span> and production end-point url to <span style="color:blue"> https://aricos.co.id </span>.</p>
 <h2 id='start-testing'>Start Testing!</h2>
-<p>You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the banking networks and will not cost you anything.</p>
+<p>You may test our APIs by sending requests in the development environment--You will automatically get IDR balances in your development account balance for testing. Requests made in the development environment will not hit the agent networks and will not cost you anything.</p>
 <h2 id='postman-collection'>Postman Collection</h2>
 <p>The easiest way to get started using our API is to use our Postman Collection. Postman is a free client application that enables you to make calls to APIs easily. To make integrating with our APIs easier, we&#39;ve created a Postman Collection of our endpoints so that you can test our APIs more easily.</p>
 
@@ -471,7 +471,7 @@
 
 <ol>
 <li><p>Install <a href="https://www.getpostman.com/">Postman</a>.</p></li>
-<li><p>Download our <a href="https://github.com/juniusvariant/aricos-bankaccount-remittance/raw/main/source/images/logo.png" download> Postman collection</a>.</p></li>
+<li><p>Download our <a href="https://s.id/-TceK" download> Postman collection</a>.</p></li>
 <li><p>Open Postman and Import the Aricos API Postman Collection.</p></li>
 <li><p>Set up the collection’s Authorization header.</p>
 
@@ -497,14 +497,14 @@
 <p>All information about your account and password will be provide by our support team by email. So if you&#39;re not getting any information about your account for development testing or for go live, please let us know.</p>
 <h2 id='account-login'>Account Login</h2><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 
-POST https://dev-bankaccount.aricos.co.id/oauth/token
+POST https://dev-cashpickup.aricos.co.id/oauth/token
 </code></pre></div>
 <p>You have to login to get token access before you do a request to our APIs. You have to keep every token from our request response every time you want to access another request.</p>
 <h3 id='login-request'>Login Request</h3>
 <blockquote>
 <p>Login Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/oauth/token'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-cashpickup.aricos.co.id/oauth/token'</span> <span class="se">\</span>
 
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
 
@@ -595,7 +595,7 @@ POST https://dev-bankaccount.aricos.co.id/oauth/token
 <blockquote>
 <p>Get Balance Example Request: </br></p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev-bankaccount.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev-cashpickup.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
 
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
 
@@ -621,7 +621,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
         <span class="s2">"on_hold_balance"</span>: 870000
     <span class="o">}]</span>,
     <span class="s2">"links"</span>: <span class="o">{</span>
-        <span class="s2">"first"</span>: <span class="s2">"https://dev-bankaccount.aricos.co.id/api/user-balances?page=1"</span>,
+        <span class="s2">"first"</span>: <span class="s2">"https://dev-cashpickup.aricos.co.id/api/user-balances?page=1"</span>,
         <span class="s2">"last"</span>: null,
         <span class="s2">"prev"</span>: null,
         <span class="s2">"next"</span>: null
@@ -629,7 +629,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
     <span class="s2">"meta"</span>: <span class="o">{</span>
         <span class="s2">"current_page"</span>: 1,
         <span class="s2">"from"</span>: 1,
-        <span class="s2">"path"</span>: <span class="s2">"https://dev-bankaccount.aricos.co.id/api/user-balances"</span>,
+        <span class="s2">"path"</span>: <span class="s2">"https://dev-cashpickup.aricos.co.id/api/user-balances"</span>,
         <span class="s2">"per_page"</span>: 15,
         <span class="s2">"to"</span>: 1
     <span class="o">}</span>
@@ -673,7 +673,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <blockquote>
 <p>Create Customer Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-cashpickup.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
@@ -838,7 +838,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>account_details.account_code </br><small><span style="color:grey"><em>optional</em> </span></small></td>
-<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#account-codes">Account Codes</a></td>
+<td><code>string</code> The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See <a href="#agent-codes">Agent Codes</a></td>
 </tr>
 <tr>
 <td>account_details.account_number </br><small><span style="color:grey"><em>optional</em> </span></small></td>
@@ -978,7 +978,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <blockquote>
 <p>Update Customer Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'https://dev-bankaccount.aricos.co.id/api/customers/c-01256'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'https://dev-cashpickup.aricos.co.id/api/customers/c-01256'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5MzFmODI3Ni1mOTBmLTQ0N2ItYjY0ZS1hMjI3MzQxOGVkMzIiLCJqdGkiOiIwYmE2NDcwMTNjYjE2ZTRmYjNhN2RjMGNkYTEyYjk0ZjkwZjExZmE0OWJjN2NjMDdlMmU4MjhlYzQ1MDkxYmM0NDljYjM0ZmQ0ZjVmNWIzNiIsImlhdCI6MTY0MjczOTQxMi44MzE3MjksIm5iZiI6MTY0MjczOTQxMi44MzE3MzYsImV4cCI6MTY3NDI3NTQxMi44MjI3NTQsInN1YiI6IjVhOWEyOGM2ZDRlOGMxMmFkMCIsInNjb3BlcyI6W119.X9hh_rPgAnlreqXZ-CuG-cIub0ihQc1EBNFBluCpcZcAaWJ8WXLrcl1U22etX2TUrBH5ulc7gL8XVaIV-yWSxoK98AbejjcXLzLnrLWvfphAgPmi3nYg96nIagBroVB1HVNByM8LQ8_TA0a7rp8dYqbOQ4zvUpCEPc6SVQo3kcfnxVoNiGuwTrL754kUaAcYhsqyP17m8aO8yDkVbOQzF9dMZDwMRUU_LMMufYJcTMydIIqQBGfzZOyKPTy0AivTe0icT9QmBM_YY-DgZ6sdVKosT3EsTah8Jo9FXKUPxTlDw3Fzwd8WXg6CBDPyz78F9A-n329CLosa16sILlaenBuwwAE-ObLqTVGcfYdATlWDUDDFdtKIdk4Ip2r-LxdLWfix-qF9W2_qrVmqQqIMQz7govDWSaH5pW_nu-v20deAoY5j2HDrQuPtFnd9iUm1UhmHVNOfDTInDw2EqEJ23E_S0A5CY_mgxbiu4leskFsCVVdcqWTA8aRPlUn22tILpk-SQs-NRuwDzX1Z06nuLrCnfFGGXqeLJC2LSFOf82FTHXoUyNMEkKe_uMO3vvavVw-BHoUgMoLyf5ljR4aev69OkJsmSwBXG36o7Ulu8HT514y2gsn0jJW2HSPfLEgwl0Q6e4yM6AFEIR7o_1AMdI-qf2qCg0bQlQCHEfX6RfY'</span> <span class="se">\</span>
@@ -1366,7 +1366,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <aside class="notice">
    Please note that you are unable to cancel a remittance request once it has been made.
 </aside>
-<h2 id='create-remittance'>Create Remittance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev-bankaccount.aricos.co.id/api/customers
+<h2 id='create-remittance'>Create Remittance</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev-cashpickup.aricos.co.id/api/customers
 </code></pre></div>
 <p>Sends a new remittance from your Aricos Account to a recipient. You’ll need to have created a customer representing the sender and a customer representing the recipient first.</p>
 
@@ -1375,7 +1375,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <blockquote>
 <p>Create Remittance Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-bankaccount.aricos.co.id/api/customers'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-cashpickup.aricos.co.id/api/customers'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJjNWMxNzVjMDAwOTE3ZjM3NmFlODQxN2YyNzExNzM0YzEyZTExYmIxOGNkNzBlYTMzZjRiMzM5MThmODQ5ZGIwMWMyNTA4ODI0NWEzN2M1NyIsImlhdCI6MTY0MjczMzE2Mi4yMTg2NTksIm5iZiI6MTY0MjczMzE2Mi4yMTg2NjcsImV4cCI6MTY3NDI2OTE2Mi4xOTA4NzUsInN1YiI6ImFlMzYwZjk2LWNkMjYtNGVlYy1hNzFlLTk1MTZkN2YzZjUwYSIsInNjb3BlcyI6W119.SSWzHI2hOKtWDzzwUCTqrZzs7uXK132BXmw5h_yDkIpAKQa91TdxdMTU-VhWMunmsQ8aAHRB2tlj-lyQk5P1XYXqeXCpajKgLHIL-P-r7PkXdHQmg8l8qamy_Vrz26zCtuSgD7YhqaTax7IxEXQL4mR9ixZnJ2wvUWz-lDIV0AbxxB5uQqspYcq-8kRjgMEr_wJvPcNW7gg9cPpznHIMcKP5XKpjjzvkn0LxKDkVB5mnAESpknchTdaMIeqFRQ_u3-kLuIm3Qp7Ri-4iiDY4I0N0MqGH93i-W-bOeF_MVI-CIa0AwLuBac-7gnsCVoxfi5QwJrs-pf1VbwsTTw6RSyxnFhp_DDiwC2pZFkoeyIu5hqPgq-u40wWsdHhCmXrurZJVntRDeMER_aC6nIo5WrMxSb_taqYLrzxuQ_ytht8N9ftkcIGt12xpp10jMcNzpECs5Of1Oc8cz5GudgkwOCpX98btstkVYjG-nu_QU0FI_Fxpv-XGGBJ6sbR9ZY96FRBLmjMfUEX7HPQ-HDo44TonabBvv0UhiEbTTYYman0F9PHWRctuc5Xi31m8fnWpOlRcr5dHKmOqxa2YTZgSzhMsZw2gAOXhmH49ef4TNm3ly2bbMHZqDcx6GwTa-rdIK2TZ4uXU9MwZ6fWliu3O5oKOYu2dcLQLBZyeN_BOPak'</span> <span class="se">\</span>
@@ -1411,7 +1411,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>description </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>string</code> Description to send with the remittance. The recipient may see this e.g., in their bank statement (if supported) or in email receipts we send on your behalf.</br></br> <span style="color:grey"><code>Maximum length</code> <small>512 characters</small></br></br></span> <small></span></td>
+<td><code>string</code> Description to send with the remittance. The recipient may see this e.g., in their statement (if supported) or in email receipts we send on your behalf.</br></br> <span style="color:grey"><code>Maximum length</code> <small>512 characters</small></br></br></span> <small></span></td>
 </tr>
 <tr>
 <td>sender_customer_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
@@ -1431,7 +1431,7 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>agent_id </br><small><span style="color:grey"><em>required</em> </span></small></td>
-<td><code>string</code> The destination Agent ID of your remittance. Refer to our list of <a href="#bank-lists">Agent Lists</a></br></br> <span style="color:grey">agent id value <code>0620b618-b2ab-46cf-ab23-679a78945b5e</code> <small>please use the refer agent id for your cash pickup remittance</small></br></br></span> <small></span></td>
+<td><code>string</code> The destination Agent ID of your remittance. Refer to our list of <a href="#agent-lists">Agent Lists</a></br></br> <span style="color:grey">agent id value <code>0620b618-b2ab-46cf-ab23-679a78945b5e</code> <small>please use the refer agent id for your cash pickup remittance</small></br></br></span> <small></span></td>
 </tr>
 </tbody></table>
 <h2 id='create-remittance-response'>Create Remittance Response</h2>
@@ -1589,11 +1589,11 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 </tr>
 <tr>
 <td>RECIPIENT_AMOUNT_ERROR</br> <span class="badge">400</span></td>
-<td>The transfer amount requested is lower than the prescribed minimum for the recipient bank. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span></td>
+<td>The transfer amount requested is lower than the prescribed minimum for the recipient. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span></td>
 </tr>
 <tr>
 <td>MAXIMUM_TRANSFER_LIMIT_ERROR</br> <span class="badge">400</span></td>
-<td>The transfer amount requested is higher than the prescribed maximum for the recipient bank. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span></td>
+<td>The transfer amount requested is higher than the prescribed maximum for the recipient. Amend the transfer amount before retrying.</br> <span class="badge error">No retry</span></td>
 </tr>
 <tr>
 <td>SENDER_CUSTOMER_VALIDATION_ERROR</br> <span class="badge">400</span></td>
