@@ -180,7 +180,7 @@ If you have prefunding to your account, the balance should be detected and updat
 ## Get Balance
 
 ```shell
-https://dev-cashpickup.aricos.co.id/api/user-balances
+GET https://dev-cashpickup.aricos.co.id/api/user-balances
 ```
 
 Retrieves your account balance. There are two balances: <b>CASH</b> refers to funds available for you to remit or withdraw. <b>HOLDING</b> refers to funds which are in transit.
