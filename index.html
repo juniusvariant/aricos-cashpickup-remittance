@@ -666,14 +666,14 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 <p>Customers are your end-customers, which include the sender and recipient of a remittance. You can perform recurring remittances with the same customers.</p>
 
 <p>Use the following Customers API to manage your customers with Aricos. Your customers’ personal data is retained to comply with regulatory requirements for fund transfer services in Indonesia, and also allows Aricos to fulfill Know-Your-Client obligations.</p>
-<h2 id='create-customer-request'>Create Customer Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev.aricos.co.id/api/v1/customer/register
+<h2 id='create-customer-request'>Create Customer Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>POST https://dev-cashpickup.aricos.co.id/api/v1/customer/register
 </code></pre></div>
 <p>Create customer for your end-customers for the sender and recipient.</p>
 
 <blockquote>
 <p>Create Customer Example Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-cashpickup.aricos.co.id/api/user-balances'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev-cashpickup.aricos.co.id/api/v1/customer/register'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
