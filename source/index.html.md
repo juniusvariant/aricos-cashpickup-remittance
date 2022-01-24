@@ -1,4 +1,3 @@
-
 ---
 title: API Reference
 
@@ -191,14 +190,19 @@ Retrieves your account balance. There are two balances: <b>CASH</b> refers to fu
 > Get Balance Example Request: </br>
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/mitra/balance -X POST \
--H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU'
---data '{"account_type":"CASH"}'
-```
+curl --location --request GET 'https://dev-bankaccount.aricos.co.id/api/user-balances' \
 
+--header 'Accept: application/json' \
+
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGM5MjY0OS1hZTA2LTRmNmUtYjAzYi1iNWE0MzI3ZDBhNDgiLCJqdGkiOiJiZTcwMTJjZWIyOTNiYTJlMWNlZDE0MWI0YmZiZWExNzA5MmNiZjI5NTIyNTQzOWMyZDMzY2E4N2YwMjVmZDQ4ZTg0NTc5OGI2N2YzNWRmNiIsImlhdCI6MTY0MjY3NTYyMC42NTQ3MywibmJmIjoxNjQyNjc1NjIwLjY1NDczNywiZXhwIjoxNjc0MjExNjIwLjYzODE4OSwic3ViIjoiYWUzNjBmOTYtY2QyNi00ZWVjLWE3MWUtOTUxNmQ3ZjNmNTBhIiwic2NvcGVzIjpbXX0.faK3IffH8w5R7EEIscvnYbnhn9uQMS6206TEovhP9lgh1XUD6PubsPiyYtPWyCo_NhO-RzRI_8CHpKaMTPK9hLRUvAeNpV2CjUmM3GG2HSmgwC5a863IJoGvaGSL90aBtw-Ub3DBv1dzn00_-98982o-gSKHElsgf1o0EYGA1Y7vXEdEfN45Eww5rFG2cVUyKQo_eh8J8aITQQ15xydDsWe1lFPYYqrDIfZ6xTNa00b-GYP-DIVHP1NOYPdihOKPgt4uSzb03vfu62PFYzlR2gQiodW7Ellf-5-kIrGVRbogcZzTnBw41yKm7jU9hxx5hLgfEB5sImBMRcihER4W4GM5fLmpVQHmlOT9hTCQrtr__XEZK481OrZ75TsEYE0oaAygP2qMrlGgMYPxXvtsF9jLOrIzSmBx16mV7OeV1hytgot2KcppO-5hui5UI1kRuSY-YIY8I0y7AGX74Sq3SGQnvnesF0r5LbrxZiGP1pDUKHmn37O0SFYXT1QNEJPwwkMwVHmqsaggrl0QNejCXQRNr2eQHc1zq5umw1oTDvoxQhHTfmtyJx3zGYhKfQckoULUZs79Z0MXsqVB1n_8fFxymdagoI2EVMQ-geb0k8a9VdXTffXzAcEMD4z7ZUhx56jnNYJz62R-ZNtkxrMAOsjS3tfMje7WKoRhgOJ4HKY'
+```
+Our get balance end-point doesn't have any body request just send the `BEARER TOKEN`  as auth
+
+<!--- 
 Parameter | Description
 --------- | -----------
-account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`).
+account_type </br><small><span style="color:grey">*optional* </span></small> </br> <small><span style="color:grey">*default* </span> `CASH`</small> | `string` The selected account type (`CASH` or `HOLDING`). 
+--->
 
 ## Get Balance Response
 
@@ -206,13 +210,36 @@ account_type </br><small><span style="color:grey">*optional* </span></small> </b
 
 ```shell
 {
-  "balance": 1241231
+	"data": [{
+		"id": "ae360f96-cd26-4eec-a71e-9516d7f3f50a",
+		"email": "argjkt2@gmail.com",
+		"name": "ARG_OTR",
+		"balance": 8288000,
+		"on_hold_balance": 870000
+	}],
+	"links": {
+		"first": "https://dev-bankaccount.aricos.co.id/api/user-balances?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "https://dev-bankaccount.aricos.co.id/api/user-balances",
+		"per_page": 15,
+		"to": 1
+	}
 }
 ```
 
 Parameter | Description
 --------- | -----------
-balance | The balance remaining in your cash account
+id | The unique identity of your account
+email | The user account that you use
+name | The user name of your account
+balance | The real balance that you can use to transfer remittance
+on_hold_balance | The retained balance from accumulation of every unfinished transaction 
 
 # Customers
 
@@ -233,36 +260,58 @@ Create customer for your end-customers for the sender and recipient.
 > Create Customer Example Request:
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/customer/register \
-   -H 'Content-Type: application/json' \
-   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
-   --data '
-     {
-      "reference_id": "r-1234",
-      "customer_type": "INDIVIDUAL",
-      "given_name": "Ichwano",
-      "surname": "Sembo",
-      "address": {
-          "country_code": "ID",
-          "province": "DKI Jakarta",
-          "city": "Jakarta Selatan",
-          "line_1": "Jl. Senayan 1 No.15"
-      },
-      "date_of_birth": "11-01-1990",
-      "identification": {
-          "ktp_number": "0987654321320987",
-          "npwp_number": "098765432132098"
-      },
-      "account_details": {
-          "account_code": "BNI",
-          "account_number": "123456780",
-          "account_holder_name": "Ichwano"
-      },
-      "email": "ichwano@email.com",
-      "mobile_number": "+628111555777",
-      "phone_number": "+622199990000"
+curl --location --request POST 'https://dev-bankaccount.aricos.co.id/api/user-balances' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data-raw '{
+    "reference_id": "x-7986",
+    "customer_type": "INDIVIDUAL",
+    "given_name": "Cika Jerika",
+    "surname": "Cijer",
+    "nationality":"ID",
+    "gender": "Female",
+    "occupation":"OTHER",
+    "address": {
+        "country_code": "ID",
+        "province_id": "31",
+        "city_id": "3171",
+        "line_1": "Jl. Senayan 1 No.15",
+        "line_2": "Komplek BNI",
+        "postal_code": "16320"
+    },
+    "date_of_birth": "11-01-1990",
+    "place_of_birth": "Prabumulih",
+    "identifications": [
+        {
+            "identification_type": "ktp",
+            "identification_country": "ID",
+            "identification_number": "1025456545454545"
+        },
+        {
+            "identification_type": "npwp",
+            "identification_country": "ID",
+            "identification_number": "254545465425489"
+        }
+    ],
+    "account_details": {
+        "account_code": "BNI",
+        "account_number": "123456789",
+        "account_holder_name": "Cika Jerika"
+    },
+    "email": "cijer@email.com",
+    "mobile": {
+        "country_code": "62",
+        "number": "08111555777"
+    },
+    "phone": {
+        "country_code": "62",
+        "number": "02199990000"
+    },
+    "fax": {
+        "country_code": "62",
+        "number": "02199991111"
     }
-   '
+}'
 ```
 
 Parameter | Description
@@ -270,34 +319,42 @@ Parameter | Description
 reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
 customer_type </br><small><span style="color:grey">*required* </span></small>| `string` Legal entity. Valid values: `INDIVIDUAL` or `BUSINESS`
 given_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Given name(s). Required if `customer_type` is `INDIVIDUAL`. Only allowed if `customer_type` is `INDIVIDUAL`
-surname </br><small><span style="color:grey">*optional* </span></small>| `string` Surname or family name, if applicable. Only allowed if `customer_type` is `INDIVIDUAL`
+surname </br><small><span style="color:grey">*required* </span></small>| `string` Surname or family name or last name. Only allowed if `customer_type` is `INDIVIDUAL`
+nationality </br><small><span style="color:grey">*required* </span></small>| `string` Nationality country of the Customer. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+gender </br><small><span style="color:grey">*required* </span></small>| `string` Gender of the Customer. Only allowed `Male` or `Female` value
+occupation </br><small><span style="color:grey">*required* </span></small>| `string` Occupation of the Customer. See [Occupation Codes](#occupation-codes)
 business_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Required if `customer_type` is `BUSINESS`. Only allowed if `customer_type` is `BUSINESS`
 address </br><small><span style="color:grey">*optional* </span></small>| `object` Customer's address
 address.country_code </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). If `customer_type` is `BUSINESS`, the country in which the corporate entity is registered. If `customer_type` is `INDIVIDUAL`, a country in which the customer holds nationality
-address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state
-address.province </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s province
-address.city </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s city
-address.suburb </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s suburb
+address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state. Download [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.province </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s province. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.city </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s city. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.district </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s district. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.village </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s village. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
 address.post_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s postal code
 address.line_1 </br><small><span style="color:grey">*optional* </span></small>| `string` First line of customer’s address. Typically used for building name and / or apartment number
 address.line_2 </br><small><span style="color:grey">*optional* </span></small>| `string` Second line of customer’s address. Typically used for building name and / or apartment number
 date_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Birth. Only allowed if `customer_type` is `INDIVIDUAL`. ISO 8601 format YYYY-MM-DD
+place_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Place of Birth. Only allowed if `customer_type` is `INDIVIDUAL`
 date_of_registration </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Registration. Only allowed if `customer_type` is `BUSINESS`. ISO 8601 format YYYY-MM-DD
-identification </br><small><span style="color:grey">*optional* </span></small>| `object` A legal document that verifies the identity of the customer
-identification.ktp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>16 characters</small></span>
-identification.npwp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>15 characters</small></span>
-identification.drivers_license </br><small><span style="color:grey">*optional* </span></small>| `string` Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>14 characters</small></span>
-identification.passport_number </br><small><span style="color:grey">*optional* </span></small>| `string` Passport number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br></br> If provided, should provide `passport_country`. In the case of multiple passports, please choose the passport of the country closest to Indonesia
-identification.passport_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Passport country of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br></br> Required if `passport_numberis` provided.
-identification.business_tax_id </br><small><span style="color:grey">*optional* </span></small>| `string` Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if `customer_type` is `BUSINESS`. If provided, should provide `business_tax_id_country`.
-identification.business_tax_id_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Country for tax identification number of the business.</br></br> Only allowed if `customer_type` is `BUSINESS`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). </br></br> Required if `business_tax_id` is provided.
+identifications </br><small><span style="color:grey">*required* </span></small>| `object` A legal document that verifies the identity of the customer
+identification.identification_type </br><small><span style="color:grey">*required* </span></small>| `string` Type of identity of the customer.</br></br> Only allowed value  `KTP`,`NPWP`,`SIM`,`PASSPORT`,`KITAS`,`KITAP`</br> `Characters` <span style="color:grey"><small>10 characters</small></span>
+identification.identification_country </br><small><span style="color:grey">*required* </span></small>| `string` Country identity publisher of the customer.</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br> `Characters` <span style="color:grey"><small>2 characters</small></span>
+identification.identification_number </br><small><span style="color:grey">*required* </span></small>| `string` Identification number of the customer.</br></br> `Characters` <span style="color:grey"><small>15 characters for `NPWP`, 16 characters for `KTP` and other identification type</small></span>
 account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
 account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes](#account-codes)
 account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
 account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
 email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
-mobile_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX
-phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
+mobile </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s mobile number.
+mobile.country_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). Example: 62
+mobile.number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX
+phone </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s phone number.
+phone.country_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s phone number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). Example: 62
+phone.number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s phone number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX
+fax </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s fax number.
+fax.country_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s fax number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). Example: 62
+fax.number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s fax number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX
 
 ## Create Customer Response
 
@@ -309,32 +366,52 @@ We return a customer object if the call succeeded.
 
 ```shell
 {
-  "id": "5c1774e76966b43a5b8198fb",
-  "external_id": "r-1234",
-  "customer_type": "INDIVIDUAL",
-  "given_name": "Ichwano",
-  "surname": "Sembo",
-  "address": {
-      "country_code": "ID",
-      "province": "DKI Jakarta",
-      "city": "Jakarta Selatan",
-      "line_1": "Jl. Senayan 1 No.15"
-  },
-  "date_of_birth": "11-01-1990",
-  "identification": {
-      "ktp_number": "0987654321320987",
-      "npwp_number": "098765432132098"
-  },
-  "account_details": {
-      "account_code": "BNI",
-      "account_number": "123456780",
-      "account_holder_name": "Ichwano"
-  },
-  "email": "ichwano@email.com",
-  "mobile_number": "+628111555777",
-  "phone_number": "+622199990000",
-  "created": "2018-12-12T13:50:12.000Z",
-  "updated": "2018-12-12T13:50:12.000Z"
+    "data": {
+        "id": "9564d7a6-f5d3-4dd4-911f-4d13144e8311",
+        "reference_id": "x-89456",
+        "customer_type": "INDIVIDUAL",
+        "given_name": "Thomas Djorgi",
+        "surname": "Thomdjor",
+        "gender": "Female",
+        "occupation": "OTHER",
+        "fax": {
+            "country_code": "62",
+            "number": "02199991111"
+        },
+        "address": {
+            "country_code": "ID",
+            "province_id": "31",
+            "city_id": "3171",
+            "line_1": "Jl. Senayan 1 No.15",
+            "line_2": "Komplek BNI",
+            "postal_code": "16320"
+        },
+        "date_of_birth": "11-01-1990",
+        "place_of_birth": "Prabumulih",
+        "nationality": "ID",
+        "identifications": [
+            {
+                "identification_type": "ktp",
+                "identification_country": "ID",
+                "identification_number": "1025456545454545"
+            },
+            {
+                "identification_type": "npwp",
+                "identification_country": "ID",
+                "identification_number": "254545465425489"
+            }
+        ],
+        "account_details": null,
+        "email": "tomdjor@email.com",
+        "mobile": {
+            "country_code": "62",
+            "number": "08111555777"
+        },
+        "phone": {
+            "country_code": "62",
+            "number": "02199990000"
+        }
+    }
 }
 ```
 
@@ -357,17 +434,60 @@ PUT https://dev.aricos.co.id/api/v1/customer/update/{reference_id}
 > Update Customer Example Request:
 
 ```shell
-curl https://dev.aricos.co.id/api/v1/customer/update/r-1234 -X PUT \
-   -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC92MVwvbG9naW4iLCJpYXQiOjE1NzI4NTA0ODMsImV4cCI6MTU3Mjg1NDA4MywibmJmIjoxNTcyODUwNDgzLCJqdGkiOiJNOEVqcmFTQlJsbWt3RGxzIiwic3ViIjoiNWRiZmNiMzE5MzgxODU3NTFmIiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.mkZN7ipwisjUZcNJWthcIJvyUJGYvcy9BctEv8V6WMU' \
-   -H 'Content-Type: application/json' \
-   -H 'cache-control: no-cache' \
-   --data '{
-     {
-      "given_name": "Ahmad",
-      "surname": "Shahab",
-      "phone_number": "+622199990000"
+curl --location --request PUT 'https://dev-bankaccount.aricos.co.id/api/customers/c-01256' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5MzFmODI3Ni1mOTBmLTQ0N2ItYjY0ZS1hMjI3MzQxOGVkMzIiLCJqdGkiOiIwYmE2NDcwMTNjYjE2ZTRmYjNhN2RjMGNkYTEyYjk0ZjkwZjExZmE0OWJjN2NjMDdlMmU4MjhlYzQ1MDkxYmM0NDljYjM0ZmQ0ZjVmNWIzNiIsImlhdCI6MTY0MjczOTQxMi44MzE3MjksIm5iZiI6MTY0MjczOTQxMi44MzE3MzYsImV4cCI6MTY3NDI3NTQxMi44MjI3NTQsInN1YiI6IjVhOWEyOGM2ZDRlOGMxMmFkMCIsInNjb3BlcyI6W119.X9hh_rPgAnlreqXZ-CuG-cIub0ihQc1EBNFBluCpcZcAaWJ8WXLrcl1U22etX2TUrBH5ulc7gL8XVaIV-yWSxoK98AbejjcXLzLnrLWvfphAgPmi3nYg96nIagBroVB1HVNByM8LQ8_TA0a7rp8dYqbOQ4zvUpCEPc6SVQo3kcfnxVoNiGuwTrL754kUaAcYhsqyP17m8aO8yDkVbOQzF9dMZDwMRUU_LMMufYJcTMydIIqQBGfzZOyKPTy0AivTe0icT9QmBM_YY-DgZ6sdVKosT3EsTah8Jo9FXKUPxTlDw3Fzwd8WXg6CBDPyz78F9A-n329CLosa16sILlaenBuwwAE-ObLqTVGcfYdATlWDUDDFdtKIdk4Ip2r-LxdLWfix-qF9W2_qrVmqQqIMQz7govDWSaH5pW_nu-v20deAoY5j2HDrQuPtFnd9iUm1UhmHVNOfDTInDw2EqEJ23E_S0A5CY_mgxbiu4leskFsCVVdcqWTA8aRPlUn22tILpk-SQs-NRuwDzX1Z06nuLrCnfFGGXqeLJC2LSFOf82FTHXoUyNMEkKe_uMO3vvavVw-BHoUgMoLyf5ljR4aev69OkJsmSwBXG36o7Ulu8HT514y2gsn0jJW2HSPfLEgwl0Q6e4yM6AFEIR7o_1AMdI-qf2qCg0bQlQCHEfX6RfY' \
+--header 'Cookie: TS0126f9dc=01b53461a60cbb3f4b604b6067dc0e494a06a620f7e7e7fef619c6d89a06a08065941af2f434a23c7687fde6280acf1128be33d60b' \
+--data-raw '{
+    "reference_id": "x-7986",
+    "customer_type": "INDIVIDUAL",
+    "given_name": "Cika Jerika",
+    "surname": "Cijer",
+    "nationality":"ID",
+    "gender": "Female",
+    "occupation":"OTHER",
+    "address": {
+        "country_code": "ID",
+        "province_id": "31",
+        "city_id": "3171",
+        "line_1": "Jl. Senayan 1 No.15",
+        "line_2": "Komplek BNI",
+        "postal_code": "16320"
+    },
+    "date_of_birth": "11-01-1990",
+    "place_of_birth": "Prabumulih",
+    "identifications": [
+        {
+            "identification_type": "ktp",
+            "identification_country": "ID",
+            "identification_number": "1025456545454545"
+        },
+        {
+            "identification_type": "npwp",
+            "identification_country": "ID",
+            "identification_number": "254545465425489"
+        }
+    ],
+    "account_details": {
+        "account_code": "BNI",
+        "account_number": "123456789",
+        "account_holder_name": "Cika Jerika"
+    },
+    "email": "cijer@email.com",
+    "mobile": {
+        "country_code": "62",
+        "number": "08111555777"
+    },
+    "phone": {
+        "country_code": "62",
+        "number": "02199990000"
+    },
+    "fax": {
+        "country_code": "62",
+        "number": "02199991111"
     }
-   }'
+}'
 ```
 
 Parameter | Description
@@ -375,34 +495,42 @@ Parameter | Description
 reference_id </br><small><span style="color:grey">*required* </span></small>| `string` Your unique id for this customer. </br></br><span>`Characters` <span style="color:grey"><small>Special and alphanumeric</small></span></br><span style="color:grey">Maximum length <small>100 maximum characters</small></span>
 customer_type </br><small><span style="color:grey">*required* </span></small>| `string` Legal entity. Valid values: `INDIVIDUAL` or `BUSINESS`
 given_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Given name(s). Required if `customer_type` is `INDIVIDUAL`. Only allowed if `customer_type` is `INDIVIDUAL`
-surname </br><small><span style="color:grey">*optional* </span></small>| `string` Surname or family name, if applicable. Only allowed if `customer_type` is `INDIVIDUAL`
+surname </br><small><span style="color:grey">*required* </span></small>| `string` Surname or family name or last name. Only allowed if `customer_type` is `INDIVIDUAL`
+nationality </br><small><span style="color:grey">*required* </span></small>| `string` Nationality country of the Customer. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+gender </br><small><span style="color:grey">*required* </span></small>| `string` Gender of the Customer. Only allowed `Male` or `Female` value
+occupation </br><small><span style="color:grey">*required* </span></small>| `string` Occupation of the Customer. See [Occupation Codes](#occupation-codes)
 business_name </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Required if `customer_type` is `BUSINESS`. Only allowed if `customer_type` is `BUSINESS`
 address </br><small><span style="color:grey">*optional* </span></small>| `object` Customer's address
 address.country_code </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s country. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). If `customer_type` is `BUSINESS`, the country in which the corporate entity is registered. If `customer_type` is `INDIVIDUAL`, a country in which the customer holds nationality
-address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state
-address.province </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s province
-address.city </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s city
-address.suburb </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s suburb
+address.state </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s state. Download [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.province </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s province. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.city </br><small><span style="color:grey">*required* </span></small>| `string` Customer’s city. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.district </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s district. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
+address.village </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s village. Download list [here](https://www.nationsonline.org/oneworld/country_code_list.htm)
 address.post_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s postal code
 address.line_1 </br><small><span style="color:grey">*optional* </span></small>| `string` First line of customer’s address. Typically used for building name and / or apartment number
 address.line_2 </br><small><span style="color:grey">*optional* </span></small>| `string` Second line of customer’s address. Typically used for building name and / or apartment number
 date_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Birth. Only allowed if `customer_type` is `INDIVIDUAL`. ISO 8601 format YYYY-MM-DD
+place_of_birth </br><small><span style="color:grey">*optional* </span></small>| `string` Place of Birth. Only allowed if `customer_type` is `INDIVIDUAL`
 date_of_registration </br><small><span style="color:grey">*optional* </span></small>| `string` Date of Registration. Only allowed if `customer_type` is `BUSINESS`. ISO 8601 format YYYY-MM-DD
-identification </br><small><span style="color:grey">*optional* </span></small>| `object` A legal document that verifies the identity of the customer
-identification.ktp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Kartu Tanda Penduduk (national identity card number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>16 characters</small></span>
-identification.npwp_number </br><small><span style="color:grey">*optional* </span></small>| `string` Nomor Pokok Wajib Pajak (tax number) of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>15 characters</small></span>
-identification.drivers_license </br><small><span style="color:grey">*optional* </span></small>| `string` Surat Izin Mengemudi (driver’s licence) number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br> `Characters` <span style="color:grey"><small>14 characters</small></span>
-identification.passport_number </br><small><span style="color:grey">*optional* </span></small>| `string` Passport number of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`</br></br> If provided, should provide `passport_country`. In the case of multiple passports, please choose the passport of the country closest to Indonesia
-identification.passport_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Passport country of the customer.</br></br> Only allowed if `customer_type` is `INDIVIDUAL`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br></br> Required if `passport_numberis` provided.
-identification.business_tax_id </br><small><span style="color:grey">*optional* </span></small>| `string` Tax identification number of the business in its country of registration.</br></br> Examples:</br> - Nomor Pokok Wajib Pajak for indonesian businesses</br> - Business Registration number for Hong Kong businesses</br> - Unique Entity Number for Singaporean businesses</br></br> Only allowed if `customer_type` is `BUSINESS`. If provided, should provide `business_tax_id_country`.
-identification.business_tax_id_country </br><small><span style="color:grey">*conditionally required* </span></small>| `string` Country for tax identification number of the business.</br></br> Only allowed if `customer_type` is `BUSINESS`. 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). </br></br> Required if `business_tax_id` is provided.
+identifications </br><small><span style="color:grey">*required* </span></small>| `object` A legal document that verifies the identity of the customer
+identification.identification_type </br><small><span style="color:grey">*required* </span></small>| `string` Type of identity of the customer.</br></br> Only allowed value  `KTP`,`NPWP`,`SIM`,`PASSPORT`,`KITAS`,`KITAP`</br> `Characters` <span style="color:grey"><small>10 characters</small></span>
+identification.identification_country </br><small><span style="color:grey">*required* </span></small>| `string` Country identity publisher of the customer.</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br> `Characters` <span style="color:grey"><small>2 characters</small></span>
+identification.identification_number </br><small><span style="color:grey">*required* </span></small>| `string` Identification number of the customer.</br></br> `Characters` <span style="color:grey"><small>15 characters for `NPWP`, 16 characters for `KTP` and other identification type</small></span>
 account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s bank account details
 account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes](#account-codes)
 account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination bank account number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
 account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
 email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
-mobile_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number with international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: +62812XXXXXX
-phone_number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s land line or alternate phone number with international prefix</br> Example: +62812XXXXXX
+mobile </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s mobile number.
+mobile.country_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). Example: 62
+mobile.number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s mobile number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX
+phone </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s phone number.
+phone.country_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s phone number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). Example: 62
+phone.number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s phone number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX
+fax </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s fax number.
+fax.country_code </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s fax number international  country prefix. Recommended if you want to notify the customer of the transaction status</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm). Example: 62
+fax.number </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s fax number without international prefix. Recommended if you want to notify the customer of the transaction status</br> Example: 812XXXXXX
 
 ## Update Customer Response
 
@@ -414,32 +542,52 @@ We return the updated customer object if the call succeeded.
 
 ```shell
 {
-  "id": "5c1774e76966b43a5b8198fb",
-  "external_id": "r-1234",
-  "customer_type": "INDIVIDUAL",
-  "given_name": "Ichwano",
-  "surname": "Sembo",
-  "address": {
-      "country_code": "ID",
-      "province": "DKI Jakarta",
-      "city": "Jakarta Selatan",
-      "line_1": "Jl. Senayan 1 No.15"
-  },
-  "date_of_birth": "11-01-1990",
-  "identification": {
-      "ktp_number": "0987654321320987",
-      "npwp_number": "098765432132098"
-  },
-  "account_details": {
-      "account_code": "BNI",
-      "account_number": "123456780",
-      "account_holder_name": "Ichwano"
-  },
-  "email": "ichwano@email.com",
-  "mobile_number": "+628111555777",
-  "phone_number": "+622199990000",
-  "created": "2018-12-12T13:50:12.000Z",
-  "updated": "2018-12-12T13:50:12.000Z"
+    "data": {
+        "id": "9564d7a6-f5d3-4dd4-911f-4d13144e8311",
+        "reference_id": "x-89456",
+        "customer_type": "INDIVIDUAL",
+        "given_name": "Thomas Djorgi",
+        "surname": "Thomdjor",
+        "gender": "Female",
+        "occupation": "OTHER",
+        "fax": {
+            "country_code": "62",
+            "number": "02199991111"
+        },
+        "address": {
+            "country_code": "ID",
+            "province_id": "31",
+            "city_id": "3171",
+            "line_1": "Jl. Senayan 1 No.15",
+            "line_2": "Komplek BNI",
+            "postal_code": "16320"
+        },
+        "date_of_birth": "11-01-1990",
+        "place_of_birth": "Prabumulih",
+        "nationality": "ID",
+        "identifications": [
+            {
+                "identification_type": "ktp",
+                "identification_country": "ID",
+                "identification_number": "1025456545454545"
+            },
+            {
+                "identification_type": "npwp",
+                "identification_country": "ID",
+                "identification_number": "254545465425489"
+            }
+        ],
+        "account_details": null,
+        "email": "tomdjor@email.com",
+        "mobile": {
+            "country_code": "62",
+            "number": "08111555777"
+        },
+        "phone": {
+            "country_code": "62",
+            "number": "02199990000"
+        }
+    }
 }
 ```
 
@@ -474,34 +622,59 @@ external_id </br><small><span style="color:grey">*optional* </span></small>| `st
 > Get Customer With external_id Example Response:
 
 ```shell
-[{
-  "id": "5c1774e76966b43a5b8198fb",
-  "external_id": "r-1234",
-  "customer_type": "INDIVIDUAL",
-  "given_name": "Ichwano",
-  "surname": "Sembo",
-  "address": {
-      "country_code": "ID",
-      "province": "DKI Jakarta",
-      "city": "Jakarta Selatan",
-      "line_1": "Jl. Senayan 1 No.15"
-  },
-  "date_of_birth": "11-01-1990",
-  "identification": {
-      "ktp_number": "0987654321320987",
-      "npwp_number": "098765432132098"
-  },
-  "account_details": {
-      "account_code": "BNI",
-      "account_number": "123456780",
-      "account_holder_name": "Ichwano"
-  },
-  "email": "ichwano@email.com",
-  "mobile_number": "+628111555777",
-  "phone_number": "+622199990000",
-  "created": "2018-12-12T13:50:12.000Z",
-  "updated": "2018-12-12T13:50:12.000Z"
-}]
+{
+    "data": {
+        "id": "9560ea7c-a505-47a9-8482-c2063ba64ae7",
+        "reference_id": "x-7986",
+        "customer_type": "INDIVIDUAL",
+        "given_name": "Cika Jerika",
+        "surname": "Cijer",
+        "gender": "Female",
+        "occupation": "OTHER",
+        "fax": {
+            "number": "02199991111",
+            "country_code": "62"
+        },
+        "address": {
+            "country_code": "ID",
+            "province_id": "31",
+            "city_id": "3171",
+            "line_1": "Jl. Senayan 1 No.15",
+            "line_2": "Komplek BNI",
+            "postal_code": "16320"
+        },
+        "date_of_birth": "1990-11-01",
+        "place_of_birth": "Prabumulih",
+        "nationality": "ID",
+        "identifications": [
+            {
+                "identification_type": "ktp",
+                "identification_number": "1025456545454545",
+                "identification_country": "ID"
+            },
+            {
+                "identification_type": "npwp",
+                "identification_number": "254545465425489",
+                "identification_country": "ID"
+            }
+        ],
+        "account_details": {
+            "id": "9560ea7c-ad42-4ef9-8d71-39a42f24d1c5",
+            "account_code": "BNI",
+            "account_number": "123456789",
+            "account_holder_name": "Cika Jerika"
+        },
+        "email": "cijer@email.com",
+        "mobile": {
+            "country_code": "62",
+            "number": "08111555777"
+        },
+        "phone": {
+            "country_code": "62",
+            "number": "02199990000"
+        }
+    }
+}
 ```
 
 # Bank Account Remittance
@@ -566,17 +739,118 @@ agent_id </br><small><span style="color:grey">*required* </span></small>| `strin
 
 ```shell
 {
-  "external_id": "72655",
-  "amount": 11000,
-  "purpose_code": "FAMILY",
-  "source_of_funds": "PERSONAL_SAVINGS",
-  "description": "uang jajan",
-  "sender_customer_id" : "5c1774e76966b43a5b8198fb",
-  "recipient_customer_id": "5b51e6ba0071ec521008e21d",
-  "status": "PENDING_RISK_ASSESSMENT",
-  "created": "2018-12-20T17:00:00.000Z",
-  "updated": "2018-12-20T17:00:00.000Z",
-  "id": "5afbf743e28bc2055b3c06ed"
+    "data": {
+        "id": "956685f1-e12b-4085-ba72-5b66ab568eb9",
+        "reference_id": "1638158760806-54",
+        "method": "A2A",
+        "amount": 90000,
+        "purpose_code": "FAMILY",
+        "source_of_funds": "PERSONAL_SAVINGS",
+        "description": "Transfer ke kampung",
+        "transaction_status": "PENDING_RISK_ASSESSMENT",
+        "sender": {
+            "id": "9560ea7c-a505-47a9-8482-c2063ba64ae7",
+            "reference_id": "x-7986",
+            "customer_type": "INDIVIDUAL",
+            "given_name": "Cika Jerika",
+            "surname": "Cijer",
+            "gender": "Female",
+            "occupation": "OTHER",
+            "fax": {
+                "number": "02199991111",
+                "country_code": "62"
+            },
+            "address": {
+                "country_code": "ID",
+                "province_id": "31",
+                "city_id": "3171",
+                "line_1": "Jl. Senayan 1 No.15",
+                "line_2": "Komplek BNI",
+                "postal_code": "16320"
+            },
+            "date_of_birth": "1990-11-01",
+            "place_of_birth": "Prabumulih",
+            "nationality": "ID",
+            "identifications": [
+                {
+                    "identification_type": "ktp",
+                    "identification_number": "1025456545454545",
+                    "identification_country": "ID"
+                },
+                {
+                    "identification_type": "npwp",
+                    "identification_number": "254545465425489",
+                    "identification_country": "ID"
+                }
+            ],
+            "account_details": {
+                "id": "9560ea7c-ad42-4ef9-8d71-39a42f24d1c5",
+                "account_code": "BNI",
+                "account_number": "123456789",
+                "account_holder_name": "Cika Jerika"
+            },
+            "email": "cijer@email.com",
+            "mobile": {
+                "country_code": "62",
+                "number": "08111555777"
+            },
+            "phone": {
+                "country_code": "62",
+                "number": "02199990000"
+            }
+        },
+        "recipient": {
+            "id": "9560e576-28b1-4fe2-9c7c-fb75f5fe40a0",
+            "reference_id": "x-7984",
+            "customer_type": "INDIVIDUAL",
+            "given_name": "Mamang Daya",
+            "surname": "Mangday",
+            "gender": "Male",
+            "occupation": "PILOT",
+            "fax": {
+                "number": "02199991111",
+                "country_code": "62"
+            },
+            "address": {
+                "country_code": "ID",
+                "province_id": "31",
+                "city_id": "3171",
+                "line_1": "Jl. Senayan 1 No.15",
+                "line_2": "Komplek BNI",
+                "postal_code": "16320"
+            },
+            "date_of_birth": "1990-11-01",
+            "place_of_birth": "Prabumulih",
+            "nationality": "ID",
+            "identifications": [
+                {
+                    "identification_type": "ktp",
+                    "identification_number": "1025456545454545",
+                    "identification_country": "ID"
+                },
+                {
+                    "identification_type": "npwp",
+                    "identification_number": "254545465425489",
+                    "identification_country": "ID"
+                }
+            ],
+            "account_details": {
+                "id": "9560e576-2efa-4e7a-8553-567bfdbaf3e8",
+                "account_code": "BNI",
+                "account_number": "00987654321",
+                "account_holder_name": "Mamang Daya"
+            },
+            "email": "dewi@email.com",
+            "mobile": {
+                "country_code": "62",
+                "number": "08111555777"
+            },
+            "phone": {
+                "country_code": "62",
+                "number": "02199990000"
+            }
+        }
+    }
 }
 ```
 
