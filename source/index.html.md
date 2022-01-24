@@ -57,7 +57,7 @@ Before you access all our features, you have to register your account to access 
 
 To successfully authenticate with Aricos's API, you must append a colon and Base 64 encode the API key. All API requests should be made over HTTPS instead of HTTP (all calls made over plain HTTP will fail).
 
-You can access our development end-point url to <span style="color:blue"> https://dev.aricos.co.id </span> and production end-point url to <span style="color:blue"> https://aricos.co.id </span>.
+You can access our development end-point url to <span style="color:blue"> https://dev-cashpickup.aricos.co.id </span> and production end-point url to <span style="color:blue"> https://cashpickup.aricos.co.id </span>.
 
 ## Start Testing!
 
@@ -71,7 +71,7 @@ The following is an outline of actions to get started with Postman.
 
 1. Install [Postman](https://www.getpostman.com/).
 
-2. Download our <a href="https://s.id/-TceK" download> Postman collection</a>.
+2. Download our <a href="https://s.id/TcoU" download> Postman collection</a>.
 
 3. Open Postman and Import the Aricos API Postman Collection.
 
@@ -518,7 +518,7 @@ identification.identification_type </br><small><span style="color:grey">*require
 identification.identification_country </br><small><span style="color:grey">*required* </span></small>| `string` Country identity publisher of the customer.</br></br> 2-letter ISO 3166-2 country code. Refer to code standard [here](https://www.nationsonline.org/oneworld/country_code_list.htm).</br> `Characters` <span style="color:grey"><small>2 characters</small></span>
 identification.identification_number </br><small><span style="color:grey">*required* </span></small>| `string` Identification number of the customer.</br></br> `Characters` <span style="color:grey"><small>15 characters for `NPWP`, 16 characters for `KTP` and other identification type</small></span>
 account_details </br><small><span style="color:grey">*optional* </span></small>| `object` Customer’s cash pickup details
-account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Account Codes](#account-codes)
+account_details.account_code </br><small><span style="color:grey">*optional* </span></small>| `string` The code of the account, can be bank codes (BCA, MANDIRI, etc.) or ewallet codes (GOPAY, OVO, etc.). Only Indonesian banks and ewallets supported currently. See [Agent Codes](#agent-codes)
 account_details.account_number </br><small><span style="color:grey">*optional* </span></small>| `string` Destination cash pickup number. If disbursing to an e-wallet, phone number registered with the e-wallet account.</br></br> <span style="color:grey">`Characters` <small>Numeric and hyphens</small></br> `BCA required length` <small>10 characters</small></br>` Other banks maximum length` <small>No maximum characters</small></br> `Other banks minimum length` <small>1 character</small></br> `E-wallets` <small>Phone number registered with the e-wallet(Example: 0812XXXXXX)</small></span></br></br> <small>*** We support remittances to virtual accounts of major banks (BRI, BNI, Mandiri, CIMB Niaga, Permata, BTN, and NOBU Bank).<br> *** We support remittances to major e-wallets (GoPay, OVO, and Mandiri e-cash).</small>
 account_details.account_holder_name </br><small><span style="color:grey">*optional* </span></small>| `string` Name of account holder per the bank's or e-wallet's records</br> <span style="color:grey">`Characters` <small>Special and alphanumeric</small></br> `Maximum length` <small>No maximum characters</small></br> `Minimum length` <small>1 character</small></span>
 email </br><small><span style="color:grey">*optional* </span></small>| `string` Customer’s email address. Recommended if you want to notify the customer of the transaction statusShould include the top-level domain name</br> Example: abc@email.com
