@@ -2,6 +2,12 @@
 
 Below are some list of data references that you require to use our API's.
 
+## Agent Codes
+
+ID | Key | Description
+--------- | --------- | -----------
+0620b618-b2ab-46cf-ab23-679a78945b5e | POS | POS Indonesia
+
 ## Purpose Codes
 
 Key | Description
@@ -143,9 +149,3 @@ TEMPORARY_TRANSFER_ERROR | We’ve encountered a temporary issue while processin
 SWITCHING_NETWORK_ERROR | At least one of the switching networks is encountering an issue. Please retry the remittance in 1-3 hours.
 INVALID_DESTINATION | The banks have reported that the destination account is unregistered or blocked. If unsure about this, please retry again or contact the destination bank directly regarding the status of the destination account.
 TRANSFER_ERROR | We’ve encountered a fatal error while processing this remittance. Certain API fields in your request may be invalid. Please contact our customer support team for more information.
-
-## Agent Codes
-
-ID | Key | Description
---------- | --------- | -----------
-0620b618-b2ab-46cf-ab23-679a78945b5e | POS | POS Indonesia
