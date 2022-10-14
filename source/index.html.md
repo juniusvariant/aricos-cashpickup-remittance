@@ -618,7 +618,7 @@ curl --location --request GET 'https://dev-cashpickup.aricos.co.id/api/customers
 
 Query Parameter | Description
 --------- | -----------
-reference_id </br><small><span style="color:grey">*optional* </span></small>| `string` Unique ID you provided in the Create Customer request</br> <span style="color:grey"><small>The reference_id must match the external_id used at customer creation precisely</small></span>
+reference_id </br><small><span style="color:grey">*optional* </span></small>| `string` Unique ID you provided in the Create Customer request</br> <span style="color:grey"><small>The reference_id must match the reference_id used at customer creation precisely</small></span>
 
 > Get Customer With reference_id Example Response:
 
